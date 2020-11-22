@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+
     tools:context=".SignUpActivity">
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,12 +22,12 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/shape_corner"
-        android:orientation="horizontal"
-        android:padding="2dp">
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -42,6 +45,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginHorizontal="20dp"
+
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
@@ -65,6 +70,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginHorizontal="20dp"
+
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
@@ -88,6 +95,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginHorizontal="20dp"
+
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
@@ -111,10 +120,11 @@
     </LinearLayout>
 
     <TextView
+
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/fillet"
         android:gravity="center"
         android:text="sign up"

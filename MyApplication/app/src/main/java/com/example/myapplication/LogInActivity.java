@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,5 +27,9 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
             }
         });
+
+        //use toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 }
