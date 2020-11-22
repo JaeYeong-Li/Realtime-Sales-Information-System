@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.SWDesign_Team3_2020;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.myapplication", appContext.getPackageName());
+        assertEquals("com.example.swdesign_team3_2020", appContext.getPackageName());
     }
 }

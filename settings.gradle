@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "SWDesign_Team3_2020"
