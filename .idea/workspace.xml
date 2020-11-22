@@ -5,51 +5,29 @@
       <config />
     </shared>
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acca09c5-1afc-4881-89fe-32e2265ff8b6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-    </list>
+    <list default="true" id="acca09c5-1afc-4881-89fe-32e2265ff8b6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[New_Device_API_24]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1keVXCe9yX4D0ihPfsi5cDYNedj" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
@@ -135,42 +113,58 @@
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="477" y="266" key="#PSD" timestamp="1606065138996">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606061209985">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="477" y="266" key="#PSD/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606065138996" />
-    <state x="666" y="104" key="#app" timestamp="1606064828911">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606061209985" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1606068166006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="104" key="#app/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606064828911" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606065175095">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606065175095" />
-    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1606061553450">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606061553450" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606068166006" />
     <state x="803" y="309" key="AndroidCreateXmlResourceDialog" timestamp="1606062667988">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="803" y="309" key="AndroidCreateXmlResourceDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606062667988" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1606063774289">
+    <state width="938" height="281" key="GridCell.Tab.0.bottom" timestamp="1606067371446">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606063774289" />
+    <state width="938" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371446" />
+    <state width="938" height="281" key="GridCell.Tab.0.center" timestamp="1606067371446">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371446" />
+    <state width="938" height="281" key="GridCell.Tab.0.left" timestamp="1606067371446">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371446" />
+    <state width="938" height="281" key="GridCell.Tab.0.right" timestamp="1606067371446">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371446" />
+    <state width="938" height="281" key="GridCell.Tab.1.bottom" timestamp="1606067371447">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371447" />
+    <state width="938" height="281" key="GridCell.Tab.1.center" timestamp="1606067371447">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371447" />
+    <state width="938" height="281" key="GridCell.Tab.1.left" timestamp="1606067371447">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371447" />
+    <state width="938" height="281" key="GridCell.Tab.1.right" timestamp="1606067371447">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="281" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067371447" />
+    <state x="683" y="236" width="584" height="804" key="find.popup" timestamp="1606066994625">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="683" y="236" width="584" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606066994625" />
+    <state x="616" y="172" width="672" height="676" key="search.everywhere.popup" timestamp="1606067648368">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="172" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606067648368" />
   </component>
 </project>

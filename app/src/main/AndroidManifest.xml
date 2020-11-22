@@ -38,9 +38,6 @@ package="com.example.SWDesign_Team3_2020">
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
     </activity>
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAv1-Y1XfW1VsJjyekcXnrKjPH6EJk7VXk"/>
 </application>
 
 </manifest>
