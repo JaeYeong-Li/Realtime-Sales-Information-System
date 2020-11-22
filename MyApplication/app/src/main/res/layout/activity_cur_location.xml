@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<!--현위치 영업중인 업소 프래그먼트들을 담을 컨테이너-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CurLocationActivity"
     android:orientation="vertical">
-
     <include
         layout="@layout/toolbar"
         android:id="@+id/toolbar" />
-
-    <fragment
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:backgroundTint="@color/blue"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:id="@+id/Button_Restaurant"
+            android:drawableLeft="@drawable/ic_baseline_restaurant_menu_24"
+            android:text="식당"
+            android:textSize="17dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="clickHandler"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:id="@+id/Button_Cafe"
+            android:drawableLeft="@drawable/ic_baseline_local_cafe_24"
+            android:text="카페"
+            android:textSize="17dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="clickHandler"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:id="@+id/Button_Entertain"
+            android:drawableLeft="@drawable/ic_baseline_music_note_24"
+            android:text="오락"
+            android:textSize="17dp"
+            android:backgroundTint="@color/blue"
+            android:onClick="clickHandler"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FrameLayout_Map"
+        ></FrameLayout>
+
 
 
 </LinearLayout>
