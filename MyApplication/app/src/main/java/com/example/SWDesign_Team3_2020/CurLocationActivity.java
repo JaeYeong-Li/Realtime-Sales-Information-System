@@ -1,0 +1,111 @@
+package com.example.SWDesign_Team3_2020;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.os.Bundle;
+
+//fir toolbar
+import android.view.MenuItem;
+import android.widget.Toast;
+import android.view.View;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+
+public class CurLocationActivity extends AppCompatActivity {
+
+    private DrawerLayout mDrawerLayout;
+    private Context context = this;
+
+    public FragmentManager fragmentManager;
+    public EntertainOpenFragment fragmentEntertain;
+    public RestaurantOpenFragment fragmentRestaurant;
+    public CafeOpenFragment fragmentCafe;
+
+    public FragmentTransaction transaction;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cur_location);
+
+        //use toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //툴바에 홈버튼 활성화
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //툴바의 홈버튼의 이미지를 변경
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_navi_menu);
+
+        //drawyerLayout
+        mDrawerLayout = (androidx.drawerlayout.widget.DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+                String title = menuItem.getTitle().toString();
+
+                if (id == R.id.account) {
+                    Toast.makeText(context, title + ": 계정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.setting) {
+                    Toast.makeText(context, title + ": 설정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.logout) {
+                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
+        //fragment handling
+        fragmentManager = getSupportFragmentManager();
+
+        fragmentCafe = new CafeOpenFragment();
+        fragmentEntertain = new EntertainOpenFragment();
+        fragmentRestaurant = new RestaurantOpenFragment();
+
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
+        //레스토랑 버튼 잠시 바꿔준 상태...
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void clickHandler(View view) {
+
+        transaction = fragmentManager.beginTransaction();
+
+        switch (view.getId())
+        {
+            case R.id.Button_Cafe:
+                transaction.replace(R.id.FrameLayout_Map,fragmentCafe).commitAllowingStateLoss();
+                break;
+            case R.id.Button_Entertain:
+                transaction.replace(R.id.FrameLayout_Map,fragmentEntertain).commitAllowingStateLoss();
+                break;
+            case R.id.Button_Restaurant:
+                transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
+                break;
+        }
+    }
+}
