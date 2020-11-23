@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 
-//fir toolbar
+//for toolbar
 import android.view.MenuItem;
 import android.widget.Toast;
 import android.view.View;
@@ -15,6 +15,9 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+//for search
+import android.content.Intent;
 
 
 public class CurLocationActivity extends AppCompatActivity {
@@ -105,6 +108,10 @@ public class CurLocationActivity extends AppCompatActivity {
                 break;
             case R.id.Button_Restaurant:
                 transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
+                break;
+            case R.id.Button_switchSearch:
+                Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
+                startActivity(intent);
                 break;
         }
     }

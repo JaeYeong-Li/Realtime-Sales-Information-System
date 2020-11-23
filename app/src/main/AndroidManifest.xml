@@ -31,6 +31,7 @@ package="com.example.SWDesign_Team3_2020">
     <activity android:name=".FavoriteInfoActivity"></activity>
     <activity android:name=".SignUpActivity" />
     <activity android:name=".LogInActivity"/>
+    <activity android:name=".Search_Calender"/>
     <activity android:name=".CurLocationActivity">
 
     <intent-filter>
