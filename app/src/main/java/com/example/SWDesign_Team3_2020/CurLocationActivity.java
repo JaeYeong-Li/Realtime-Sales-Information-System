@@ -2,6 +2,7 @@ package com.example.SWDesign_Team3_2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 //for toolbar
@@ -78,7 +79,8 @@ public class CurLocationActivity extends AppCompatActivity {
 
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
-        //레스토랑 버튼 잠시 바꿔준 상태...
+        //레스토랑 버튼 색 초기화
+        findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
 
     }
 
@@ -102,12 +104,23 @@ public class CurLocationActivity extends AppCompatActivity {
         {
             case R.id.Button_Cafe:
                 transaction.replace(R.id.FrameLayout_Map,fragmentCafe).commitAllowingStateLoss();
+                findViewById(R.id.Button_Cafe).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
+
             case R.id.Button_Entertain:
                 transaction.replace(R.id.FrameLayout_Map,fragmentEntertain).commitAllowingStateLoss();
+                findViewById(R.id.Button_Entertain).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
+
             case R.id.Button_Restaurant:
                 transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
             case R.id.Button_switchSearch:
                 Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
