@@ -62,7 +62,8 @@ public class CurLocationActivity extends AppCompatActivity {
                 if (id == R.id.account) {
                     Toast.makeText(context, title + ": 계정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.setting) {
-                    Toast.makeText(context, title + ": 설정 정보를 확인합니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
+                    startActivity(intent);
                 } else if (id == R.id.logout) {
                     Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
                 }
@@ -121,10 +122,6 @@ public class CurLocationActivity extends AppCompatActivity {
                 findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
                 findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
                 findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
-                break;
-            case R.id.Button_switchSearch:
-                Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
-                startActivity(intent);
                 break;
         }
     }

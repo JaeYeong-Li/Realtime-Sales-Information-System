@@ -52,15 +52,6 @@
                 android:textSize="17dp"
                 android:backgroundTint="@color/blue"
                 android:onClick="clickHandler"/>
-            <Button
-                android:id="@+id/Button_switchSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/purple_200"
-                android:onClick="clickHandler"
-                android:text="위치/날짜검색"
-                android:textSize="10dp" />
         </LinearLayout>
 
         <FrameLayout
