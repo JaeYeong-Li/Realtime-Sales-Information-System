@@ -22,7 +22,14 @@
             android:id="@+id/calender_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        <Button
+            android:id="@+id/searchStep1"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:text="Next"
+            app:backgroundTint="#3F51B5"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"/>
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
