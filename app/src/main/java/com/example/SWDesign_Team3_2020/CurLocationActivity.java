@@ -71,6 +71,7 @@ public class CurLocationActivity extends AppCompatActivity {
             }
         });
 
+
         //fragment handling
         fragmentManager = getSupportFragmentManager();
 

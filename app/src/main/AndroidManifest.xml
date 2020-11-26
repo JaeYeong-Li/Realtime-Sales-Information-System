@@ -7,6 +7,7 @@ package="com.example.SWDesign_Team3_2020">
      location permissions for the "MyLocation" functionality.
 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 <application
     android:allowBackup="true"
@@ -15,15 +16,6 @@ package="com.example.SWDesign_Team3_2020">
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.MyApplication">
-
-    <!--
-     The API key for Google Maps-based APIs is defined as a string resource.
-     (See the file "res/values/google_maps_api.xml").
-     Note that the API key is linked to the encryption key used to sign the APK.
-     You need a different API key for each encryption key, including the release key that is used to
-     sign the APK for publishing.
-     You can define the keys for the debug and release targets in src/debug/ and src/release/.
-    -->
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyAv1-Y1XfW1VsJjyekcXnrKjPH6EJk7VXk" />
