@@ -19,5 +19,11 @@
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:title="로그아웃"
             />
+        <item
+            android:id="@+id/storeinfo"
+            android:icon="@drawable/ic_launcher_foreground"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="가게 정보"
+            />
     </group>
 </menu>
