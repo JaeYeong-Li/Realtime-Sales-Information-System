@@ -33,14 +33,6 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
         editText = (EditText) findViewById(R.id.search_editText);
         button=(Button)findViewById(R.id.searchStep1_5);
 
-        //use toolbar
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //툴바에 홈버튼 활성화
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-        //툴바의 홈버튼의 이미지를 변경
-        getActivity().getActionBar().setHomeButtonEnabled(false);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
