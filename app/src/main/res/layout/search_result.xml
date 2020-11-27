@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--현위치 영업중인 업소 프래그먼트들을 담을 컨테이너-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:background="@color/blue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchResult"
+        android:orientation="vertical">
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/blue"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_Restaurant"
+                android:drawableLeft="@drawable/ic_baseline_restaurant_menu_24"
+                android:text="식당"
+                android:textSize="17dp"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_Cafe"
+                android:drawableLeft="@drawable/ic_baseline_local_cafe_24"
+                android:text="카페"
+                android:textSize="17dp"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_Entertain"
+                android:drawableLeft="@drawable/ic_baseline_music_note_24"
+                android:text="오락"
+                android:textSize="17dp"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:id="@+id/FrameLayout_SearchResult"
+                ></FrameLayout>
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

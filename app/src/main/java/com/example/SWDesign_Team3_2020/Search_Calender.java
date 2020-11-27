@@ -76,14 +76,6 @@ public class Search_Calender extends AppCompatActivity {
                 diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
             }
         });
-//        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//            @SuppressLint("DefaultLocale")
-//            @Override
-//            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-//                month += 1;
-//                textView.setText(String.format("%d년 %d월 %d일", year, month, dayOfMonth));
-//            }
-//        });
     }
 
     @Override
