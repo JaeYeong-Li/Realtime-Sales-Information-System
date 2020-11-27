@@ -24,8 +24,14 @@ package="com.example.SWDesign_Team3_2020">
     <activity android:name=".SignUpActivity" />
     <activity android:name=".LogInActivity"/>
     <activity android:name=".Search_Calender"/>
+<<<<<<< HEAD
     <activity android:name=".Search_Location"/>
     <activity android:name=".CurLocationActivity">
+=======
+    <activity android:name=".CurLocationActivity"/>
+    <activity android:name=".StoreInfoActivity"/>
+    <activity android:name=".WriteContent">
+>>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
 
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
