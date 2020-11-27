@@ -126,7 +126,7 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
         switch (view.getId()) {
             case R.id.searchStep3:
                 android.widget.Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
+                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Result.class);
                 startActivity(intent);
                 finish();
                 break;
