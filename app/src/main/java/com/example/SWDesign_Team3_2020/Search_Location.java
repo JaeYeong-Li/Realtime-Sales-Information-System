@@ -36,7 +36,7 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.searchmap);
         mapFragment.getMapAsync(this);
     }
 
@@ -120,5 +120,16 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void clickHandler(View view) {
+        switch (view.getId()) {
+            case R.id.searchStep3:
+                android.widget.Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 }
