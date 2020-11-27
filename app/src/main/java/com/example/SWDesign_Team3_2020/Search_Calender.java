@@ -16,8 +16,11 @@ import com.google.android.material.navigation.NavigationView;
 import android.content.Context;
 import androidx.appcompat.widget.Toolbar;
 
-//for search
+//for searchStep, fragment
 import android.content.Intent;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import android.view.View;
 
 public class Search_Calender extends AppCompatActivity {
     public CalendarView calendarView;
@@ -92,6 +95,18 @@ public class Search_Calender extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clickHandler(View view) {
+        switch (view.getId())
+        {
+            case R.id.searchStep1:
+                Toast.makeText(context, ": 클릭", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Search_Location.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
 

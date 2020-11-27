@@ -5,32 +5,43 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".CurLocationActivity"
         android:orientation="vertical">
-        <include
-            layout="@layout/toolbar"
-            android:id="@+id/toolbar" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
+        <EditText
+            android:id="@+id/search_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/calender_textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="Enter the Address." />
+
         <Button
-            android:id="@+id/searchStep1"
+            android:id="@+id/searchStep1_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.SWDesign_Team3_2020.Search_Location" />
+        <Button
+            android:id="@+id/searchStep2"
             android:layout_width="fill_parent"
             android:layout_height="70dp"
             android:text="Next"
-            app:backgroundTint="#3F51B5"
+            android:backgroundTint="#3F51B5"
             android:layout_marginLeft="120dp"
             android:layout_marginRight="120dp"
             android:onClick="clickHandler"/>
+
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
