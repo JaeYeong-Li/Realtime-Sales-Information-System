@@ -28,8 +28,6 @@ package="com.example.SWDesign_Team3_2020">
     <activity android:name=".StoreInfoActivity"/>
     <activity android:name=".WriteContent"/>
     <activity android:name=".CurLocationActivity">
-
-
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

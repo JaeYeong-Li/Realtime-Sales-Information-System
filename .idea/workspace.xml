@@ -28,42 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f948191e-d70b-4e07-b80e-993f580cef4d" name="Default Changelist" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/SWDesign_Team3_2020/Search_Calender.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/SWDesign_Team3_2020/Search_Calender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/search_calender.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/search_calender.xml" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/SWDesign_Team3_2020/StoreInfoActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/SWDesign_Team3_2020/WriteContent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_storeinfo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/navi_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navi_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
->>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
-    </list>
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-<<<<<<< HEAD
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[New_Device_API_24]" />
-=======
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
->>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -104,17 +72,13 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-11-24T18:45:06.446Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-<<<<<<< HEAD
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SWDesign_Team3_2020_my2" />
-=======
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
->>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\알고\SWDesign_Team3_2020\app\src\main\res\drawable" />
+      <recent name="D:\?�고\SWDesign_Team3_2020\app\src\main\res\drawable" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.SWDesign_Team3_2020" />
@@ -232,21 +196,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1606243688715" />
-<<<<<<< HEAD
-    <state x="540" y="275" key="AndroidCreateResourceFileDialog" timestamp="1606466567311">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="540" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606466567311" />
-    <state x="686" y="211" key="FileChooserDialogImpl" timestamp="1606466156553">
-      <screen x="0" y="0" width="1920" height="1040" />
-=======
     <state x="958" y="291" key="AndroidCreateResourceFileDialog" timestamp="1606443588466">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="958" y="291" key="AndroidCreateResourceFileDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606443588466" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606096671789">
       <screen x="0" y="0" width="1536" height="824" />
->>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606096671789" />
     <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606466156553" />
@@ -269,38 +224,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1131" height="201" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606244901035" />
-<<<<<<< HEAD
-    <state width="938" height="297" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606477969250" />
-    <state width="938" height="297" key="GridCell.Tab.1.bottom" timestamp="1606477969251">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="297" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606477969251" />
-    <state width="938" height="297" key="GridCell.Tab.1.center" timestamp="1606477969251">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="297" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606477969251" />
-    <state width="938" height="297" key="GridCell.Tab.1.left" timestamp="1606477969251">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="297" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606477969251" />
-    <state width="938" height="297" key="GridCell.Tab.1.right" timestamp="1606477969251">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="297" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606477969251" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1606383107245">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606383107245" />
-    <state x="726" y="41" width="773" height="778" maximized="true" key="dock-window-1" timestamp="1606116551428">
-      <screen x="0" y="0" width="1536" height="824" />
-=======
     <state x="922" y="173" key="SettingsEditor" timestamp="1606443370382">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="922" y="173" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1606443370382" />
     <state x="252" y="72" width="967" height="992" key="dock-window-1" timestamp="1606443118791">
       <screen x="0" y="0" width="1920" height="1050" />
->>>>>>> b3cea7f8a8454d4886d8286e8765c54a3e7c8bdb
     </state>
     <state x="726" y="41" width="773" height="778" maximized="true" key="dock-window-1/0.0.1536.824@0.0.1536.824" timestamp="1606116551428" />
     <state x="252" y="72" width="967" height="992" key="dock-window-1/0.0.1920.1050@0.0.1920.1050" timestamp="1606443118791" />
