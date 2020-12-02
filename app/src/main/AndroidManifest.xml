@@ -6,10 +6,15 @@ package="com.example.SWDesign_Team3_2020">
      Google Maps Android API v2, but you must specify either coarse or fine
      location permissions for the "MyLocation" functionality.
 -->
+    <!-- for php -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--         -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 <application
+    android:usesCleartextTraffic="true"
+
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -28,6 +33,7 @@ package="com.example.SWDesign_Team3_2020">
     <activity android:name=".StoreInfoActivity"/>
     <activity android:name=".WriteContent"/>
     <activity android:name=".MyPage_member"/>
+    <activity android:name=".MyPage_nonmember"/>
     <activity android:name=".CurLocationActivity">
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />

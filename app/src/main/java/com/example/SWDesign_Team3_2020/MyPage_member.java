@@ -23,7 +23,7 @@ public class MyPage_member extends AppCompatActivity {
     public void clickHandler(android.view.View view) {
         switch (view.getId())
         {
-            case R.id.회원가입:
+            case R.id.mybutton1:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
                 startActivity(intent);

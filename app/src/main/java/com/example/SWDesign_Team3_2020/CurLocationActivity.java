@@ -25,7 +25,6 @@ import android.content.Intent;
 
 
 public class CurLocationActivity extends AppCompatActivity {
-
     private DrawerLayout mDrawerLayout;
     private Context context = this;
 
@@ -62,13 +61,13 @@ public class CurLocationActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 String title = menuItem.getTitle().toString();
 
-                if (id == R.id.account) {
+                if (id == R.id.curLocationSearch) {
                     Toast.makeText(context, title + "현재 페이지", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.setting) {
                     Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
                 } else if (id == R.id.mypage_toolbar) {
-                    Intent intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    Intent intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
                     startActivity(intent);
                 }
                 return true;

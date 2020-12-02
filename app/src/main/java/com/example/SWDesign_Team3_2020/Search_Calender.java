@@ -53,7 +53,7 @@ public class Search_Calender extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 String title = menuItem.getTitle().toString();
 
-                if (id == R.id.account) {
+                if (id == R.id.curLocationSearch) {
                     Intent intent = new Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();

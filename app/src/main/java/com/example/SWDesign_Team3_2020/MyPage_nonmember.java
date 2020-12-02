@@ -1,37 +1,19 @@
 package com.example.SWDesign_Team3_2020;
 
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull ;
-import android.widget.TextView;
-import android.widget.CalendarView;
-
-//for toolbar
-import android.view.MenuItem;
-import android.widget.Toast;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.navigation.NavigationView;
 import android.content.Context;
-import androidx.appcompat.widget.Toolbar;
 
-//for searchStep, fragment
-import android.content.Intent;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import android.view.View;
+public class MyPage_nonmember extends AppCompatActivity {
 
-public class Search_Result extends AppCompatActivity {
-    public android.widget.CalendarView calendarView;
-    public android.widget.TextView diaryTextView;
-    private androidx.drawerlayout.widget.DrawerLayout mDrawerLayout;
-    private android.content.Context context = this;
+    private Context context = this;
+    private DrawerLayout mDrawerLayout;
 
-    @Override
-    protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
+    protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.SWDesign_Team3_2020.R.layout.search_result);
+        setContentView(R.layout.mypage_nonmeber);
+
         //use toolbar
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,40 +40,25 @@ public class Search_Result extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.setting) {
-                    android.widget.Toast.makeText(context, title + ": 현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.logout) {
-                    android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
+                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Calender.class);
+                    startActivity(intent);
+                } else if (id == R.id.mypage_toolbar) {
+                    android.widget.Toast.makeText(context, title + "현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
         });
-
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
-                mDrawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void clickHandler(android.view.View view) {
         switch (view.getId())
         {
-            case R.id.searchStep1:
+            case R.id.mytosignin:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
+                android.content.Intent intent = new android.content.Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
     }
-
-
 }
-
