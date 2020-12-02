@@ -27,6 +27,7 @@ package="com.example.SWDesign_Team3_2020">
     <activity android:name=".Search_Location"/>
     <activity android:name=".StoreInfoActivity"/>
     <activity android:name=".WriteContent"/>
+    <activity android:name=".MyPage_member"/>
     <activity android:name=".CurLocationActivity">
 
 

@@ -31,7 +31,7 @@ public class Search_Calender extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.SWDesign_Team3_2020.R.layout.search_calender);
+        setContentView(R.layout.search_calender);
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

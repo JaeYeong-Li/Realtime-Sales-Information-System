@@ -64,8 +64,9 @@ public class CurLocationActivity extends AppCompatActivity {
                 } else if (id == R.id.setting) {
                     Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
-                } else if (id == R.id.logout) {
-                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.mypage_toolbar) {
+                    Intent intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    startActivity(intent);
                 }
                 return true;
             }
