@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 //for toolbar
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -84,6 +87,10 @@ public class CurLocationActivity extends AppCompatActivity {
         transaction.replace(R.id.FrameLayout_Map,fragmentRestaurant).commitAllowingStateLoss();
         //레스토랑 버튼 색 초기화
         findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
+
+        //Sliding pannel
+        ListView listView = findViewById(R.id.listView);
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,new String[] {"Copy","Paste","Cut","Delete"}));
 
     }
 

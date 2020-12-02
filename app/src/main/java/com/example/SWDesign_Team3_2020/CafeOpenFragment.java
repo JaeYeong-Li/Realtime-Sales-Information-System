@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Objects;
 
-public class CafeOpenFragment extends Fragment implements onMapReadyCallback {
+public class CafeOpenFragment extends Fragment  {
 
     LocationManager manager;
     GPSListener gpsListener;
