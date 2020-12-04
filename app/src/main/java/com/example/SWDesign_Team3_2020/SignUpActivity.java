@@ -72,6 +72,10 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        EditTextID = (EditText)findViewById(R.id.signupText_id);
+        EditTextPW = (EditText)findViewById(R.id.signupText_pw);
+        EditTextNAME = (EditText)findViewById(R.id.signupText_name);
+
         Button buttonInsert = (Button)findViewById(R.id.button_signup);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String pw = EditTextPW.getText().toString();
                 String name = EditTextNAME.getText().toString();
 
-                InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/insert.php", id,pw,name);
-
+                SignUp task = new SignUp();
+                task.execute("http://" + IP_ADDRESS + "/SignUp.php", id,pw,name);
 
                 EditTextID.setText("");
                 EditTextPW.setText("");
@@ -93,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    class InsertData extends AsyncTask<String, Void, String>{
+    class SignUp extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
 
         @Override
@@ -123,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
             String name = (String)params[3];
 
             String serverURL = (String)params[0];
-            String postParameters = "id=" + id + "&pw=" + pw + "&pw=" + name;
+            String postParameters = "id=" + id + "&pw=" + pw + "&name=" + name;
 
 
             try {

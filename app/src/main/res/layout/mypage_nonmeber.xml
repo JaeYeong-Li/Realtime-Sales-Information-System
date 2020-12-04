@@ -28,7 +28,7 @@
             android:onClick="clickHandler"/>
 
         <Button
-            android:id="@+id/로그인"
+            android:id="@+id/mytologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="로그인"

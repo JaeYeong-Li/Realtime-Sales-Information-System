@@ -51,11 +51,18 @@ public class MyPage_nonmember extends AppCompatActivity {
     }
 
     public void clickHandler(android.view.View view) {
+        android.content.Intent intent;
         switch (view.getId())
         {
             case R.id.mytosignin:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), SignUpActivity.class);
+                intent = new android.content.Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.mytologin:
+                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+                intent = new android.content.Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();
                 break;
