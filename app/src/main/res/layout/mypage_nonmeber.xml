@@ -5,14 +5,16 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CurLocationActivity"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".CurLocationActivity">
+
         <include
-            layout="@layout/toolbar"
-            android:id="@+id/toolbar" />
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <TextView
             android:id="@+id/mypage_name"
@@ -20,33 +22,51 @@
             android:layout_height="30dp"
             android:text="myName" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:src="@mipmap/image" />
+
+
         <Button
             android:id="@+id/mytosignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="회원가입"
-            android:onClick="clickHandler"/>
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:onClick="clickHandler"
+            android:text="회원가입" />
 
         <Button
             android:id="@+id/mytologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="로그인"
-            android:onClick="clickHandler"/>
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:onClick="clickHandler"
+            android:text="로그인" />
 
         <Button
             android:id="@+id/mybutton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="선호가게"
-            android:onClick="clickHandler"/>
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:onClick="clickHandler"
+            android:text="선호가게" />
 
 
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+
+
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"
