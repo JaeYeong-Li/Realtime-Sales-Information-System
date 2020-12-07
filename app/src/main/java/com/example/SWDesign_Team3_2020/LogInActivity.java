@@ -32,7 +32,7 @@ public class LogInActivity extends AppCompatActivity {
     private static final String TAG_JSON="storeInfo";
     private static final String TAG_ID = "id";
     private static final String TAG_PW = "pw";
-    private static final String TAG_NAME = "pw";
+    private static final String TAG_NAME = "name";
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
@@ -202,8 +202,12 @@ public class LogInActivity extends AppCompatActivity {
 
     private void showResult(){
         try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            int idx = mJsonString.indexOf("[");
+            mJsonString = mJsonString.substring(idx);
+            mJsonString.trim();
+
+            Log.d("MyApp",mJsonString);
+            JSONArray jsonArray = new JSONArray(mJsonString);
 
             JSONObject item = jsonArray.getJSONObject(0);
             String id = item.getString(TAG_ID);
