@@ -41,10 +41,15 @@ public class LogInActivity extends AppCompatActivity {
     private EditText EditTextPW;
     String mJsonString;
 
+    private GlobalVar m_gvar = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
 
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -214,8 +219,14 @@ public class LogInActivity extends AppCompatActivity {
             String pw = item.getString(TAG_PW);
             String name = item.getString(TAG_NAME);
 
+            m_gvar.setUserID(id);
+            m_gvar.setUserPW(pw);
+            m_gvar.setUserNAME(name);
+
             android.widget.Toast.makeText(context, "환영합니다"+name+"님", android.widget.Toast.LENGTH_SHORT).show();
-            System.out.println(name);
+
+            android.content.Intent intent = new android.content.Intent(getApplicationContext(), MyPage_member.class);
+            startActivity(intent);
 
         } catch (JSONException e) {
 

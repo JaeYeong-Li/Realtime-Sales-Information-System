@@ -10,17 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".CurLocationActivity">
+        tools:context=".MyPage_member">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
-
-        <TextView
-            android:id="@+id/mypage_name"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="myName" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -29,6 +23,14 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp"
             android:src="@mipmap/image" />
+
+        <TextView
+            android:id="@+id/mypage_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:text="myName" />
 
         <Button
             android:id="@+id/mybutton1"
