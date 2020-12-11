@@ -10,6 +10,7 @@ import android.content.Context;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class EditStoreInfo extends AppCompatActivity {
 
@@ -19,14 +20,13 @@ public class EditStoreInfo extends AppCompatActivity {
     private TextView menuView;
     private Double lan;
     private Double lon;
-    private Button regButton;
+    private CheckBox cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addressView = findViewById(R.id.editSI_address);
         menuView = findViewById(R.id.editSI_menu);
-        regButton = findViewById(R.id.button_editstoreInfo);
         setContentView(R.layout.activity_editstoreinfo);
 
         //use toolbar
@@ -62,7 +62,19 @@ public class EditStoreInfo extends AppCompatActivity {
                 return true;
             }
         });
-/*
+
+        //체크박스 설정
+        cbmon = (CheckBox) findViewById(R.id.monday);
+        cbtue = (CheckBox) findViewById(R.id.tuesday);
+        cbwed = (CheckBox) findViewById(R.id.wednesday);
+        cbthu = (CheckBox) findViewById(R.id.thursday);
+        cbfri = (CheckBox) findViewById(R.id.friday);
+        cbsat = (CheckBox) findViewById(R.id.saturday);
+        cbsun = (CheckBox) findViewById(R.id.sunday);
+
+
+        Button regButton = findViewById(R.id.button_editstoreInfo);
+
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,23 +82,52 @@ public class EditStoreInfo extends AppCompatActivity {
                 String name = addressView.getText().toString();
                 String menu = menuView.getText().toString();
 
+                //openDate
+                String openDate = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
+                if(cbmon.isChecked() == true){
+                    openDate += "mon";
+                }
+                if(cbtue.isChecked() == true) {
+                    openDate += "tue";
+                }
+                if(cbwed.isChecked() == true) {
+                    openDate += "wed";
+                }
+                if(cbthu.isChecked() == true) {
+                    openDate += "thu";
+                }
+                if(cbfri.isChecked() == true) {
+                    openDate += "fri";
+                }
+                if(cbsat.isChecked() == true) {
+                    openDate += "sat";
+                }
+                if(cbsun.isChecked() == true) {
+                    openDate += "sun";
+                }
 
                 //com.example.SWDesign_Team3_2020.SignUpActivity.SignUp task = new com.example.SWDesign_Team3_2020.SignUpActivity.SignUp();
                 //task.execute("http://" + IP_ADDRESS + "/SignUp.php", id,pw,name);
 
 
             }
-        });*/
+        });
     }
 
     public void clickHandler(View view) {
-        switch (view.getId())
-        {
-            case R.id.editSI_addressButton:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo_SearchLocation.class);
-                startActivityForResult(intent,1);
-                break;
+        int clickid = view.getId();
+        if (clickid ==R.id.editSI_addressButton) {
+            android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+            Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo_SearchLocation.class);
+            startActivityForResult(intent, 1);
+        }else if(clickid == R.id.monto|| clickid == R.id.monto|| clickid == R.id.monfrom|| clickid == R.id.tueto|| clickid ==R.id.tuefrom
+                ||clickid == R.id.wedto|| clickid == R.id.wedfrom|| clickid == R.id.thuto|| clickid == R.id.thufrom||
+                clickid == R.id.frito||clickid == R.id.frifrom||clickid == R.id.satto||clickid == R.id.satfrom||clickid == R.id.sunto|| clickid ==R.id.sunfrom){
+            EditStoreInfo_monthly mEditStoreInfo_monthly = new EditStoreInfo_monthly();
+            Bundle args_id = new Bundle();
+            args_id.putString("id",Integer.toString(clickid));
+            mEditStoreInfo_monthly.setArguments(args_id);
+            mEditStoreInfo_monthly.show(getSupportFragmentManager(),"TimePicker");
         }
     }
 

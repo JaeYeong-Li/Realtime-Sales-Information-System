@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import android.os.Bundle;
+import android.view.View;
 
 public class EditStoreInfo_SearchLocation extends FragmentActivity implements OnMapReadyCallback {
 
@@ -26,7 +28,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
     private String address;
 
     @Override
-    protected void onCreate(android.os.Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editstoreinfo_searchlocation);
         editText = (android.widget.EditText) findViewById(R.id.search_editText);
@@ -34,7 +36,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (com.google.android.gms.maps.SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.searchmap);
         mapFragment.getMapAsync(this);
     }
@@ -52,10 +54,10 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-        geocoder = new android.location.Geocoder(this);
+        geocoder = new Geocoder(this);
 
         // 맵 터치 이벤트 구현 //
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+        mMap.setOnMapClickListener(new OnMapClickListener(){
             @Override
             public void onMapClick(LatLng point) {
                 MarkerOptions mOptions = new MarkerOptions();
@@ -74,7 +76,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
         ////////////////////
 
         // 버튼 이벤트
-        button.setOnClickListener(new android.widget.Button.OnClickListener(){
+        button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(android.view.View v){
                 String str=editText.getText().toString();
@@ -121,7 +123,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    public void clickHandler(android.view.View view) {
+    public void clickHandler(View view) {
         switch (view.getId()) {
             case R.id.button2_editstorelocation:
                 // 현재 활성화된 액티비티를 시작하게 한 인텐트 호출

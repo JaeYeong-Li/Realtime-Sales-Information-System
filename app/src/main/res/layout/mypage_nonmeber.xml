@@ -12,11 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MyPage_member">
+        tools:context=".CurLocationActivity">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
+
+        <TextView
+            android:id="@+id/mypage_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="myName" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -26,24 +32,31 @@
             android:layout_marginBottom="50dp"
             android:src="@mipmap/image" />
 
-        <TextView
-            android:id="@+id/mypage_name"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginRight="150dp"
-            android:text="myName" />
+
 
         <Button
-            android:id="@+id/mybutton1"
+            android:id="@+id/mytosignin"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:backgroundTint="#3F51B5"
+            android:layout_marginBottom="5dp"
+            android:onClick="clickHandler"
+            android:text="회원가입" />
+
+        <Button
+            android:id="@+id/mytologin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-
             app:backgroundTint="#3F51B5"
             android:layout_marginBottom="5dp"
-            android:text="가게정보" />
+            android:onClick="clickHandler"
+            android:text="로그인" />
 
         <Button
             android:id="@+id/mybutton2"
@@ -52,6 +65,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             app:backgroundTint="#3F51B5"
+            android:onClick="clickHandler"
             android:text="선호가게" />
 
         <TextView
@@ -70,6 +84,8 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+
+
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"

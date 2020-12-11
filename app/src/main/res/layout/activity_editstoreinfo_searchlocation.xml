@@ -25,13 +25,13 @@
 
         <Button
             android:id="@+id/button1_editstorelocation"
-            android:layout_width="198dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Search" />
 
         <Button
             android:id="@+id/button2_editstorelocation"
-            android:layout_width="196dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#3F51B5"
             android:onClick="clickHandler"
