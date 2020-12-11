@@ -5,24 +5,18 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFCD"
+    android:background="#FFD700"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".CurLocationActivity">
+        tools:context=".MyPage_member">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
-
-        <TextView
-            android:id="@+id/mypage_name"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="myName" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -32,35 +26,42 @@
             android:layout_marginBottom="50dp"
             android:src="@mipmap/image" />
 
+        <TextView
+            android:id="@+id/mypage_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:text="myName" />
 
         <Button
-            android:id="@+id/mytosignin"
+            android:id="@+id/mybutton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+
+            app:backgroundTint="#3F51B5"
             android:layout_marginBottom="5dp"
-            android:onClick="clickHandler"
-            android:text="회원가입" />
+            android:text="가게정보" />
 
         <Button
-            android:id="@+id/mytologin"
+            android:id="@+id/mybutton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="5dp"
-            android:onClick="clickHandler"
-            android:text="로그인" />
-
-        <Button
-            android:id="@+id/mytolike2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:onClick="clickHandler"
+            app:backgroundTint="#3F51B5"
             android:text="선호가게" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:gravity="center"
+            android:text="가게영업정보 열람 시스템"
+
+            android:textSize="24sp" />
 
 
     </LinearLayout>
@@ -69,8 +70,6 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-
-
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"

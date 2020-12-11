@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFCD"
+    android:background="#FFD700"
     >
 
     <LinearLayout
@@ -19,13 +19,14 @@
             android:id="@+id/toolbar" />
 
         <TextView
-            android:padding="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:text="Real-time store sales information system"
+            android:text="welcome"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_marginHorizontal="20dp"
@@ -88,6 +89,8 @@
                 android:gravity="center"
                 android:text="sign in"
                 android:textColor="#ffffff"
+
+                app:backgroundTint="#3F51B5"
                 android:textSize="18sp" />
 
             <Button
@@ -98,10 +101,19 @@
                 android:background="@drawable/fillet"
                 android:gravity="center"
                 android:text="sign up"
+                app:backgroundTint="#3F51B5"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center"
+            android:text="가게영업정보 열람 시스템"
+
+            android:textSize="24sp" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
