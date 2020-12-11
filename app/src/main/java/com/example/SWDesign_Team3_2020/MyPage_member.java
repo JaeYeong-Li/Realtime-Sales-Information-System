@@ -2,6 +2,8 @@ package com.example.SWDesign_Team3_2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
+import android.content.Intent;
+
 public class MyPage_member extends AppCompatActivity {
 
     private android.content.Context context = this;
@@ -34,9 +36,9 @@ public class MyPage_member extends AppCompatActivity {
     public void clickHandler(android.view.View view) {
         switch (view.getId())
         {
-            case R.id.mybutton1:
+            case R.id.mytoedit:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
+                Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo.class);
                 startActivity(intent);
                 finish();
                 break;
