@@ -44,10 +44,10 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     MarkerOptions myLocationMarker;
     Marker myMarker;
+    int storeId;
     int markerIndex = 1;
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
-
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
@@ -139,9 +139,10 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
         Toast toast = Toast.makeText(this.getContext(), msg, Toast.LENGTH_LONG);
         toast.show();
-        if (markerHashMap.get(marker) != 0 ) {
+        if (markerHashMap.get(marker) != -1 ) { // 내 위치가 아니라면 가게 id 보내기
+            Log.i("value 값", (markerHashMap.get(marker)).toString());
             Intent i = new Intent(this.getContext(),SpecificInfoActivity.class);
-            i.putExtra("Latitude", marker.getPosition().latitude);
+            i.putExtra("storeId",markerHashMap.get(marker));
             startActivity(i);
         }
 
@@ -181,10 +182,11 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         showMyLocationMarker(curPoint);
 
         //가게 위치 보여주기 -> DB에서 끌어올 것
+        storeId = 0;
         LatLng storeLatlng_close = new LatLng(curPoint.latitude, curPoint.longitude + 0.01);
         //마커 옵션 객체 생성 ->가까운 것들만 (해쉬맵에 추가)
         if (isitClose(storeLatlng_close, curPoint) == true) {
-            showStoreLocationMarker(storeLatlng_close);
+            showStoreLocationMarker(storeLatlng_close, storeId);
             markerIndex++;
         }
 
@@ -231,7 +233,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     }
 
 
-    private void showStoreLocationMarker(LatLng storeLatLng) {
+    private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
 
         MarkerOptions storeLocationMarker = new MarkerOptions();
         storeLocationMarker.position(storeLatLng);
@@ -240,7 +242,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
         myMarker = map.addMarker(storeLocationMarker);
 
-        markerHashMap.put(myMarker,markerIndex);
+        markerHashMap.put(myMarker,storeId);
         Log.i("showStoreLocation", "가게 마커 불러옴");
 
 
@@ -265,7 +267,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             myMarker = map.addMarker(myLocationMarker);
         }
 
-        markerHashMap.put(myMarker, 0);
+        markerHashMap.put(myMarker, -1);
         //해쉬맵에 현위치 추가
 
     }

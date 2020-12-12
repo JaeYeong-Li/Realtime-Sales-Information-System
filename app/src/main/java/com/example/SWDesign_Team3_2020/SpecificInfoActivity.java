@@ -15,10 +15,10 @@ public class SpecificInfoActivity extends AppCompatActivity {
         textView = findViewById(R.id.TextView_markerInfo);
 
         //intent 받기
-        double latitude = getIntent().getDoubleExtra("Latitude",0);
+        int storeId = getIntent().getIntExtra("storeId",1000);
         //받은 정보 게시
 
-        textView.setText(String.valueOf(latitude));
+        textView.setText(String.valueOf(storeId));
 
     }
 }
