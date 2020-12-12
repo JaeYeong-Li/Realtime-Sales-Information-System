@@ -349,7 +349,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="monthly plan"
+                    android:text="monthly plan: 휴무예정일을 선택하세요"
                     android:textColor="#000000"
                     android:textSize="15sp"
                     android:textStyle="bold" />
