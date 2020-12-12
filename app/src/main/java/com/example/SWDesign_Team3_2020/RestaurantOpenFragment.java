@@ -133,9 +133,10 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        String msg = marker.getPosition().latitude + "";
+        String msg = marker.getPosition().latitude + "!!!!!!!!!!!!!!!!";
         Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
         toast.show();
+        marker.showInfoWindow();
 
         return true;
     }
@@ -174,8 +175,6 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
         //이건안떠야함
         showStoreLocationMarker(storeLatlng_far,curPoint);
 
-        //마커 클릭 이벤트
-        map.setOnMarkerClickListener(this);
 
     }
     private double decimalToradian(double decimal) {
@@ -220,11 +219,15 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
         {
             MarkerOptions storeLocationMarker = new MarkerOptions();
             storeLocationMarker.position(storeLocation);
+            storeLocationMarker.title("Store Position \n");
+            storeLocationMarker.snippet("Click here to see.");
             storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
-            Marker myStoreMarker;
-            myStoreMarker= map.addMarker(storeLocationMarker);
+            myMarker = map.addMarker(storeLocationMarker);
+
             Log.i("showStoreLocation", "가게 마커 불러옴");
 
+            //마커 클릭 이벤트
+            map.setOnMarkerClickListener(this);
         }
 
     }
