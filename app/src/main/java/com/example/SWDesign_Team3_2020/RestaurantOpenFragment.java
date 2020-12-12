@@ -29,7 +29,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Objects;
 
-public class RestaurantOpenFragment extends Fragment   {
+import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.*;
+
+public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMarkerClickListener  {
 
     LocationManager manager;
     GPSListener gpsListener;
@@ -125,6 +130,16 @@ public class RestaurantOpenFragment extends Fragment   {
         toast.show();
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        String msg = marker.getPosition().latitude + "";
+        Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
+        toast.show();
+
+        return true;
+    }
+
     class GPSListener implements LocationListener {
         //위치 확인되었을 때 자동으로 호출됨
 
@@ -158,6 +173,9 @@ public class RestaurantOpenFragment extends Fragment   {
         showStoreLocationMarker(storeLatlng_close,curPoint);
         //이건안떠야함
         showStoreLocationMarker(storeLatlng_far,curPoint);
+
+        //마커 클릭 이벤트
+        map.setOnMarkerClickListener(this);
 
     }
     private double decimalToradian(double decimal) {
