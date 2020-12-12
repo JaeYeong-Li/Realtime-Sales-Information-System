@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -34,7 +35,7 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.*;
 
-public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMarkerClickListener  {
+public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener,GoogleMap.OnMarkerClickListener {
 
     LocationManager manager;
     GPSListener gpsListener;
@@ -58,14 +59,11 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
 
 
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(getContext(),"접근 권한이 없습니다. 설정에서 접근권한을 허용해주세요.",Toast.LENGTH_SHORT).show();
+                    && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "접근 권한이 없습니다. 설정에서 접근권한을 허용해주세요.", Toast.LENGTH_SHORT).show();
                 return;
-            }
-            else
-            {
-                if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            } else {
+                if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
                     location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
@@ -78,23 +76,21 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
                         Log.i("MyLocTest", "최근 위치1 호출");
                     }
                     //        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,gpsListener);
-                }
-                else if (manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                } else if (manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                     location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
                         String message = "최근 위치2 -> Latitude : " + latitude + "\n Longitude : " + longitude;
 
-                        showCurrentLocation(latitude,longitude);
+                        showCurrentLocation(latitude, longitude);
 
-                        Log.i("MyLocTest","최근 위치2 호출");
+                        Log.i("MyLocTest", "최근 위치2 호출");
                     }
                     //           manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
                     //manager.removeUpdates(gpsListener);
                 }
-                if(googleMap!=null)
-                {
+                if (googleMap != null) {
                     googleMap.setMyLocationEnabled(true);
 
                 }
@@ -103,6 +99,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
 
 
     };
+    private Marker marker;
 
 
     @Nullable
@@ -130,12 +127,29 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
         toast.show();
     }
 
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+       // this.marker = marker;
+
+        //Intent i = new Intent(MainActivity.this, ActivityOne.class);
+        //startActivity(i);
+        String msg = "tooltip!!";
+        Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
+        toast.show();
+
+    }
+
+
+
+
+
     @Override
     public boolean onMarkerClick(Marker marker) {
 
         String msg = marker.getPosition().latitude + "!!!!!!!!!!!!!!!!";
         Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
-        toast.show();
+    //    toast.show();
         marker.showInfoWindow();
 
         return true;
@@ -228,6 +242,8 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnMark
 
             //마커 클릭 이벤트
             map.setOnMarkerClickListener(this);
+            //툴팁 클릭 이벤트
+            map.setOnInfoWindowClickListener(this);
         }
 
     }

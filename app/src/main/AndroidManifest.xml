@@ -1,49 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.SWDesign_Team3_2020">
-
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.SWDesign_Team3_2020">
     <!--
      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
      Google Maps Android API v2, but you must specify either coarse or fine
      location permissions for the "MyLocation" functionality.
--->
+    -->
     <!-- for php -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--         -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!--  -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-<application
-    android:usesCleartextTraffic="true"
-    android:name=".GlobalVar"
+    <application
+        android:name=".GlobalVar"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".SpecificInfoActivity"></activity>
 
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.MyApplication">
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAv1-Y1XfW1VsJjyekcXnrKjPH6EJk7VXk" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAv1-Y1XfW1VsJjyekcXnrKjPH6EJk7VXk" />
 
-    <activity android:name=".FavoriteInfoActivity"></activity>
-    <activity android:name=".SignUpActivity" />
-    <activity android:name=".LogInActivity"/>
-    <activity android:name=".Search_Calender"/>
-    <activity android:name=".Search_Location"/>
-    <activity android:name=".StoreInfoActivity"/>
-    <activity android:name=".EditStoreInfo"/>
-    <activity android:name=".EditStoreInfo_SearchLocation"
-        android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-    <activity android:name=".MyPage_member"/>
-    <activity android:name=".MyPage_nonmember"/>
-    <activity android:name=".CurLocationActivity">
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-    </activity>
-</application>
+        <activity android:name=".FavoriteInfoActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LogInActivity" />
+        <activity android:name=".Search_Calender" />
+        <activity android:name=".Search_Location" />
+        <activity android:name=".StoreInfoActivity" />
+        <activity android:name=".EditStoreInfo" />
+        <activity
+            android:name=".EditStoreInfo_SearchLocation"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity android:name=".MyPage_member" />
+        <activity android:name=".MyPage_nonmember" />
+        <activity android:name=".CurLocationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>
-
