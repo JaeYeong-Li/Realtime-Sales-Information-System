@@ -201,7 +201,7 @@
                             android:id="@+id/thursday"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Thurssday" />
+                            android:text="Thursday" />
 
                         <TextView
                             android:id="@+id/thuto"
@@ -337,6 +337,31 @@
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:padding="2dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="monthly plan"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/editSI_monthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mcv_selectionColor="#00F"
+                    app:mcv_selectionMode="multiple"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

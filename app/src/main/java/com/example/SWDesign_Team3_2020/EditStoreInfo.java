@@ -11,6 +11,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import java.util.Calendar;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 public class EditStoreInfo extends AppCompatActivity {
 
@@ -62,6 +64,18 @@ public class EditStoreInfo extends AppCompatActivity {
                 return true;
             }
         });
+/*
+        //monthly 플랜 설정
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH,+1);
+
+        MaterialCalendarView materialCalendarView = findViewById(R.id.editSI_monthly);
+        materialCalendarView.setOnDateChangedListener(this);
+        materialCalendarView.setOnMonthChangedListener(this);
+        materialCalendarView.setTopbarVisible(false);
+
+*/
+
 
         //체크박스 설정
         cbmon = (CheckBox) findViewById(R.id.monday);
