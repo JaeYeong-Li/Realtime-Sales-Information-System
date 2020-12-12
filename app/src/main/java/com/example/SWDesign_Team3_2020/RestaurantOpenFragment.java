@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
@@ -35,7 +36,7 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.*;
 
-public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener,GoogleMap.OnMarkerClickListener {
+public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
     LocationManager manager;
     GPSListener gpsListener;
@@ -43,8 +44,11 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     MarkerOptions myLocationMarker;
     Marker myMarker;
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    int markerIndex = 1;
 
+    HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
+
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -53,6 +57,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             map = googleMap;
             //startLocationService
             Location location = null;
+
 
             long minTime = 0;
             float minDistance = 0;
@@ -130,29 +135,25 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-       // this.marker = marker;
-
-        //Intent i = new Intent(MainActivity.this, ActivityOne.class);
-        //startActivity(i);
         String msg = "tooltip!!";
-        Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
+
+        Toast toast = Toast.makeText(this.getContext(), msg, Toast.LENGTH_LONG);
         toast.show();
+        if (markerHashMap.get(marker) != 0 ) {
+            Intent i = new Intent(this.getContext(),SpecificInfoActivity.class);
+            i.putExtra("Latitude", marker.getPosition().latitude);
+            startActivity(i);
+        }
 
     }
-
-
-
 
 
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        String msg = marker.getPosition().latitude + "!!!!!!!!!!!!!!!!";
-        Toast toast = Toast.makeText(this.getContext(),msg, Toast.LENGTH_LONG);
-    //    toast.show();
         marker.showInfoWindow();
-
         return true;
+
     }
 
     class GPSListener implements LocationListener {
@@ -163,10 +164,10 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             String message = "내 위치는 Latitude : " + latitude + "\nLongtitude : " + longitude;
-            Log.i("MyLocTest",message);
+            Log.i("MyLocTest", message);
 
-            showCurrentLocation(latitude,longitude);
-            Log.i("MyLocTest","onLocationChanged() 호출되었습니다.");
+            showCurrentLocation(latitude, longitude);
+            Log.i("MyLocTest", "onLocationChanged() 호출되었습니다.");
 
         }
     }
@@ -175,28 +176,33 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         LatLng curPoint = new LatLng(latitude, longitude);
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 14));
+
+        //내 위치 보여주기 (해쉬맵에 추가)
         showMyLocationMarker(curPoint);
 
-        //DB에서 가게 정보 확인
-        //현위치 내 인근의 가게 ROW만 뽑을 것. -> 아이디.
-        //밑에 슬라이딩 리스트 띄우고 아이디에 맞는 가게 정보 리스트로 나타내기
-        //가게 정보 마커 등장 -> ROW의 위, 경도만 필요 , 클릭 이벤트 처리할땐 가게 ID필요
-        LatLng storeLatlng_far = new LatLng(58,-122);
-        LatLng storeLatlng_close = new LatLng(curPoint.latitude,curPoint.longitude+0.01);
+        //가게 위치 보여주기 -> DB에서 끌어올 것
+        LatLng storeLatlng_close = new LatLng(curPoint.latitude, curPoint.longitude + 0.01);
+        //마커 옵션 객체 생성 ->가까운 것들만 (해쉬맵에 추가)
+        if (isitClose(storeLatlng_close, curPoint) == true) {
+            showStoreLocationMarker(storeLatlng_close);
+            markerIndex++;
+        }
 
-        //이건 뜨고
-        showStoreLocationMarker(storeLatlng_close,curPoint);
-        //이건안떠야함
-        showStoreLocationMarker(storeLatlng_far,curPoint);
-
+        //마커 클릭 이벤트
+        map.setOnMarkerClickListener(this);
+        //툴팁 클릭 이벤트
+        map.setOnInfoWindowClickListener(this);
 
     }
+
     private double decimalToradian(double decimal) {
         return (decimal * Math.PI / 180.0);
     }
-    private double radianTodecimal(double radian){
-        return (radian*180/Math.PI);
+
+    private double radianTodecimal(double radian) {
+        return (radian * 180 / Math.PI);
     }
+
     private boolean isitClose(LatLng storeLocation, LatLng MyLocation) {
         //현위치에서 1km 이내 가게인지 보여줌.
 
@@ -207,7 +213,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         Rad = Math.PI / 180;
         radLat1 = Rad * storeLocation.latitude;
         radLat2 = Rad * MyLocation.latitude;
-        radDist = Rad * (storeLocation.longitude- MyLocation.longitude);
+        radDist = Rad * (storeLocation.longitude - MyLocation.longitude);
 
         distance = Math.sin(radLat1) * Math.sin(radLat2);
         distance = distance + Math.cos(radLat1) * Math.cos(radLat2)
@@ -217,36 +223,30 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         double rslt = ret / 1000;
         // km로 변환 및 반올림
 
-        Log.i("거리",rslt+"km");
-        if (rslt<=1.0)
-        {
+        Log.i("거리", rslt + "km");
+        if (rslt <= 1.0) {
             return true;
-        }
-        else
+        } else
             return false;
     }
 
 
-    private void showStoreLocationMarker(LatLng storeLocation,LatLng curPoint){
-        //거리 계산 -> 1km 내의 가게들만 뜨도록,,
-        if (isitClose(storeLocation,curPoint)==true)
-        {
-            MarkerOptions storeLocationMarker = new MarkerOptions();
-            storeLocationMarker.position(storeLocation);
-            storeLocationMarker.title("Store Position \n");
-            storeLocationMarker.snippet("Click here to see.");
-            storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
-            myMarker = map.addMarker(storeLocationMarker);
+    private void showStoreLocationMarker(LatLng storeLatLng) {
 
-            Log.i("showStoreLocation", "가게 마커 불러옴");
+        MarkerOptions storeLocationMarker = new MarkerOptions();
+        storeLocationMarker.position(storeLatLng);
+        storeLocationMarker.title("Store Position \n");
+        storeLocationMarker.snippet("Click here to see.");
+        storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
+        myMarker = map.addMarker(storeLocationMarker);
 
-            //마커 클릭 이벤트
-            map.setOnMarkerClickListener(this);
-            //툴팁 클릭 이벤트
-            map.setOnInfoWindowClickListener(this);
-        }
+        markerHashMap.put(myMarker,markerIndex);
+        Log.i("showStoreLocation", "가게 마커 불러옴");
+
 
     }
+
+
 
     private void showMyLocationMarker(LatLng curPoint) {
         if (myLocationMarker == null) {
@@ -255,13 +255,18 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             myLocationMarker.title("Current Position \n");
             myLocationMarker.snippet("You are here.");
             myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(200));
+
             myMarker = map.addMarker(myLocationMarker);
+
 
         } else {
             myMarker.remove(); // 마커삭제
             myLocationMarker.position(curPoint);
             myMarker = map.addMarker(myLocationMarker);
         }
+
+        markerHashMap.put(myMarker, 0);
+        //해쉬맵에 현위치 추가
 
     }
 }
