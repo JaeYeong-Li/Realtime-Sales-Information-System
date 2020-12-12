@@ -34,35 +34,47 @@
             android:layout_marginRight="150dp"
             android:text="myName" />
 
-        <Button
+        <TextView
             android:id="@+id/mybutton1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-
-            app:backgroundTint="#3F51B5"
             android:layout_marginBottom="5dp"
-            android:text="가게정보" />
+            android:background="@drawable/btn_normal"
+            android:gravity="center"
+            android:text="가게정보"
+            android:textColor="@color/white" />
 
-        <Button
+
+
+        <TextView
             android:id="@+id/mybutton2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            app:backgroundTint="#3F51B5"
-            android:text="선호가게" />
+            android:background="@drawable/btn_normal"
+            android:gravity="center"
+            android:text="선호가게"
+            android:textColor="@color/white" />
 
-        <Button
+
+
+
+        <TextView
             android:id="@+id/mytoedit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            app:backgroundTint="#3F51B5"
+            android:background="@drawable/btn_normal"
+            android:gravity="center"
             android:onClick="clickHandler"
-            android:text="선호가게등록(임시)" />
+            android:text="선호가게등록(임시)"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/textview"
