@@ -11,8 +11,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import java.util.Calendar;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import androidx.annotation.NonNull;
+import java.util.List;
 
 public class EditStoreInfo extends AppCompatActivity {
 
@@ -23,12 +27,14 @@ public class EditStoreInfo extends AppCompatActivity {
     private Double lan;
     private Double lon;
     private CheckBox cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun;
+    String selDates="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addressView = findViewById(R.id.editSI_address);
         menuView = findViewById(R.id.editSI_menu);
+
         setContentView(R.layout.activity_editstoreinfo);
 
         //use toolbar
@@ -64,17 +70,46 @@ public class EditStoreInfo extends AppCompatActivity {
                 return true;
             }
         });
-/*
+
         //monthly 플랜 설정
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.MONTH,+1);
-
         MaterialCalendarView materialCalendarView = findViewById(R.id.editSI_monthly);
-        materialCalendarView.setOnDateChangedListener(this);
-        materialCalendarView.setOnMonthChangedListener(this);
-        materialCalendarView.setTopbarVisible(false);
 
-*/
+        int afterYear = CalendarDay.today().getYear();
+        int afterMonth = CalendarDay.today().getMonth()+1;
+        if(afterMonth==13) {
+            afterMonth = 1;
+            afterYear += 1;
+        }
+        int afterDay = CalendarDay.today().getDay();
+        if(afterMonth==2 && afterDay>28) {
+            if(afterYear%4==0)
+                afterDay =29;
+            else {
+                afterDay = 28;
+            }
+        }else if((afterMonth==4||afterMonth==6||afterMonth==9||afterMonth==11)&&afterDay==31)
+            afterDay=30;
+
+        //materialCalendarView.setSelectedDate(CalendarDay.today());
+        materialCalendarView.state().edit()
+                .setMinimumDate(CalendarDay.from(CalendarDay.today().getYear(), CalendarDay.today().getMonth(), CalendarDay.today().getDay()))
+                .setMaximumDate(CalendarDay.from(afterYear, afterMonth, afterDay))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                //List<CalendarDay> selectedDates = materialCalendarView.getSelectedDates();
+                int idx = date.toString().indexOf("{");
+                String temp = date.toString().substring(idx);
+                idx = temp.indexOf("}");
+                temp = temp.substring(1,idx);
+                selDates = selDates + temp + ";";
+
+                android.widget.Toast.makeText(context, selDates, android.widget.Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         //체크박스 설정
