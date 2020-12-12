@@ -25,7 +25,8 @@ public class SignUpActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private Context context = this;
 
-    private static String IP_ADDRESS = "10.0.2.2";
+    //private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "27.113.19.27";
     private static String TAG = "phptest";
 
     private EditText EditTextID;
