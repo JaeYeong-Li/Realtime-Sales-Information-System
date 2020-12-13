@@ -196,7 +196,6 @@ public class Search_Result extends AppCompatActivity {
             case 6: sd_day="fri"; break;
             case 7: sd_day="sat"; break;
         }
-        Log.i("selectedDate요일:", sd_day);
 
         String ot = openTime;
         String od = openDate;
@@ -212,19 +211,16 @@ public class Search_Result extends AppCompatActivity {
                 while(true) {
                     int idx2 = od.indexOf(";");
                     if (idx2 != -1) {
-                        String od_temp = od.substring(idx2);
+                        //"123;"일때idx는3,length는4
+                        String od_temp="";
+                        if(idx2-1!=od.length())
+                            od_temp = od.substring(idx2+1);
                         od = od.substring(0, idx2);
-                        Log.i("closedDate:", od.toString());
-                        Date dateod;
-                        try {
-                            dateod = sdf.parse(od);
-                        } catch (Exception e) {
-                            dateod = new Date();
-                        }
-                        //Log.i("selectedDate:", sd.toString());
-                        if(dateod.equals(sd))
+                        Log.i("od_temp:", od_temp);
+                        if(od.equals(selectedDate))
                             return false;
-                        od = od_temp;
+                        if(od_temp=="") { break; }
+                        else { od = od_temp; }
                     }else { break; }
                 }
                 return true;
