@@ -11,11 +11,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
-import androidx.annotation.NonNull;
 import android.provider.MediaStore;
 import android.net.Uri;
 import androidx.loader.content.CursorLoader;
@@ -25,25 +23,28 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
 import android.os.AsyncTask;
 import android.widget.EditText;
+import java.util.List;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class EditStoreInfo extends AppCompatActivity {
 
     //private static String IP_ADDRESS = "10.0.2.2";
     private static String IP_ADDRESS = "27.113.19.27";
     private static String TAG = "phptest";
+    private GlobalVar m_gvar = null;
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
     private EditText storenameView,menuView;
     private TextView addressView;
-    private String lan,lon;
-    private CheckBox cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun;
-    String selDates="";
+    private String lat,lan;
+    String selDates="",imgurl;
+    private static final int PICK_FROM_MAP = 1;
     private static final int PICK_FROM_ALBUM = 2;
-    String imgurl;
+    private RadioButton rc1,rc2,rc3;
+    private RadioGroup rg_category;
     Boolean specialcheck = false;
-
-    private GlobalVar m_gvar = null;
 
 
     @Override
@@ -53,8 +54,12 @@ public class EditStoreInfo extends AppCompatActivity {
         storenameView = (EditText) findViewById(R.id.eidtSI_storeName);
         addressView = (TextView) findViewById(R.id.editSI_address);
         menuView = (EditText) findViewById(R.id.editSI_menu);
+        rc1 = (RadioButton) findViewById(R.id.editSI_rbRest);
+        rc2 = (RadioButton) findViewById(R.id.editSI_rbCaffe);
+        rc3 = (RadioButton) findViewById(R.id.editSI_rbEnt);
+        rg_category = (RadioGroup) findViewById(R.id.editSI_rgcategory);
 
-        //globalVal
+        //globalVar
         m_gvar = (GlobalVar) getApplicationContext();
 
         //use toolbar
@@ -91,6 +96,9 @@ public class EditStoreInfo extends AppCompatActivity {
             }
         });
 
+        //category
+
+
         //monthly 플랜 설정
         MaterialCalendarView materialCalendarView = findViewById(R.id.editSI_monthly);
 
@@ -117,29 +125,6 @@ public class EditStoreInfo extends AppCompatActivity {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
-        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                //List<CalendarDay> selectedDates = materialCalendarView.getSelectedDates();
-                int idx = date.toString().indexOf("{");
-                String temp = date.toString().substring(idx);
-                idx = temp.indexOf("}");
-                temp = temp.substring(1,idx);
-                selDates = selDates + temp + ";";
-
-                android.widget.Toast.makeText(context, selDates, android.widget.Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        //체크박스 설정
-        cbmon = (CheckBox) findViewById(R.id.monday);
-        cbtue = (CheckBox) findViewById(R.id.tuesday);
-        cbwed = (CheckBox) findViewById(R.id.wednesday);
-        cbthu = (CheckBox) findViewById(R.id.thursday);
-        cbfri = (CheckBox) findViewById(R.id.friday);
-        cbsat = (CheckBox) findViewById(R.id.saturday);
-        cbsun = (CheckBox) findViewById(R.id.sunday);
 
         //메뉴사진
         Button btmenupic = (Button) findViewById(R.id.editSI_menuPicture);
@@ -157,13 +142,9 @@ public class EditStoreInfo extends AppCompatActivity {
         Switch sw = (Switch)findViewById(R.id.editSI_specialSwitch);
 
         //스위치의 체크 이벤트를 위한 리스너 등록
-
         sw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                // TODO Auto-generated method stub
-                android.widget.Toast.makeText(context, "체크상태 = " + isChecked, android.widget.Toast.LENGTH_SHORT).show();
                 specialcheck = isChecked;
             }
 
@@ -178,78 +159,107 @@ public class EditStoreInfo extends AppCompatActivity {
                 String name = storenameView.getText().toString();
                 String menu = menuView.getText().toString();
                 TextView opentotv, openfromtv, specialtv;
+                //category: category
+                int category = 1;
+                if(rc1.isChecked()){
+                    category = 1;
+                }else if(rc2.isChecked()){
+                    category = 2;
+                }else if(rc3.isChecked()){
+                    category = 3;
+                }
                 //openDate: selDates
+                List<CalendarDay> selDatesList = materialCalendarView.getSelectedDates();
+                selDates = "";
+                for(CalendarDay cd : selDatesList){
+                    int idx = cd.toString().indexOf("{");
+                    String temp = cd.toString().substring(idx);
+                    idx = temp.indexOf("}");
+                    temp = temp.substring(1,idx);
+                    selDates = selDates + temp + ";";
+                }
                 //openTime: openTime
+                    //체크박스 설정
+                CheckBox cbmon = (CheckBox) findViewById(R.id.monday);
+                CheckBox cbtue = (CheckBox) findViewById(R.id.tuesday);
+                CheckBox cbwed = (CheckBox) findViewById(R.id.wednesday);
+                CheckBox cbthu = (CheckBox) findViewById(R.id.thursday);
+                CheckBox cbfri = (CheckBox) findViewById(R.id.friday);
+                CheckBox cbsat = (CheckBox) findViewById(R.id.saturday);
+                CheckBox cbsun = (CheckBox) findViewById(R.id.sunday);
+
                 String openTime = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
-                if(cbmon.isChecked() == true){
-                    openTime += "mon";
-                    opentotv = findViewById(R.id.monto);
-                    openfromtv = findViewById(R.id.monfrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbmon.isChecked()){
+                    openTime = openTime + "mon";
+                    opentotv = (TextView)findViewById(R.id.monto);
+                    openfromtv = (TextView)findViewById(R.id.monfrom);
+                    openTime = openTime + opentotv.getText();
+                    openTime = openTime + openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbtue.isChecked() == true) {
-                    openTime += "tue";
-                    opentotv = findViewById(R.id.tueto);
-                    openfromtv = findViewById(R.id.tuefrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbtue.isChecked()) {
+                    openTime = openTime + "tue";
+                    opentotv = (TextView)findViewById(R.id.tueto);
+                    openfromtv = (TextView)findViewById(R.id.tuefrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime +openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbwed.isChecked() == true) {
-                    openTime += "wed";
-                    opentotv = findViewById(R.id.wedto);
-                    openfromtv = findViewById(R.id.wedfrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbwed.isChecked()) {
+                    openTime = openTime + "wed";
+                    opentotv = (TextView)findViewById(R.id.wedto);
+                    openfromtv = (TextView)findViewById(R.id.wedfrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime + openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbthu.isChecked() == true) {
-                    openTime += "thu";
-                    opentotv = findViewById(R.id.thuto);
-                    openfromtv = findViewById(R.id.thufrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbthu.isChecked()) {
+                    openTime = openTime + "thu";
+                    opentotv = (TextView) findViewById(R.id.thuto);
+                    openfromtv = (TextView) findViewById(R.id.thufrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime +openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbfri.isChecked() == true) {
-                    openTime += "fri";
-                    opentotv = findViewById(R.id.frito);
-                    openfromtv = findViewById(R.id.frifrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbfri.isChecked()) {
+                    openTime = openTime + "fri";
+                    opentotv = (TextView) findViewById(R.id.frito);
+                    openfromtv = (TextView) findViewById(R.id.frifrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime +openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbsat.isChecked() == true) {
-                    openTime += "sat";
-                    opentotv = findViewById(R.id.satto);
-                    openfromtv = findViewById(R.id.satfrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbsat.isChecked()) {
+                    openTime = openTime + "sat";
+                    opentotv = (TextView) findViewById(R.id.satto);
+                    openfromtv = (TextView) findViewById(R.id.satfrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime +openfromtv.getText();
+                    openTime = openTime +";";
                 }
-                if(cbsun.isChecked() == true) {
-                    openTime += "sun";
-                    opentotv = findViewById(R.id.sunto);
-                    openfromtv = findViewById(R.id.sunfrom);
-                    openTime += opentotv.getText();
-                    openTime += openfromtv.getText();
-                    openTime += ";";
+                if(cbsun.isChecked()) {
+                    openTime = openTime + "sun";
+                    opentotv = (TextView) findViewById(R.id.sunto);
+                    openfromtv = (TextView) findViewById(R.id.sunfrom);
+                    openTime = openTime +opentotv.getText();
+                    openTime = openTime +openfromtv.getText();
+                    openTime = openTime +";";
                 }
 
-                //ownerID: userid
+                //ownerID: g_gvar.getuserID()
                 //specialBool: specialcheck
                 //specialTime: specialtv
                 specialtv = findViewById(R.id.editSI_specialTime);
                 //photoUrl: imgurl
 
                 UploadStoreInfo task = new UploadStoreInfo();
-                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, lan, lon, menu, selDates,
-                        openTime, m_gvar.getuserID(),specialcheck.toString(),specialtv.getText().toString(),imgurl);
+                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, menu, selDates, openTime,
+                        m_gvar.getuserID(), specialcheck.toString(),specialtv.getText().toString(),imgurl);
             }
         });
     }
+
+
 
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = { MediaStore.Images.Media.DATA };
@@ -268,7 +278,7 @@ public class EditStoreInfo extends AppCompatActivity {
         if (clickid ==R.id.editSI_addressButton) {
             android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
             Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo_SearchLocation.class);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent,PICK_FROM_MAP);
         }else if(clickid == R.id.monto|| clickid == R.id.monto|| clickid == R.id.monfrom|| clickid == R.id.tueto|| clickid ==R.id.tuefrom
                 ||clickid == R.id.wedto|| clickid == R.id.wedfrom|| clickid == R.id.thuto|| clickid == R.id.thufrom||
                 clickid == R.id.frito||clickid == R.id.frifrom||clickid == R.id.satto||clickid == R.id.satfrom||clickid == R.id.sunto|| clickid ==R.id.sunfrom){
@@ -284,22 +294,19 @@ public class EditStoreInfo extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        // 액티비티가 정상적으로 종료되었을 경우
-        if (resultCode == RESULT_OK) {
-            // requestCode==1 로 호출한 경우에만 처리.
-            if (requestCode == 1) {
+        switch(requestCode){
+            case PICK_FROM_MAP:
                 addressView = (TextView) findViewById(R.id.editSI_address);
-                lon = data.getStringExtra("lon");
-                lan = data.getStringExtra("lan");
+                lat = data.getStringExtra("lat");
+                lan = data.getStringExtra("lon");
                 addressView.setText(data.getStringExtra("address"));
-            }
-        }else if(resultCode == PICK_FROM_ALBUM) {
-            Uri uri = data.getData();
-            //경로 구하기
-            imgurl=getRealPathFromURI(uri);
-            android.widget.Toast.makeText(context, imgurl, android.widget.Toast.LENGTH_SHORT).show();
+                break;
+            case PICK_FROM_ALBUM:
+                Uri uri = data.getData();
+                //경로 구하기
+                imgurl=getRealPathFromURI(uri);
+                break;
         }
-
     }
 
     class UploadStoreInfo extends AsyncTask<String, Void, String> {
@@ -326,26 +333,23 @@ public class EditStoreInfo extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-/*
-task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, lan.toString(),
-                        lon.toString(), menu, selDates, openTime, m_gvar.getuserID(),specialcheck.toString(),specialtv.getText().toString(),imgurl);
- */
             String d_name = (String)params[1];
-            String d_lan = (String)params[2];
-            String d_lon = (String)params[3];
-            String d_menu = (String)params[4];
-            String d_openDate = (String)params[5];
-            String d_openTime = (String)params[6];
-            String d_ownerID = (String)params[7];
-            String d_specialBool = (String)params[8];
-            String d_speciLTime = (String)params[9];
-            String d_photoUrl1 = (String)params[10];
+            String d_category = (String)params[2];
+            String d_lat = (String)params[3];
+            String d_lan = (String)params[4];
+            String d_menu = (String)params[5];
+            String d_openDate = (String)params[6];
+            String d_openTime = (String)params[7];
+            String d_ownerID = (String)params[8];
+            String d_specialBool = (String)params[9];
+            String d_specialTime = (String)params[10];
+            String d_photoUrl1 = (String)params[11];
 
             String serverURL = (String)params[0];
 
-            String postParameters = "storeName=" + d_name + "&lat=" + d_lan + "&lang=" + d_lon
-                    + "&menu=" + d_menu + "&openDate=" + d_openDate + "&openTime" + d_openTime + "&ownerID=" + d_ownerID
-                    + "&specialBool=" + d_specialBool + "&specialTime=" + d_speciLTime + "&photoUrl1=" + d_photoUrl1;
+            String postParameters = "storeName=" + d_name + "&category=" + d_category + "&lat=" + d_lat + "&lang=" + d_lan
+                    + "&menu=" + d_menu + "&openDate=" + d_openDate + "&openTime=" + d_openTime + "&ownerId=" + d_ownerID
+                    + "&specialBool=" + d_specialBool + "&specialTime=" + d_specialTime + "&photoUrl1=" + d_photoUrl1;
 
 
             try {

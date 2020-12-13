@@ -98,6 +98,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
                 address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); // 주소
                 latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
                 longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
+                android.widget.Toast.makeText(getApplicationContext(), latitude.toString()+";"+longitude.toString(), android.widget.Toast.LENGTH_LONG).show();
 
                 // 좌표(위도, 경도) 생성
                 LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
