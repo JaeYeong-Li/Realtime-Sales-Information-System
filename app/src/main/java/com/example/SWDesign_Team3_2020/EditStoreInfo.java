@@ -84,7 +84,7 @@ public class EditStoreInfo extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if (id == R.id.curLocationSearch) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.inputSearch) {
