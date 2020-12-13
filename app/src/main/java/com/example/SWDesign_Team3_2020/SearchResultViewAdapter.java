@@ -4,10 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.content.Context;
+import java.util.ArrayList;
 
-public class ResultViewAdapter extends BaseAdapter {
-    private android.content.Context mContext;
-
+public class SearchResultViewAdapter extends BaseAdapter {
+    private Context mContext;
+    private ArrayList<SearchResultViewItem> listViewItemList = null;
 
     @Override
     public int getCount() {

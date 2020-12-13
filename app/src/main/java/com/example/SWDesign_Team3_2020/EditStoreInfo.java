@@ -259,7 +259,7 @@ public class EditStoreInfo extends AppCompatActivity {
                 //photoUrl: imgurl
 
                 UploadStoreInfo task = new UploadStoreInfo();
-                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, menu, selDates, openTime,
+                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, addressView.getText().toString(), menu, selDates, openTime,
                         m_gvar.getuserID(), specialcheck.toString(),specialtv.getText().toString(),imgurl);
 
                 finish();
@@ -356,17 +356,18 @@ public class EditStoreInfo extends AppCompatActivity {
             String d_category = (String)params[2];
             String d_lat = (String)params[3];
             String d_lan = (String)params[4];
-            String d_menu = (String)params[5];
-            String d_openDate = (String)params[6];
-            String d_openTime = (String)params[7];
-            String d_ownerID = (String)params[8];
-            String d_specialBool = (String)params[9];
-            String d_specialTime = (String)params[10];
-            String d_photoUrl1 = (String)params[11];
+            String d_address = (String)params[5];
+            String d_menu = (String)params[6];
+            String d_openDate = (String)params[7];
+            String d_openTime = (String)params[8];
+            String d_ownerID = (String)params[9];
+            String d_specialBool = (String)params[10];
+            String d_specialTime = (String)params[11];
+            String d_photoUrl1 = (String)params[12];
 
             String serverURL = (String)params[0];
 
-            String postParameters = "storeName=" + d_name + "&category=" + d_category + "&lat=" + d_lat + "&lang=" + d_lan
+            String postParameters = "storeName=" + d_name + "&category=" + d_category + "&lat=" + d_lat + "&lang=" + d_lan + "&address=" + d_address
                     + "&menu=" + d_menu + "&openDate=" + d_openDate + "&openTime=" + d_openTime + "&ownerId=" + d_ownerID
                     + "&specialBool=" + d_specialBool + "&specialTime=" + d_specialTime + "&photoUrl1=" + d_photoUrl1;
 

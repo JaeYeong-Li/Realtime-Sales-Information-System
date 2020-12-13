@@ -2,13 +2,13 @@ package com.example.SWDesign_Team3_2020;
 
 public class SearchResultViewItem {
     private String StoreName;
-    private String StoreOwner;
     private String Address;
+    private String OpenTime;
 
-    public SearchResultViewItem(String StoreName, String StoreOwner, String Address){
+    public SearchResultViewItem(String StoreName, String Address, String OpenTime){
         this.StoreName = StoreName;
-        this.StoreOwner = StoreOwner;
         this.Address = Address;
+        this.OpenTime = OpenTime;
     }
     public String getStoreName() { return StoreName; }
 
@@ -16,17 +16,17 @@ public class SearchResultViewItem {
         this.StoreName = StoreName;
     }
 
-    public String getStoreOwner() { return StoreOwner; }
-
-    public void setStoreOwner(String StoreOwner) {
-        this.StoreOwner = StoreOwner;
-    }
+    public String getAddress() { return Address; }
 
     public void setAddress(String Address) {
         this.Address = Address;
     }
 
-    public String getAddress() { return Address; }
+    public void setOpenTime(String Address) {
+        this.OpenTime = OpenTime;
+    }
+
+    public String getOpenTime() { return OpenTime; }
 
 
 }
