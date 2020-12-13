@@ -31,6 +31,7 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".Search_Calender" />
         <activity android:name=".Search_Location" />
+        <activity android:name=".Search_Result" />
         <activity android:name=".StoreInfoActivity" />
         <activity android:name=".EditStoreInfo" />
         <activity

@@ -61,11 +61,10 @@
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/searchresult_listview"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:id="@+id/searchresult_recyclerview" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
