@@ -7,15 +7,44 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="2dp">
 
-        <TextView
-            android:textSize="100dp"
+        <!--ONLY ONE DIRECT CHILD-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Menu Fragment" />
+            android:layout_marginVertical="12px"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30px"
+                android:layout_marginTop="45px"
+                android:drawableLeft="@drawable/ic_baseline_food_bank_24"
+                android:text=" Today's Menu"
+                android:textSize="22dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/TextView_Menu"
+                android:paddingLeft="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Macaron, eggtart"
+                android:textSize="21dp"
+                android:layout_marginBottom="30dp"
+
+                >
+            </TextView>
+
+
+
+        </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>

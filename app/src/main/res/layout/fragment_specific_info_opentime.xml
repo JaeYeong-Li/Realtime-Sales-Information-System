@@ -7,15 +7,561 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="2dp">
 
-        <TextView
-            android:textSize="100dp"
+        <!--ONLY ONE DIRECT CHILD-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="TIME Fragment" />
+            android:layout_marginVertical="12px"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20px"
+                android:drawableLeft="@drawable/ic_baseline_check_24"
+                android:text=" Regular Business Hours"
+                android:textSize="21dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+            <!--월요일 -->
+            <LinearLayout
+                android:id="@+id/LinearLayout_Mon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Mon  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Mon_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Mon_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Mon_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Mon_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <!--화요일-->
+            <LinearLayout
+                android:id="@+id/LinearLayout_Tue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Tue  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Tue_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Tue_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Tue_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Tue_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <!--수요일-->
+            <LinearLayout
+                android:id="@+id/LinearLayout_Wed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Wed  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Wed_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Wed_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Wed_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Wed_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <!--목요일-->
+            <LinearLayout
+                android:id="@+id/LinearLayout_Thu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Thu  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Thu_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Thu_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Thu_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Thu_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+            <!--금요일-->
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_Fri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Fri  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Fri_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Fri_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Fri_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Fri_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <!--토요일-->
+            <LinearLayout
+                android:id="@+id/LinearLayout_Sat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Sat  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Sat_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Sat_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Sat_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Sat_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <!--일요일-->
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_Sun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60px"
+                    android:drawableLeft="@drawable/ic_baseline_lens_24"
+                    android:text="  Sun  :  "
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+                <!--시작 시간-->
+                <TextView
+                    android:id="@+id/TextView_Sun_StartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Sun_StartMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18px"
+                    android:text="~"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/TextView_Sun_EndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:text=":"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TextView_Sun_EndMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12px"
+                    android:layout_marginBottom="12px"
+                    android:text="09"
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <TextView
+                android:paddingLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25px"
+                android:layout_marginTop="50px"
+                android:drawableLeft="@drawable/ic_baseline_wb_incandescent_24"
+                android:text=" Business Hours for TODAY ONLY"
+                android:textSize="21dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:textColor="@color/purple_500"
+                android:paddingLeft="20dp"
+                android:id="@+id/TextView_ChangedTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:text="Today, we will close for a vacation."
+                android:layout_marginBottom="30dp"
+                />
+
+        </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>
