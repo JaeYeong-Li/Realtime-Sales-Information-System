@@ -19,8 +19,8 @@
             tools:context=".EditStoreInfo">
 
             <include
-                layout="@layout/toolbar"
-                android:id="@+id/toolbar" />
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,9 +32,9 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -43,16 +43,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:background="#ffffff"
                     android:hint="storeName(필수)"
-                    android:paddingLeft="10dp"
-                    android:background="#ffffff" />
+                    android:paddingLeft="10dp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:padding="2dp">
@@ -64,279 +64,274 @@
                     android:onClick="clickHandler"
                     android:text="검색" />
 
-                <EditText
+                <TextView
                     android:id="@+id/editSI_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="First click left button" />
+                    android:text="First click left button" />
             </LinearLayout>
 
-            <ScrollView
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="vertical"
-                android:padding="2dp">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/monday"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:text="Monday" />
 
-                        <CheckBox
-                            android:id="@+id/monday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Monday" />
+                    <TextView
+                        android:id="@+id/monto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
 
-                        <TextView
-                            android:id="@+id/monto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/monfrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"
-                            android:text="from" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/tuesday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Tuesday" />
-
-                        <TextView
-                            android:id="@+id/tueto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tuefrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/wednesday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Wednesday" />
-
-                        <TextView
-                            android:id="@+id/wedto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/wedfrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/thursday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Thursday" />
-
-                        <TextView
-                            android:id="@+id/thuto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/thufrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/friday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Friday" />
-
-                        <TextView
-                            android:id="@+id/frito"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/frifrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/satgroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/saturday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Saturday" />
-                        <TextView
-                            android:id="@+id/satto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/satfrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/sunday"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:text="Sunday" />
-
-                        <TextView
-                            android:id="@+id/sunto"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="to"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="50dp"
-                            android:text="~"
-                            android:textSize="20dp"
-                            android:gravity="center_horizontal"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/sunfrom"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:text="from"
-                            android:gravity="center_horizontal"
-                            android:onClick="clickHandler"/>
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/monfrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
                 </LinearLayout>
-            </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/tuesday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Tuesday" />
+
+                    <TextView
+                        android:id="@+id/tueto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tuefrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/wednesday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Wednesday" />
+
+                    <TextView
+                        android:id="@+id/wedto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wedfrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/thursday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Thursday" />
+
+                    <TextView
+                        android:id="@+id/thuto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/thufrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/friday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Friday" />
+
+                    <TextView
+                        android:id="@+id/frito"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/frifrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/satgroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/saturday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Saturday" />
+
+                    <TextView
+                        android:id="@+id/satto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/satfrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/sunday"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sunday" />
+
+                    <TextView
+                        android:id="@+id/sunto"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="to" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:text="~"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sunfrom"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_horizontal"
+                        android:onClick="clickHandler"
+                        android:text="from" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -345,6 +340,7 @@
                 android:layout_marginTop="30dp"
                 android:orientation="vertical"
                 android:padding="2dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -359,27 +355,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:mcv_selectionColor="#00F"
-                    app:mcv_selectionMode="multiple"
-                    />
+                    app:mcv_selectionMode="multiple" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:padding="2dp">
+
                 <EditText
                     android:id="@+id/editSI_menu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:hint="menu"
                     android:paddingLeft="10dp" />
-            </LinearLayout>
 
+                <Button
+                    android:id="@+id/editSI_menuPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:text="사진첨부"
+                    android:textColor="#3CB371" />
+                <Switch
+                    android:id="@+id/editSI_specialSwitch"
+                    android:text="금일 일정 변동 여부"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <EditText
+                    android:id="@+id/editSI_specialTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="금일 일정 변동여부 설명"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_editstoreInfo"
@@ -391,9 +408,9 @@
                 android:text="Register"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
-
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

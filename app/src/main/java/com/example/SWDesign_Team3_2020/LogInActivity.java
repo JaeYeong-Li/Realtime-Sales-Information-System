@@ -27,7 +27,8 @@ import java.util.HashMap;
 public class LogInActivity extends AppCompatActivity {
 
     private static String TAG = "phpquerytest";
-    private static String IP_ADDRESS = "10.0.2.2";
+    //private static String IP_ADDRESS = "10.0.2.2"; 에뮬레이터용
+    private static String IP_ADDRESS = "27.113.19.27";
 
     private static final String TAG_JSON="storeInfo";
     private static final String TAG_ID = "id";

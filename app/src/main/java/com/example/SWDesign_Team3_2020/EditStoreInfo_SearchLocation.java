@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class EditStoreInfo_SearchLocation extends FragmentActivity implements OnMapReadyCallback {
 
@@ -31,7 +32,7 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editstoreinfo_searchlocation);
-        editText = (android.widget.EditText) findViewById(R.id.search_editText);
+        editText = (android.widget.EditText) findViewById(R.id.editstorelocation_editText);
         button=(android.widget.Button)findViewById(R.id.button1_editstorelocation);
 
 
@@ -95,12 +96,8 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
                 // 콤마를 기준으로 split
                 String []splitStr = addressList.get(0).toString().split(",");
                 address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); // 주소
-                System.out.println(address);
-
                 latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
                 longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
-                System.out.println(latitude);
-                System.out.println(longitude);
 
                 // 좌표(위도, 경도) 생성
                 LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
@@ -127,11 +124,10 @@ public class EditStoreInfo_SearchLocation extends FragmentActivity implements On
         switch (view.getId()) {
             case R.id.button2_editstorelocation:
                 // 현재 활성화된 액티비티를 시작하게 한 인텐트 호출
-                Intent intent = getIntent();
-                android.widget.Toast.makeText(getApplicationContext(), intent.getStringExtra("file"),
-                        android.widget.Toast.LENGTH_LONG).show();
-                intent.putExtra("lat", Double.parseDouble(latitude));
-                intent.putExtra("lon", Double.parseDouble(longitude));
+                Intent intent = new Intent();
+                //android.widget.Toast.makeText(getApplicationContext(), intent.getStringExtra("file"), android.widget.Toast.LENGTH_LONG).show();
+                intent.putExtra("lat", latitude.toString());
+                intent.putExtra("lon", longitude.toString());
                 intent.putExtra("address",address);
                 setResult(RESULT_OK,intent);
                 finish();

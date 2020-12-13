@@ -16,26 +16,46 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import androidx.annotation.NonNull;
-import java.util.List;
+import android.provider.MediaStore;
+import android.net.Uri;
+import androidx.loader.content.CursorLoader;
+import android.database.Cursor;
+import android.widget.Switch;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
+import android.os.AsyncTask;
+import android.widget.EditText;
 
 public class EditStoreInfo extends AppCompatActivity {
 
+    //private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "27.113.19.27";
+    private static String TAG = "phptest";
+
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private EditText storenameView,menuView;
     private TextView addressView;
-    private TextView menuView;
-    private Double lan;
-    private Double lon;
+    private String lan,lon;
     private CheckBox cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun;
     String selDates="";
+    private static final int PICK_FROM_ALBUM = 2;
+    String imgurl;
+    Boolean specialcheck = false;
+
+    private GlobalVar m_gvar = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addressView = findViewById(R.id.editSI_address);
-        menuView = findViewById(R.id.editSI_menu);
-
         setContentView(R.layout.activity_editstoreinfo);
+        storenameView = (EditText) findViewById(R.id.eidtSI_storeName);
+        addressView = (TextView) findViewById(R.id.editSI_address);
+        menuView = (EditText) findViewById(R.id.editSI_menu);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
 
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -121,47 +141,127 @@ public class EditStoreInfo extends AppCompatActivity {
         cbsat = (CheckBox) findViewById(R.id.saturday);
         cbsun = (CheckBox) findViewById(R.id.sunday);
 
+        //메뉴사진
+        Button btmenupic = (Button) findViewById(R.id.editSI_menuPicture);
+        btmenupic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PICK_FROM_ALBUM);
+            }
+        });
+
+        //금일 일정 변동 여부
+        Switch sw = (Switch)findViewById(R.id.editSI_specialSwitch);
+
+        //스위치의 체크 이벤트를 위한 리스너 등록
+
+        sw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                // TODO Auto-generated method stub
+                android.widget.Toast.makeText(context, "체크상태 = " + isChecked, android.widget.Toast.LENGTH_SHORT).show();
+                specialcheck = isChecked;
+            }
+
+        });
+
 
         Button regButton = findViewById(R.id.button_editstoreInfo);
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String name = addressView.getText().toString();
+                String name = storenameView.getText().toString();
                 String menu = menuView.getText().toString();
-
-                //openDate
-                String openDate = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
+                TextView opentotv, openfromtv, specialtv;
+                //openDate: selDates
+                //openTime: openTime
+                String openTime = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
                 if(cbmon.isChecked() == true){
-                    openDate += "mon";
+                    openTime += "mon";
+                    opentotv = findViewById(R.id.monto);
+                    openfromtv = findViewById(R.id.monfrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbtue.isChecked() == true) {
-                    openDate += "tue";
+                    openTime += "tue";
+                    opentotv = findViewById(R.id.tueto);
+                    openfromtv = findViewById(R.id.tuefrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbwed.isChecked() == true) {
-                    openDate += "wed";
+                    openTime += "wed";
+                    opentotv = findViewById(R.id.wedto);
+                    openfromtv = findViewById(R.id.wedfrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbthu.isChecked() == true) {
-                    openDate += "thu";
+                    openTime += "thu";
+                    opentotv = findViewById(R.id.thuto);
+                    openfromtv = findViewById(R.id.thufrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbfri.isChecked() == true) {
-                    openDate += "fri";
+                    openTime += "fri";
+                    opentotv = findViewById(R.id.frito);
+                    openfromtv = findViewById(R.id.frifrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbsat.isChecked() == true) {
-                    openDate += "sat";
+                    openTime += "sat";
+                    opentotv = findViewById(R.id.satto);
+                    openfromtv = findViewById(R.id.satfrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
                 if(cbsun.isChecked() == true) {
-                    openDate += "sun";
+                    openTime += "sun";
+                    opentotv = findViewById(R.id.sunto);
+                    openfromtv = findViewById(R.id.sunfrom);
+                    openTime += opentotv.getText();
+                    openTime += openfromtv.getText();
+                    openTime += ";";
                 }
 
-                //com.example.SWDesign_Team3_2020.SignUpActivity.SignUp task = new com.example.SWDesign_Team3_2020.SignUpActivity.SignUp();
-                //task.execute("http://" + IP_ADDRESS + "/SignUp.php", id,pw,name);
+                //ownerID: userid
+                //specialBool: specialcheck
+                //specialTime: specialtv
+                specialtv = findViewById(R.id.editSI_specialTime);
+                //photoUrl: imgurl
 
-
+                UploadStoreInfo task = new UploadStoreInfo();
+                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, lan, lon, menu, selDates,
+                        openTime, m_gvar.getuserID(),specialcheck.toString(),specialtv.getText().toString(),imgurl);
             }
         });
     }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+
+        CursorLoader cursorLoader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 
     public void clickHandler(View view) {
         int clickid = view.getId();
@@ -188,11 +288,120 @@ public class EditStoreInfo extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             // requestCode==1 로 호출한 경우에만 처리.
             if (requestCode == 1) {
+                addressView = (TextView) findViewById(R.id.editSI_address);
+                lon = data.getStringExtra("lon");
+                lan = data.getStringExtra("lan");
                 addressView.setText(data.getStringExtra("address"));
-                lon = data.getDoubleExtra("lon",0);
-                lan = data.getDoubleExtra("lan",0);
             }
+        }else if(resultCode == PICK_FROM_ALBUM) {
+            Uri uri = data.getData();
+            //경로 구하기
+            imgurl=getRealPathFromURI(uri);
+            android.widget.Toast.makeText(context, imgurl, android.widget.Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    class UploadStoreInfo extends AsyncTask<String, Void, String> {
+        android.app.ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = android.app.ProgressDialog.show(EditStoreInfo.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            //mTextViewResult.setText(result);
+            android.util.Log.d(TAG, "POST response  - " + result);
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+/*
+task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, lan.toString(),
+                        lon.toString(), menu, selDates, openTime, m_gvar.getuserID(),specialcheck.toString(),specialtv.getText().toString(),imgurl);
+ */
+            String d_name = (String)params[1];
+            String d_lan = (String)params[2];
+            String d_lon = (String)params[3];
+            String d_menu = (String)params[4];
+            String d_openDate = (String)params[5];
+            String d_openTime = (String)params[6];
+            String d_ownerID = (String)params[7];
+            String d_specialBool = (String)params[8];
+            String d_speciLTime = (String)params[9];
+            String d_photoUrl1 = (String)params[10];
+
+            String serverURL = (String)params[0];
+
+            String postParameters = "storeName=" + d_name + "&lat=" + d_lan + "&lang=" + d_lon
+                    + "&menu=" + d_menu + "&openDate=" + d_openDate + "&openTime" + d_openTime + "&ownerID=" + d_ownerID
+                    + "&specialBool=" + d_specialBool + "&specialTime=" + d_speciLTime + "&photoUrl1=" + d_photoUrl1;
+
+
+            try {
+
+                java.net.URL url = new java.net.URL(serverURL);
+                java.net.HttpURLConnection httpURLConnection = (java.net.HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                java.io.OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                android.util.Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                java.io.InputStream inputStream;
+                if(responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(inputStream, "UTF-8");
+                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                android.util.Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
+        }
     }
 }
