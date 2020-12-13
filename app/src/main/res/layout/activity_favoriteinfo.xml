@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FavoriteInfoActivity"
-    android:background="#FFD700">
+  >
     <include
         layout="@layout/toolbar"
         android:id="@+id/toolbar" />

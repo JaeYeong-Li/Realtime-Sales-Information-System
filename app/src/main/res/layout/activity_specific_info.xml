@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SpecificInfoActivity">
-<TextView
-    android:id="@+id/TextView_markerInfo"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="Hellooooo"/>
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SpecificInfoActivity"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar" />
+        <LinearLayout
+            android:layout_marginTop="17dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="60px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/lightgray"
+            android:layout_marginBottom="17dp"
+            >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:src="@mipmap/heart_before"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:paddingLeft="30px"
+                android:paddingTop="9px"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선호가게 등록"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:layout_marginLeft="12px"
+                android:paddingRight="30px"
+                android:paddingVertical="12px"
+                android:padding="20px"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="할매국밥"
+            android:textStyle="bold"
+            android:textSize="38dp"
+            android:layout_marginVertical="35px"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울시 용산구 보광동 12번지"
+            android:textSize="20dp"
+            android:layout_marginBottom="15dp"
+            />
+        <ImageView
+
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:src="@mipmap/heart"
+            android:layout_marginBottom="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/blue"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_OpenInfo"
+                android:text="영업정보"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_Menu"
+                android:text="오늘의 메뉴"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:id="@+id/Button_OpenSchedule"
+                android:text="영업일정"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/blue"
+                android:onClick="clickHandler"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
