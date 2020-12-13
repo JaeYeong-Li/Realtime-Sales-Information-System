@@ -36,6 +36,7 @@ public class CurLocationActivity extends AppCompatActivity {
     public FragmentTransaction transaction;
 
     private GlobalVar m_gvar = null;
+    Boolean isLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,11 @@ public class CurLocationActivity extends AppCompatActivity {
 
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
+        if(m_gvar.isIDnull() == true) {
+            isLogin = false;
+        }else{
+            isLogin=true;
+        }
 
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,12 +74,21 @@ public class CurLocationActivity extends AppCompatActivity {
 
                 if (id == R.id.curLocationSearch) {
                     Toast.makeText(context, title + "현재 페이지", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.setting) {
+                } else if (id == R.id.inputSearch) {
                     Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
+                    finish();
                 } else if (id == R.id.mypage_toolbar) {
-                    Intent intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    Intent intent;
+                    if(isLogin == true){
+                        intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    }
                     startActivity(intent);
+                    finish();
+                } else if (id == R.id.logout) {
+                android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

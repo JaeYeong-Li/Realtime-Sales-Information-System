@@ -14,10 +14,12 @@
             layout="@layout/toolbar"
             android:id="@+id/toolbar" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/search_calendar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:mcv_selectionColor="#00F"
+            app:mcv_selectionMode="single" />
         <TextView
             android:id="@+id/calender_textView"
             android:layout_width="match_parent"

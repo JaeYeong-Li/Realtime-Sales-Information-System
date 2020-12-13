@@ -39,10 +39,22 @@ public class SpecificInfoActivity extends AppCompatActivity {
     private boolean preferedStore = false;
 
     private ImageView ImageView_Heart;
+
+    private GlobalVar m_gvar = null;
+    Boolean isLogin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_info);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
+        if(m_gvar.isIDnull() == true) {
+            isLogin = false;
+        }else{
+            isLogin=true;
+        }
 
         //initialize view
         Button_Opentime = findViewById(R.id.Button_OpenTime);
@@ -112,9 +124,15 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
                 if (id == R.id.curLocationSearch) {
                     Toast.makeText(context, title + "현재 페이지", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.setting) {
-                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
+                } else if (id == R.id.inputSearch) {
+                    Intent intent;
+                    if(isLogin = true){
+                        intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    }
                     startActivity(intent);
+                    finish();
                 } else if (id == R.id.mypage_toolbar) {
                     Intent intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
                     startActivity(intent);

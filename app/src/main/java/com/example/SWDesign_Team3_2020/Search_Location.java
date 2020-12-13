@@ -18,6 +18,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
+import android.widget.Toast;
+import android.content.Intent;
 
 public class Search_Location extends FragmentActivity implements OnMapReadyCallback {
 
@@ -25,6 +27,7 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
     private Geocoder geocoder;
     private Button button;
     private EditText editText;
+    private String selDate, latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,8 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
         setContentView(R.layout.search_location);
         editText = (EditText) findViewById(R.id.search_editText);
         button=(Button)findViewById(R.id.searchStep1_5);
-
+        Intent intent = getIntent();
+        selDate = intent.getStringExtra("selDate");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -96,8 +100,8 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
                 String address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); // 주소
                 System.out.println(address);
 
-                String latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
-                String longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
+                latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
+                longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
                 System.out.println(latitude);
                 System.out.println(longitude);
 
@@ -125,10 +129,12 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
     public void clickHandler(View view) {
         switch (view.getId()) {
             case R.id.searchStep3:
-                android.widget.Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Result.class);
+                Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Search_Result.class);
+                intent.putExtra("selDate", selDate);
+                intent.putExtra("lat", latitude.toString());
+                intent.putExtra("lon", longitude.toString());
                 startActivity(intent);
-                finish();
                 break;
         }
     }

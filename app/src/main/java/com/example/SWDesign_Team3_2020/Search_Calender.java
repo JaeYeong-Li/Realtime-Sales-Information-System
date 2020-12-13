@@ -7,6 +7,9 @@ import androidx.annotation.NonNull ;
 import android.widget.TextView;
 import android.widget.CalendarView;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;;
+
 //for toolbar
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,8 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 
 //for searchStep, fragment
 import android.content.Intent;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 
 public class Search_Calender extends AppCompatActivity {
@@ -27,6 +28,9 @@ public class Search_Calender extends AppCompatActivity {
     public TextView diaryTextView;
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private GlobalVar m_gvar = null;
+    Boolean isLogin = false;
+    MaterialCalendarView materialCalendarView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +39,14 @@ public class Search_Calender extends AppCompatActivity {
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
+        if(m_gvar.isIDnull() == true) {
+            isLogin = false;
+        }else{
+            isLogin=true;
+        }
 
         //툴바에 홈버튼 활성화
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,25 +69,49 @@ public class Search_Calender extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    Toast.makeText(context, title + ": 현재 페이지", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.inputSearch) {
+                    android.widget.Toast.makeText(context, "현재페이지", android.widget.Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.mypage_toolbar) {
+                    Intent intent;
+                    if(isLogin == true){
+                        intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    }
+                    startActivity(intent);
+                    finish();
                 } else if (id == R.id.logout) {
-                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
         });
 
         // calender;
-        diaryTextView = findViewById(R.id.calender_textView);
-        calendarView = findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(new android.widget.CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                diaryTextView.setVisibility(android.view.View.VISIBLE);
-                diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
+       materialCalendarView = findViewById(R.id.search_calendar);
+
+        int afterYear = com.prolificinteractive.materialcalendarview.CalendarDay.today().getYear();
+        int afterMonth = com.prolificinteractive.materialcalendarview.CalendarDay.today().getMonth()+1;
+        if(afterMonth==13) {
+            afterMonth = 1;
+            afterYear += 1;
+        }
+        int afterDay = com.prolificinteractive.materialcalendarview.CalendarDay.today().getDay();
+        if(afterMonth==2 && afterDay>28) {
+            if(afterYear%4==0)
+                afterDay =29;
+            else {
+                afterDay = 28;
             }
-        });
+        }else if((afterMonth==4||afterMonth==6||afterMonth==9||afterMonth==11)&&afterDay==31)
+            afterDay=30;
+
+        //materialCalendarView.setSelectedDate(CalendarDay.today());
+        materialCalendarView.state().edit()
+                .setMinimumDate(com.prolificinteractive.materialcalendarview.CalendarDay.from(com.prolificinteractive.materialcalendarview.CalendarDay.today().getYear(), com.prolificinteractive.materialcalendarview.CalendarDay.today().getMonth(), com.prolificinteractive.materialcalendarview.CalendarDay.today().getDay()))
+                .setMaximumDate(com.prolificinteractive.materialcalendarview.CalendarDay.from(afterYear, afterMonth, afterDay))
+                .setCalendarDisplayMode(com.prolificinteractive.materialcalendarview.CalendarMode.MONTHS)
+                .commit();
     }
 
     @Override
@@ -93,10 +129,15 @@ public class Search_Calender extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.searchStep1:
-                Toast.makeText(context, ": 클릭", Toast.LENGTH_SHORT).show();
+                CalendarDay cd = materialCalendarView.getSelectedDate();
+                int idx = cd.toString().indexOf("{");
+                String temp = cd.toString().substring(idx);
+                idx = temp.indexOf("}");
+                temp = temp.substring(1,idx);
+
                 Intent intent = new Intent(getApplicationContext(), Search_Location.class);
+                intent.putExtra("selDate", temp);
                 startActivity(intent);
-                finish();
                 break;
         }
     }
