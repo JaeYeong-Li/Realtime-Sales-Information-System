@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SpecificInfoFragment_OpenTime#newInstance} factory method to
@@ -60,5 +62,6 @@ public class SpecificInfoFragment_OpenTime extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_specific_info_opentime, container, false);
+
     }
 }
