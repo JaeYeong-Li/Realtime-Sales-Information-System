@@ -27,6 +27,8 @@ public class Search_Calender extends AppCompatActivity {
     public TextView diaryTextView;
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private GlobalVar m_gvar = null;
+    Boolean isLogin = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,14 @@ public class Search_Calender extends AppCompatActivity {
         //use toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
+        if(m_gvar.isIDnull() == true) {
+            isLogin = false;
+        }else{
+            isLogin=true;
+        }
 
         //툴바에 홈버튼 활성화
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,10 +67,19 @@ public class Search_Calender extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    Toast.makeText(context, title + ": 현재 페이지", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.inputSearch) {
+                    android.widget.Toast.makeText(context, "현재페이지", android.widget.Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.mypage_toolbar) {
+                    Intent intent;
+                    if(isLogin == true){
+                        intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    }
+                    startActivity(intent);
+                    finish();
                 } else if (id == R.id.logout) {
-                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.HashMap;
+import android.content.Intent;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -74,14 +75,19 @@ public class LogInActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if (id == R.id.curLocationSearch) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
+                    Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Calender.class);
+                } else if (id == R.id.inputSearch) {
+                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
+                    finish();
                 } else if (id == R.id.mypage_toolbar) {
-                    android.widget.Toast.makeText(context, title + "현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    startActivity(intent);
+                    finish();
+                } else if (id == R.id.logout) {
+                    android.widget.Toast.makeText(context, title + "로그인안했음", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

@@ -27,11 +27,22 @@ public class Search_Result extends AppCompatActivity {
     public android.widget.TextView diaryTextView;
     private androidx.drawerlayout.widget.DrawerLayout mDrawerLayout;
     private android.content.Context context = this;
+    private GlobalVar m_gvar = null;
+    Boolean isLogin = false;
 
     @Override
     protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.SWDesign_Team3_2020.R.layout.search_result);
+
+        //globalVal
+        m_gvar = (GlobalVar) getApplicationContext();
+        if(m_gvar.isIDnull() == true) {
+            isLogin = false;
+        }else{
+            isLogin=true;
+        }
+
         //use toolbar
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,8 +68,19 @@ public class Search_Result extends AppCompatActivity {
                     android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    android.widget.Toast.makeText(context, title + ": 현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.inputSearch) {
+                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
+                    startActivity(intent);
+                    finish();
+                } else if (id == R.id.mypage_toolbar) {
+                    Intent intent;
+                    if(isLogin == true){
+                        intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
+                    }
+                    startActivity(intent);
+                    finish();
                 } else if (id == R.id.logout) {
                     android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }

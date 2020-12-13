@@ -4,14 +4,18 @@ package com.example.SWDesign_Team3_2020;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 
 public class MyPage_nonmember extends AppCompatActivity {
 
+    public static Activity _MyPage_nonmember;
     private Context context = this;
     private DrawerLayout mDrawerLayout;
 
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _MyPage_nonmember = MyPage_nonmember.this;
         setContentView(R.layout.mypage_nonmeber);
 
         //use toolbar
@@ -36,18 +40,32 @@ public class MyPage_nonmember extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if (id == R.id.curLocationSearch) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
+                    Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Calender.class);
+                } else if (id == R.id.inputSearch) {
+                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
+                    finish();
                 } else if (id == R.id.mypage_toolbar) {
-                    android.widget.Toast.makeText(context, title + "현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(context, "현재페이지", android.widget.Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.logout) {
+                    android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+                mDrawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void clickHandler(android.view.View view) {
@@ -58,13 +76,11 @@ public class MyPage_nonmember extends AppCompatActivity {
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.mytologin:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(intent);
-                finish();
                 break;
         }
     }

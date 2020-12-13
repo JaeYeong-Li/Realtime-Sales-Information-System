@@ -63,11 +63,13 @@ public class SignUpActivity extends AppCompatActivity {
                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
+                } else if (id == R.id.inputSearch) {
                     android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Calender.class);
                     startActivity(intent);
                 } else if (id == R.id.mypage_toolbar) {
-                    android.widget.Toast.makeText(context, title + "현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
+                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), MyPage_nonmember.class);
+                    startActivity(intent);
+                    finish();
                 }
                 return true;
             }
@@ -93,6 +95,8 @@ public class SignUpActivity extends AppCompatActivity {
                 EditTextPW.setText("");
                 EditTextNAME.setText("");
 
+                android.widget.Toast.makeText(context, "가입완료", android.widget.Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

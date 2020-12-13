@@ -59,7 +59,7 @@ public class EditStoreInfo extends AppCompatActivity {
         rc3 = (RadioButton) findViewById(R.id.editSI_rbEnt);
         rg_category = (RadioGroup) findViewById(R.id.editSI_rgcategory);
 
-        //globalVar
+        //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
 
         //use toolbar
@@ -87,8 +87,14 @@ public class EditStoreInfo extends AppCompatActivity {
                     android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (id == R.id.setting) {
-                    android.widget.Toast.makeText(context, title + ": 현재 페이지", android.widget.Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.inputSearch) {
+                    Intent intent = new Intent(getApplicationContext(), Search_Calender.class);
+                    startActivity(intent);
+                    finish();
+                } else if (id == R.id.mypage_toolbar) {
+                    Intent intent = new Intent(getApplicationContext(), MyPage_member.class);
+                    startActivity(intent);
+                    finish();
                 } else if (id == R.id.logout) {
                     android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
@@ -255,8 +261,21 @@ public class EditStoreInfo extends AppCompatActivity {
                 UploadStoreInfo task = new UploadStoreInfo();
                 task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, menu, selDates, openTime,
                         m_gvar.getuserID(), specialcheck.toString(),specialtv.getText().toString(),imgurl);
+
+                finish();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+                mDrawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
