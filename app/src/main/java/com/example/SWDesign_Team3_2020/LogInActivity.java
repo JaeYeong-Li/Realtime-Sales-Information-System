@@ -105,6 +105,9 @@ public class LogInActivity extends AppCompatActivity {
                 String id = EditTextID.getText().toString();
                 String pw = EditTextPW.getText().toString();
                 task.execute( "http://" + IP_ADDRESS + "/login.php", id,pw);
+                MyPage_nonmember MN = (MyPage_nonmember) MyPage_nonmember._MyPage_nonmember;
+                MN.finish();
+                finish();
             }
         });
     }

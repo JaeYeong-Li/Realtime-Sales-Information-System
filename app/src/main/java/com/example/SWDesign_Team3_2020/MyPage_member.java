@@ -82,7 +82,6 @@ public class MyPage_member extends AppCompatActivity {
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo.class);
                 startActivity(intent);
-                finish();
                 break;
         }
     }
