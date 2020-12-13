@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="선호가게 등록"
+                android:text="Bookmark this store"
                 android:gravity="center_vertical"
                 android:textStyle="bold"
                 android:textSize="19dp"
@@ -78,36 +78,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:weightSum="12"
             android:backgroundTint="@color/blue"
             >
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
                 android:id="@+id/Button_OpenTime"
-                android:text="영업정보"
+                android:text="Open Hours"
                 android:textSize="17dp"
-                android:textStyle="bold"
                 android:backgroundTint="@color/blue"
-                android:onClick="clickHandler"/>
+                android:onClick="clickHandler"
+                android:layout_width="0dp" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
                 android:id="@+id/Button_Menu"
-                android:text="오늘의 메뉴"
+                android:text="Today's Menu"
                 android:textSize="17dp"
-                android:textStyle="bold"
                 android:backgroundTint="@color/blue"
                 android:onClick="clickHandler"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
                 android:id="@+id/Button_OpenSchedule"
-                android:text="영업일정"
-                android:textSize="17dp"
-                android:textStyle="bold"
+                android:text="Schedule"
+                android:textSize="15dp"
                 android:backgroundTint="@color/blue"
                 android:onClick="clickHandler"/>
 

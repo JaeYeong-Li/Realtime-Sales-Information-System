@@ -63,6 +63,10 @@ public class SpecificInfoActivity extends AppCompatActivity {
         //DB찾아보고 없는 거면 preferedStore = false
 
 
+
+
+
+
         Button_Prefer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +75,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
                 // -> "선호가게로 등록되었습니다" 하고 선호 DB에 저장, 진한 하트로 바꿔, preferedStore 바꿔
                 if (preferedStore==false)
                 {
-                    Toast.makeText(context, "선호가게로 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Bookmarked as a preferred store", Toast.LENGTH_SHORT).show();
                     preferedStore = true;
                     ImageView_Heart.setImageResource(R.mipmap.heart);
                 }
@@ -79,7 +83,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
                 //-> 선호가게에서 삭제했습니다" 하고 선호 DB에서 삭제, 연한 하트로 바꿔, preferedStore 바뀨ㅓ
                 else
                 {
-                    Toast.makeText(context, "선호가게에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Deleted from the preferred store list", Toast.LENGTH_SHORT).show();
                     preferedStore = false;
                     ImageView_Heart.setImageResource(R.mipmap.heart_before);
                 }
@@ -135,7 +139,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
      //버튼 클릭 이벤트(프래그먼트)
     public void clickHandler(View view) {
 
-        Toast.makeText(context, "BtnClikced", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "BtnClikced", Toast.LENGTH_SHORT).show();
 
         transaction = fragmentManager.beginTransaction();
 
