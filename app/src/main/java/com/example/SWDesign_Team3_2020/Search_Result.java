@@ -1,39 +1,37 @@
 package com.example.SWDesign_Team3_2020;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull ;
-import android.widget.TextView;
-import android.widget.CalendarView;
+import android.widget.ListView;
+import com.google.android.material.navigation.NavigationView;
 
 //for toolbar
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.navigation.NavigationView;
 import android.content.Context;
 import androidx.appcompat.widget.Toolbar;
 
 //for searchStep, fragment
 import android.content.Intent;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 
+
 public class Search_Result extends AppCompatActivity {
-    public android.widget.CalendarView calendarView;
-    public android.widget.TextView diaryTextView;
-    private androidx.drawerlayout.widget.DrawerLayout mDrawerLayout;
-    private android.content.Context context = this;
+
+
+    private ListView listview;
+    private SearchResultViewAdapter adapter;
+
+    private DrawerLayout mDrawerLayout;
+    private Context context = this;
     private GlobalVar m_gvar = null;
     Boolean isLogin = false;
 
     @Override
     protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.SWDesign_Team3_2020.R.layout.search_result);
+        setContentView(R.layout.search_result);
 
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
@@ -44,7 +42,7 @@ public class Search_Result extends AppCompatActivity {
         }
 
         //use toolbar
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //툴바에 홈버튼 활성화
@@ -53,9 +51,9 @@ public class Search_Result extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_navi_menu);
 
         //drawyerLayout
-        mDrawerLayout = (androidx.drawerlayout.widget.DrawerLayout) findViewById(R.id.drawer_layout);
-        com.google.android.material.navigation.NavigationView navigationView = (com.google.android.material.navigation.NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(android.view.MenuItem menuItem) {
                 menuItem.setChecked(true);
@@ -65,7 +63,7 @@ public class Search_Result extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if (id == R.id.curLocationSearch) {
-                    android.content.Intent intent = new android.content.Intent(getApplicationContext(), CurLocationActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CurLocationActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.inputSearch) {
@@ -82,32 +80,41 @@ public class Search_Result extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.logout) {
-                    android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
         });
 
+        //searchresult Adapter 생성
+        adapter = new SearchResultViewAdapter();
+
+        //리스트뷰 참조 및 Adapter 달기
+        listview = (ListView) findViewById(R.id.searchresult_listview);
+        listview.setAdapter(adapter);
+
+        adapter.
+
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
-                mDrawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void clickHandler(android.view.View view) {
+    public void clickHandler(View view) {
         switch (view.getId())
         {
             case R.id.searchStep1:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                android.content.Intent intent = new android.content.Intent(getApplicationContext(), Search_Location.class);
+               Toast.makeText(context, ": 클릭", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Search_Location.class);
                 startActivity(intent);
                 finish();
                 break;
