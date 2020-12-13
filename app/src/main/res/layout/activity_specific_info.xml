@@ -16,6 +16,8 @@
             layout="@layout/toolbar"
             android:id="@+id/toolbar" />
         <LinearLayout
+            android:id="@+id/Button_Prefer"
+            android:clickable="true"
             android:layout_marginTop="17dp"
             android:layout_gravity="right"
             android:layout_marginRight="60px"
@@ -25,11 +27,11 @@
             android:background="@color/lightgray"
             android:layout_marginBottom="17dp"
             >
-
             <ImageView
+                android:id="@+id/ImageView_Heart"
                 android:src="@mipmap/heart_before"
-                android:layout_width="47dp"
-                android:layout_height="47dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:paddingLeft="30px"
                 android:paddingTop="9px"
                 android:layout_gravity="center_vertical"
@@ -40,35 +42,37 @@
                 android:text="선호가게 등록"
                 android:gravity="center_vertical"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:textSize="19dp"
                 android:layout_marginLeft="12px"
                 android:paddingRight="30px"
-                android:paddingVertical="12px"
+                android:paddingVertical="20px"
                 android:padding="20px"
                 />
         </LinearLayout>
         <TextView
+            android:id="@+id/TextView_Storename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="할매국밥"
             android:textStyle="bold"
-            android:textSize="38dp"
-            android:layout_marginVertical="35px"
+            android:textSize="30dp"
+            android:layout_marginVertical="27px"
             />
         <TextView
+            android:id="@+id/TextView_Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="서울시 용산구 보광동 12번지"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_marginBottom="15dp"
             />
         <ImageView
-
-            android:layout_width="210dp"
-            android:layout_height="210dp"
+            android:id="@+id/ImageView_OpenInfo"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
             android:src="@mipmap/heart"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:id="@+id/Button_OpenInfo"
+                android:id="@+id/Button_OpenTime"
                 android:text="영업정보"
                 android:textSize="17dp"
                 android:textStyle="bold"
@@ -110,6 +114,7 @@
         </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/FrameLayout_SpecificInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
