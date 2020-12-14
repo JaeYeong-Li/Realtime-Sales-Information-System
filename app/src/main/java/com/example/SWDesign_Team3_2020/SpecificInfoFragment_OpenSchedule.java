@@ -33,7 +33,7 @@ import static java.lang.String.valueOf;
  * create an instance of this fragment.
  */
 public class SpecificInfoFragment_OpenSchedule extends Fragment implements DayViewDecorator {
-    public ArrayList<CalendarDay> holidays = new ArrayList<CalendarDay>();
+    public ArrayList<CalendarDay> holidays = new ArrayList<>();
 
     private MaterialCalendarView calendarView;
     View v;
@@ -111,32 +111,27 @@ public class SpecificInfoFragment_OpenSchedule extends Fragment implements DayVi
                 .setMaximumDate(CalendarDay.from(afterYear, afterMonth, afterDay))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_NONE);
+        materialCalendarView.setSelectionMode(com.prolificinteractive.materialcalendarview.MaterialCalendarView.SELECTION_MODE_NONE);
 
         CalendarDay tmp = CalendarDay.from(2020,12,20);
-        holidays.add(tmp);
-        materialCalendarView.addDecorator((DayViewDecorator) DayViewDecorator);
+        CalendarDay tmpP = CalendarDay.from(2020,12,23);
+        holidays.add(tmpP);
 
+        holidays.add(tmp);
+       // materialCalendarView.addDecorator((DayViewDecorator) DayViewDecorator);
+    materialCalendarView.setSelectedDate(tmp);
+        materialCalendarView.setSelectedDate(tmpP);
         return v;
     }
 
 
     @Override
-    public boolean shouldDecorate(CalendarDay day) {
-        //holidays 에 그 날짜가 있나 없나 검사
-        int msg = day.getMonth();
-        String m = valueOf(msg);
-        Log.d("12월 20ㅣㅇㄹ 나와랏!",m);
-        if (holidays.contains(day))
-            return true;
-        else
-            return false;
+    public boolean shouldDecorate(com.prolificinteractive.materialcalendarview.CalendarDay day) {
+        return false;
     }
 
     @Override
-    public void decorate(DayViewFacade view) {
-
-        view.addSpan(new DotSpan(5, Color.MAGENTA));
+    public void decorate(com.prolificinteractive.materialcalendarview.DayViewFacade view) {
 
     }
 }
