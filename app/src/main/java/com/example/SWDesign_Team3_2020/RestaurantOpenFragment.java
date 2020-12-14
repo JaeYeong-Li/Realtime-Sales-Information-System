@@ -30,6 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
@@ -37,6 +39,10 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.*;
 
 public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
+
+    //private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "27.113.19.27";
+    private static String TAG = "phpexample";
 
     LocationManager manager;
     GPSListener gpsListener;
@@ -46,6 +52,12 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     Marker myMarker;
     int storeId;
     int markerIndex = 1;
+    String mJsonString;
+    private LatLng curPoint;
+
+    private java.util.ArrayList<SearchResultViewItem> mArrayList;
+
+
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -189,7 +201,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     }
 
     private void showCurrentLocation(double latitude, double longitude) {
-        LatLng curPoint = new LatLng(latitude, longitude);
+         curPoint = new LatLng(latitude, longitude);
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 14));
 
@@ -197,13 +209,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         showMyLocationMarker(curPoint);
 
         //가게 위치 보여주기 -> DB에서 끌어올 것
-        storeId = 0;
-        LatLng storeLatlng_close = new LatLng(curPoint.latitude, curPoint.longitude + 0.01);
-        //마커 옵션 객체 생성 ->가까운 것들만 (해쉬맵에 추가)
-        if (isitClose(storeLatlng_close, curPoint) == true) {
-            showStoreLocationMarker(storeLatlng_close, storeId);
-            markerIndex++;
-        }
+
 
         //마커 클릭 이벤트
         map.setOnMarkerClickListener(this);
@@ -211,14 +217,208 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         map.setOnInfoWindowClickListener(this);
 
     }
+    ///////////////////////여기부터 손봐야함 - 가게의 시간 정보 vs 현재의 시간 정보 비교
+    private boolean isitOpen(String openDate, String openTime, Date sd){
+        //Date sd는 today!
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.setTime(sd);
 
-    private double decimalToradian(double decimal) {
-        return (decimal * Math.PI / 180.0);
+        //오늘 요일(int): sd_nday
+        int sd_nday = cal.get(java.util.Calendar.DAY_OF_WEEK);
+        String sd_day = "";
+        switch(sd_nday) {
+            case 1: sd_day="sun"; break;
+            case 2: sd_day="mon"; break;
+            case 3: sd_day="tue"; break;
+            case 4: sd_day="wed"; break;
+            case 5: sd_day="thu"; break;
+            case 6: sd_day="fri"; break;
+            case 7: sd_day="sat"; break;
+        }
+
+        String ot = openTime;
+        String od = openDate;
+        do{
+            int idx1 = ot.indexOf(";");
+            if (idx1 == -1)
+                break;
+            String ot_temp = ot.substring(idx1);
+            ot = ot.substring(0, 3);
+            Log.i("openTime요일:", ot);
+
+            if (ot.equals(sd_day)) {
+                while(true) {
+                    int idx2 = od.indexOf(";");
+                    if (idx2 != -1) {
+                        //"123;"일때idx는3,length는4
+                        String od_temp="";
+                        if(idx2-1!=od.length())
+                            od_temp = od.substring(idx2+1);
+                        od = od.substring(0, idx2);
+                        Log.i("od_temp:", od_temp);
+                        if(od.equals(sd))
+                            return false;
+                        if(od_temp=="") { break; }
+                        else { od = od_temp; }
+                    }else { break; }
+                }
+                return true;
+            }
+            ot = ot_temp;
+        }while(true);
+        return false;
     }
 
-    private double radianTodecimal(double radian) {
-        return (radian * 180 / Math.PI);
+    private class GetData extends android.os.AsyncTask<String, Void, String> {
+
+        android.app.ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = android.app.ProgressDialog.show(getContext(),
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            Log.d(TAG, "response - " + result);
+
+            if (result == null){
+                Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mJsonString = result;
+                Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
+                arrangeResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = "country=" + params[1];
+
+            try {
+
+                java.net.URL url = new java.net.URL(serverURL);
+                java.net.HttpURLConnection httpURLConnection = (java.net.HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                java.io.OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                java.io.InputStream inputStream;
+                if(responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(inputStream, "UTF-8");
+                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
     }
+
+    private void arrangeResult() {
+        String TAG_STOREID = "storeId";
+        String TAG_STORENAME = "storeName";
+        String TAG_CATEGORY = "category";
+        String TAG_LAT = "lat";
+        String TAG_LANG = "lang";
+        String TAG_ADDRESS = "address";
+        String TAG_OPENDATE = "openDate";
+        String TAG_OPENTIME = "openTime";
+
+        try {
+            int idx = mJsonString.indexOf("[");
+            mJsonString = mJsonString.substring(idx);
+            mJsonString.trim();
+
+            Log.d("MyApp", mJsonString);
+            org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                Log.d(TAG, "start arrange result");
+                org.json.JSONObject item = jsonArray.getJSONObject(i);
+
+                String lat = item.getString(TAG_LAT);
+                String lang = item.getString(TAG_LANG);
+                LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
+
+                String openDate = item.getString(TAG_OPENDATE);
+                String openTime = item.getString(TAG_OPENTIME);
+                String category = item.getString(TAG_CATEGORY);
+
+                Date today = new Date();
+
+                //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
+                if (isitClose(storeLocation, curPoint) == true && isitOpen(openDate, openTime, today)==true && (category.equals('1')))
+                {
+
+                    String storeId = item.getString(TAG_STORENAME);
+                    String storeName = item.getString(TAG_STORENAME);
+                    String address = item.getString(TAG_ADDRESS);
+
+                    SearchResultViewItem storeData = new SearchResultViewItem(storeId, storeName, category, lat, lang, address, openDate, openTime);
+                    LatLng storeLatlng = new com.google.android.gms.maps.model.LatLng(parseDouble(lat),parseDouble(lang));
+
+                    ////////////마커로 표시////////////////////
+                    showStoreLocationMarker(storeLatlng, parseInt(storeId));
+
+                    mArrayList.add(storeData);
+                    Log.d("어레이 들어감??",mArrayList.get(0).getStoreName());
+                //    mAdapter.notifyDataSetChanged();
+                }
+            }
+            Log.d(TAG, "finish arrange result");
+
+        } catch (org.json.JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
+
 
     private boolean isitClose(LatLng storeLocation, LatLng MyLocation) {
         //현위치에서 1km 이내 가게인지 보여줌.
