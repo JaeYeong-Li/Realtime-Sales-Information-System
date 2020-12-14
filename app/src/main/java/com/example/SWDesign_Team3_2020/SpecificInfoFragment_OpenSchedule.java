@@ -111,16 +111,15 @@ public class SpecificInfoFragment_OpenSchedule extends Fragment implements DayVi
                 .setMaximumDate(CalendarDay.from(afterYear, afterMonth, afterDay))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        materialCalendarView.setSelectionMode(com.prolificinteractive.materialcalendarview.MaterialCalendarView.SELECTION_MODE_NONE);
+        materialCalendarView.setSelectionMode(com.prolificinteractive.materialcalendarview.MaterialCalendarView.SELECTION_MODE_MULTIPLE);
 
         CalendarDay tmp = CalendarDay.from(2020,12,20);
+        materialCalendarView.setDateSelected(tmp,true);
+        holidays.add(tmp);
         CalendarDay tmpP = CalendarDay.from(2020,12,23);
+        materialCalendarView.setDateSelected(tmpP,true);
         holidays.add(tmpP);
 
-        holidays.add(tmp);
-       // materialCalendarView.addDecorator((DayViewDecorator) DayViewDecorator);
-    materialCalendarView.setSelectedDate(tmp);
-        materialCalendarView.setSelectedDate(tmpP);
         return v;
     }
 
