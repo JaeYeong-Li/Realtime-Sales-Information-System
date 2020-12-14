@@ -26,6 +26,7 @@ import android.widget.EditText;
 import java.util.List;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.util.Log;
 
 public class EditStoreInfo extends AppCompatActivity {
 
@@ -44,7 +45,11 @@ public class EditStoreInfo extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 2;
     private RadioButton rc1,rc2,rc3;
     private RadioGroup rg_category;
-    Boolean specialcheck = false;
+    Boolean specialcheck = false, alreadystore;
+    String mJsonString="";
+    int category=1;
+    CheckBox cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun;
+    MaterialCalendarView materialCalendarView;
 
 
     @Override
@@ -102,11 +107,17 @@ public class EditStoreInfo extends AppCompatActivity {
             }
         });
 
-        //category
-
+        //체크박스 설정
+        cbmon = (CheckBox) findViewById(R.id.monday);
+        cbtue = (CheckBox) findViewById(R.id.tuesday);
+        cbwed = (CheckBox) findViewById(R.id.wednesday);
+        cbthu = (CheckBox) findViewById(R.id.thursday);
+        cbfri = (CheckBox) findViewById(R.id.friday);
+        cbsat = (CheckBox) findViewById(R.id.saturday);
+        cbsun = (CheckBox) findViewById(R.id.sunday);
 
         //monthly 플랜 설정
-        MaterialCalendarView materialCalendarView = findViewById(R.id.editSI_monthly);
+        materialCalendarView = findViewById(R.id.editSI_monthly);
 
         int afterYear = CalendarDay.today().getYear();
         int afterMonth = CalendarDay.today().getMonth()+1;
@@ -156,6 +167,10 @@ public class EditStoreInfo extends AppCompatActivity {
 
         });
 
+        //check if this user register his store already
+        checkstore task1 = new checkstore();
+        task1.execute( "http://" + IP_ADDRESS + "/checkstore.php", m_gvar.getuserID());
+
 
         Button regButton = findViewById(R.id.button_editstoreInfo);
 
@@ -166,7 +181,7 @@ public class EditStoreInfo extends AppCompatActivity {
                 String menu = menuView.getText().toString();
                 TextView opentotv, openfromtv, specialtv;
                 //category: category
-                int category = 1;
+                category = 1;
                 if(rc1.isChecked()){
                     category = 1;
                 }else if(rc2.isChecked()){
@@ -185,15 +200,6 @@ public class EditStoreInfo extends AppCompatActivity {
                     selDates = selDates + temp + ";";
                 }
                 //openTime: openTime
-                    //체크박스 설정
-                CheckBox cbmon = (CheckBox) findViewById(R.id.monday);
-                CheckBox cbtue = (CheckBox) findViewById(R.id.tuesday);
-                CheckBox cbwed = (CheckBox) findViewById(R.id.wednesday);
-                CheckBox cbthu = (CheckBox) findViewById(R.id.thursday);
-                CheckBox cbfri = (CheckBox) findViewById(R.id.friday);
-                CheckBox cbsat = (CheckBox) findViewById(R.id.saturday);
-                CheckBox cbsun = (CheckBox) findViewById(R.id.sunday);
-
                 String openTime = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
                 if(cbmon.isChecked()){
                     openTime = openTime + "mon";
@@ -258,9 +264,19 @@ public class EditStoreInfo extends AppCompatActivity {
                 specialtv = findViewById(R.id.editSI_specialTime);
                 //photoUrl: imgurl
 
-                UploadStoreInfo task = new UploadStoreInfo();
-                task.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, addressView.getText().toString(), menu, selDates, openTime,
-                        m_gvar.getuserID(), specialcheck.toString(),specialtv.getText().toString(),imgurl);
+                UploadStoreInfo task2 = new UploadStoreInfo();
+
+                if(alreadystore==true) {
+                    task2.execute("http://" + IP_ADDRESS + "/EditExistStoreInfo.php", name, Integer.toString(category), lat, lan, addressView.getText().toString(), menu, selDates, openTime,
+                            m_gvar.getuserID(), specialcheck.toString(), specialtv.getText().toString(), imgurl);
+                    Log.i("executed phpfile:","EditExistStoreInfo.php");
+                }
+
+                else if(alreadystore==false) {
+                    task2.execute("http://" + IP_ADDRESS + "/EditStoreInfo.php", name, Integer.toString(category), lat, lan, addressView.getText().toString(), menu, selDates, openTime,
+                            m_gvar.getuserID(), specialcheck.toString(), specialtv.getText().toString(), imgurl);
+                    Log.i("executed phpfile:","EditStoreInfo.php");
+                }
 
                 finish();
             }
@@ -428,4 +444,167 @@ public class EditStoreInfo extends AppCompatActivity {
 
         }
     }
+
+    private class checkstore extends AsyncTask<String, Void, String>{
+
+        android.app.ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = android.app.ProgressDialog.show(EditStoreInfo.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            Log.d(TAG, "response - " + result);
+
+            if (result == null){
+                android.widget.Toast.makeText(context, errorString, android.widget.Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mJsonString = result;
+                int idx = mJsonString.indexOf("storeInfo");
+                if(idx==-1){
+                    Log.i("AlreadyStoreinfo?","no");
+                    alreadystore=false;
+                }else{
+                    Log.i("AlreadyStoreinfo?","yes");
+                    alreadystore=true;
+                    arrangeResult();
+                }
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = "ownerId=" + params[1];
+
+            try {
+
+                java.net.URL url = new java.net.URL(serverURL);
+                java.net.HttpURLConnection httpURLConnection = (java.net.HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                java.io.OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                java.io.InputStream inputStream;
+                if(responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(inputStream, "UTF-8");
+                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void arrangeResult() {
+        String TAG_STOREID = "storeId";
+        String TAG_STORENAME = "storeName";
+        String TAG_CATEGORY = "category";
+        String TAG_LAT = "lat";
+        String TAG_LANG = "lang";
+        String TAG_ADDRESS = "address";
+        String TAG_MENU = "menu";
+        String TAG_OPENTIME = "openTime";
+
+        try {
+            int idx = mJsonString.indexOf("[");
+            mJsonString = mJsonString.substring(idx);
+            mJsonString.trim();
+
+            Log.d("MyApp", mJsonString);
+            org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                Log.d(TAG, "start arrange result");
+                org.json.JSONObject item = jsonArray.getJSONObject(i);
+
+                storenameView.setText(item.getString(TAG_STORENAME));
+                lat = item.getString(TAG_LAT);
+                lan = item.getString(TAG_LANG);
+                addressView.setText(item.getString(TAG_ADDRESS));
+                category = Integer.parseInt(item.getString(TAG_CATEGORY));
+                if(category==1){
+                    rc1.setChecked(true);
+                }else if(category==2){
+                    rc2.setChecked(true);
+                }else if(category==3){
+                    rc3.setChecked(true);
+                }
+                menuView.setText(item.getString(TAG_MENU));
+                showopenTime(item.getString(TAG_OPENTIME));
+            }
+            Log.d(TAG, "finish arrange result");
+
+        } catch (org.json.JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
+
+    public void showopenTime(String ot){
+        do {
+            int idx1 = ot.indexOf(";");
+            if (idx1 == -1)
+                break;
+            String ot_temp = ot.substring(idx1);
+            ot = ot.substring(0, 3);
+            switch(ot){
+                case "sun": cbsun.setChecked(true);
+                case "mon": cbmon.setChecked(true);
+                case "tue": cbtue.setChecked(true);
+                case "wed": cbwed.setChecked(true);
+                case "thu": cbthu.setChecked(true);
+                case "fri": cbfri.setChecked(true);
+                case "sat": cbsat.setChecked(true);
+            }
+        }while(true);
+    }
+
 }
