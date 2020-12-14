@@ -71,8 +71,18 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
         //DB찾아보고 있는 거면 preferedStore = true
         // 사진 진한 하트로 바꾸기
+        if (preferedStore == false)
+        {
+            ImageView_Heart.setImageResource(com.example.SWDesign_Team3_2020.R.drawable.ic_baseline_add_24);
 
-        //DB찾아보고 없는 거면 preferedStore = false
+        }
+        else
+        {
+            //DB찾아보고 없는 거면 preferedStore = false
+            ImageView_Heart.setImageResource(com.example.SWDesign_Team3_2020.R.drawable.ic_baseline_check_24);
+
+
+        }
 
 
 
@@ -85,11 +95,10 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
                 //preferedStore이 false면
                 // -> "선호가게로 등록되었습니다" 하고 선호 DB에 저장, 진한 하트로 바꿔, preferedStore 바꿔
-                if (preferedStore==false)
-                {
+                if (preferedStore==false) {
                     Toast.makeText(context, "Bookmarked as a preferred store", Toast.LENGTH_SHORT).show();
                     preferedStore = true;
-                    ImageView_Heart.setImageResource(R.mipmap.heart);
+                    ImageView_Heart.setImageResource(com.example.SWDesign_Team3_2020.R.drawable.ic_baseline_check_24);
                 }
                 //preferedStore이 true면
                 //-> 선호가게에서 삭제했습니다" 하고 선호 DB에서 삭제, 연한 하트로 바꿔, preferedStore 바뀨ㅓ
@@ -97,7 +106,8 @@ public class SpecificInfoActivity extends AppCompatActivity {
                 {
                     Toast.makeText(context, "Deleted from the preferred store list", Toast.LENGTH_SHORT).show();
                     preferedStore = false;
-                    ImageView_Heart.setImageResource(R.mipmap.heart_before);
+                    ImageView_Heart.setImageResource(com.example.SWDesign_Team3_2020.R.drawable.ic_baseline_add_24);
+
                 }
             }
         });

@@ -29,7 +29,7 @@
             >
             <ImageView
                 android:id="@+id/ImageView_Heart"
-                android:src="@mipmap/heart_before"
+                android:src="@drawable/ic_baseline_add_24"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:paddingLeft="30px"
@@ -71,7 +71,7 @@
             android:id="@+id/ImageView_OpenInfo"
             android:layout_width="145dp"
             android:layout_height="145dp"
-            android:src="@mipmap/heart"
+            android:src="@mipmap/restaurant"
             android:layout_marginBottom="35dp"
             />
         <LinearLayout
