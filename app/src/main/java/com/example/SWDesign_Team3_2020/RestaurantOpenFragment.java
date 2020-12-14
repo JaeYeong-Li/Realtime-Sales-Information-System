@@ -171,6 +171,21 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             Log.i("MyLocTest", "onLocationChanged() 호출되었습니다.");
 
         }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
     }
 
     private void showCurrentLocation(double latitude, double longitude) {

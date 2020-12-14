@@ -2,6 +2,8 @@ package com.example.SWDesign_Team3_2020;
 
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +22,26 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Objects;
 
 
 public class Search_Location_map extends Fragment implements onMapReadyCallback{
+    //검색 서비스
     private GoogleMap mMap;
     private Geocoder geocoder;
     private android.widget.Button button;
     private EditText editText;
+
+    //현 위치 보여주기 위함
+    LocationManager manager;
+    RestaurantOpenFragment.GPSListener gpsListener;
+    GoogleMap map;
+
+    MarkerOptions myLocationMarker;
+    Marker myMarker;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -42,9 +56,21 @@ public class Search_Location_map extends Fragment implements onMapReadyCallback{
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
+            //예시 위치 시드니
+            /*
             LatLng sydney = new LatLng(37.56, 126.97);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            */
+
+
+            manager = (LocationManager) Objects.requireNonNull(getContext()).getSystemService(getContext().LOCATION_SERVICE);
+            //gpsListener = new GPSListener();
+            map = googleMap;
+            //startLocationService
+            Location location = null;
+
+
         }
     };
 
@@ -84,6 +110,7 @@ public class Search_Location_map extends Fragment implements onMapReadyCallback{
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             @Override
             public void onMapClick(LatLng point) {
+                /*  현 위치 마커 스니팻 터치 이벤트
                 MarkerOptions mOptions = new MarkerOptions();
                 // 마커 타이틀
                 mOptions.title("마커 좌표");
@@ -95,6 +122,8 @@ public class Search_Location_map extends Fragment implements onMapReadyCallback{
                 mOptions.position(new LatLng(latitude, longitude));
                 // 마커(핀) 추가
                 googleMap.addMarker(mOptions);
+
+                 */
             }
         });
         ////////////////////
