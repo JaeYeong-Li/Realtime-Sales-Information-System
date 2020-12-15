@@ -43,6 +43,9 @@ public class SpecificInfoActivity extends AppCompatActivity {
     private GlobalVar m_gvar = null;
     Boolean isLogin = false;
 
+
+    private android.widget.TextView TextView_StoreName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,9 @@ public class SpecificInfoActivity extends AppCompatActivity {
         Button_Prefer = findViewById(R.id.Button_Prefer);
 
         ImageView_Heart = findViewById(R.id.ImageView_Heart);
+
+        TextView_StoreName = findViewById(R.id.TextView_Storename);
+        TextView_StoreName.setText("아에이오우");
 
         //set on click listener for linear layout button
         //버튼 클릭 이벤트(리니어 레이아웃 - 선호 버튼)

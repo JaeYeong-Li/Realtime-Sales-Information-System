@@ -48,15 +48,17 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     GPSListener gpsListener;
     GoogleMap map;
 
+    //  MarkerOptions storeLocationMarker;
     MarkerOptions myLocationMarker;
     Marker myMarker;
+
     int storeId;
     int markerIndex = 1;
     String mJsonString;
     private LatLng curPoint;
 
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
-
+    private SearchResultViewAdapter mAdapter;
 
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
@@ -73,6 +75,12 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
             long minTime = 0;
             float minDistance = 0;
+
+            mArrayList = new java.util.ArrayList<>();
+            mAdapter = new SearchResultViewAdapter(getActivity(), mArrayList);
+
+            mArrayList.clear();
+            mAdapter.notifyDataSetChanged();
 
 
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -116,7 +124,6 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
 
     };
-    private Marker marker;
 
 
     @Nullable
@@ -136,27 +143,27 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             mapFragment.getMapAsync(callback);
         }
 
-        Context context = getContext();
-        CharSequence text = "Restaurant Open Fragement!";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Date selDate = new java.util.Date();
+        String Keyword = selDate.toString();
+        GetData task = new GetData();
+        task.execute("http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
     }
 
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        String msg = "tooltip!!";
+        String msg;
 
-        Toast toast = Toast.makeText(this.getContext(), msg, Toast.LENGTH_LONG);
-        toast.show();
-        if (markerHashMap.get(marker) != -1 ) { // 내 위치가 아니라면 가게 id 보내기
-            Log.i("value 값", (markerHashMap.get(marker)).toString());
-            Intent i = new Intent(this.getContext(),SpecificInfoActivity.class);
-            i.putExtra("storeId",markerHashMap.get(marker));
+        storeId = markerHashMap.get(marker);
+
+        if (storeId != -1) { // 내 위치가 아니라면 가게 id 보내기
+            Intent i = new Intent(this.getContext(), SpecificInfoActivity.class);
+            i.putExtra("storeId", storeId);
             startActivity(i);
         }
+
+
 
     }
 
@@ -201,8 +208,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     }
 
     private void showCurrentLocation(double latitude, double longitude) {
-         curPoint = new LatLng(latitude, longitude);
-
+        curPoint = new com.google.android.gms.maps.model.LatLng(latitude, longitude);
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 14));
 
         //내 위치 보여주기 (해쉬맵에 추가)
@@ -217,56 +223,83 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         map.setOnInfoWindowClickListener(this);
 
     }
+
     ///////////////////////여기부터 손봐야함 - 가게의 시간 정보 vs 현재의 시간 정보 비교
-    private boolean isitOpen(String openDate, String openTime, Date sd){
+    private boolean isitOpen(String openDate, String openTime, Date sd) {
+        /*
+        Toast.makeText(getContext(),"하...이게문제임", android.widget.Toast.LENGTH_LONG).show();
         //Date sd는 today!
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.setTime(sd);
 
         //오늘 요일(int): sd_nday
+
         int sd_nday = cal.get(java.util.Calendar.DAY_OF_WEEK);
         String sd_day = "";
-        switch(sd_nday) {
-            case 1: sd_day="sun"; break;
-            case 2: sd_day="mon"; break;
-            case 3: sd_day="tue"; break;
-            case 4: sd_day="wed"; break;
-            case 5: sd_day="thu"; break;
-            case 6: sd_day="fri"; break;
-            case 7: sd_day="sat"; break;
+        switch (sd_nday) {
+            case 1:
+                sd_day = "sun";
+                break;
+            case 2:
+                sd_day = "mon";
+                break;
+            case 3:
+                sd_day = "tue";
+                break;
+            case 4:
+                sd_day = "wed";
+                break;
+            case 5:
+                sd_day = "thu";
+                break;
+            case 6:
+                sd_day = "fri";
+                break;
+            case 7:
+                sd_day = "sat";
+                break;
         }
+        Log.i("open요일:", sd_day);
+
 
         String ot = openTime;
         String od = openDate;
-        do{
+        do {
             int idx1 = ot.indexOf(";");
             if (idx1 == -1)
                 break;
             String ot_temp = ot.substring(idx1);
-            ot = ot.substring(0, 3);
+            ot = ot.substring(1, 4);
             Log.i("openTime요일:", ot);
 
             if (ot.equals(sd_day)) {
-                while(true) {
+                while (true) {
                     int idx2 = od.indexOf(";");
                     if (idx2 != -1) {
                         //"123;"일때idx는3,length는4
-                        String od_temp="";
-                        if(idx2-1!=od.length())
-                            od_temp = od.substring(idx2+1);
+                        String od_temp = "";
+                        if (idx2 - 1 != od.length())
+                            od_temp = od.substring(idx2 + 1);
                         od = od.substring(0, idx2);
                         Log.i("od_temp:", od_temp);
-                        if(od.equals(sd))
+                        if (od.equals(sd))
                             return false;
-                        if(od_temp=="") { break; }
-                        else { od = od_temp; }
-                    }else { break; }
+                        if (od_temp == "") {
+                            break;
+                        } else {
+                            od = od_temp;
+                        }
+                    } else {
+                        break;
+                    }
                 }
                 return true;
             }
             ot = ot_temp;
-        }while(true);
-        return false;
+        } while (true);
+        */
+
+        return true;
     }
 
     private class GetData extends android.os.AsyncTask<String, Void, String> {
@@ -290,10 +323,9 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             progressDialog.dismiss();
             Log.d(TAG, "response - " + result);
 
-            if (result == null){
+            if (result == null) {
                 Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 mJsonString = result;
                 Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
                 arrangeResult();
@@ -327,10 +359,9 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                 Log.d(TAG, "response code - " + responseStatusCode);
 
                 java.io.InputStream inputStream;
-                if(responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
+                if (responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                }
-                else{
+                } else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -340,7 +371,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
@@ -361,6 +392,8 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     }
 
     private void arrangeResult() {
+        Toast.makeText(getContext(), "arrangeREut", android.widget.Toast.LENGTH_LONG).show();
+
         String TAG_STOREID = "storeId";
         String TAG_STORENAME = "storeName";
         String TAG_CATEGORY = "category";
@@ -389,26 +422,30 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                 String openDate = item.getString(TAG_OPENDATE);
                 String openTime = item.getString(TAG_OPENTIME);
                 String category = item.getString(TAG_CATEGORY);
+                String storeId = item.getString(TAG_STOREID);
 
                 Date today = new Date();
 
                 //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
-                if (isitClose(storeLocation, curPoint) == true && isitOpen(openDate, openTime, today)==true && (category.equals('1')))
-                {
 
-                    String storeId = item.getString(TAG_STORENAME);
+                if (isitClose(storeLocation, curPoint) == true && isitOpen(openDate, openTime, today) == true && (category.equals("1"))) {
+
                     String storeName = item.getString(TAG_STORENAME);
                     String address = item.getString(TAG_ADDRESS);
 
                     SearchResultViewItem storeData = new SearchResultViewItem(storeId, storeName, category, lat, lang, address, openDate, openTime);
-                    LatLng storeLatlng = new com.google.android.gms.maps.model.LatLng(parseDouble(lat),parseDouble(lang));
+                    LatLng storeLatlng = new LatLng(parseDouble(lat), parseDouble(lang));
+                    //              Toast.makeText(getContext(), "문제야문제", android.widget.Toast.LENGTH_LONG).show();
 
                     ////////////마커로 표시////////////////////
                     showStoreLocationMarker(storeLatlng, parseInt(storeId));
 
                     mArrayList.add(storeData);
-                    Log.d("어레이 들어감??",mArrayList.get(0).getStoreName());
-                //    mAdapter.notifyDataSetChanged();
+                    //        Log.i("어레이 들어감??", mArrayList.get(0).getStoreName());
+                    //    mAdapter.notifyDataSetChanged();
+                } else {
+
+                    Toast.makeText(getContext(), "멂어어어어어", android.widget.Toast.LENGTH_LONG).show();
                 }
             }
             Log.d(TAG, "finish arrange result");
@@ -443,26 +480,56 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         Log.i("거리", rslt + "km");
         if (rslt <= 1.0) {
             return true;
-        } else
-            return false;
+        }
+        return false;
     }
 
+    private Marker addMarkerforStore(LatLng storeLatLng, int storeId) {
+        Log.i("storeLca", String.valueOf(storeId));
+
+/*
+        MarkerOptions storeLocationMarker= new MarkerOptions();
+        storeLocationMarker.position(storeLatLng);
+        storeLocationMarker.title("Store Position \n");
+        storeLocationMarker.snippet("Click here to see.");
+        storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(180));
+
+ */
+        return map.addMarker(new MarkerOptions()
+                .position(storeLatLng)
+                .title("Store Position")
+                .snippet("Click here to see.")
+                .icon(BitmapDescriptorFactory.defaultMarker(180)));
+
+
+    }
 
     private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
+/*
+        Toast.makeText(getContext(),"///////////////storeLocation marker//////////////", android.widget.Toast.LENGTH_LONG).show();
 
-        MarkerOptions storeLocationMarker = new MarkerOptions();
+
+        Toast.makeText(getContext(),storeLatLng.toString(), android.widget.Toast.LENGTH_LONG).show();
+
+         storeLocationMarker = new MarkerOptions();
         storeLocationMarker.position(storeLatLng);
         storeLocationMarker.title("Store Position \n");
         storeLocationMarker.snippet("Click here to see.");
         storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
-        myMarker = map.addMarker(storeLocationMarker);
 
-        markerHashMap.put(myMarker,storeId);
-        Log.i("showStoreLocation", "가게 마커 불러옴");
+
+*/
+//        Marker newMarker = map.addMarker(storeLocationMarker);
+        ////////////////////
+        markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
+
+        //마커 클릭 이벤트
+        map.setOnMarkerClickListener(this);
+        //툴팁 클릭 이벤트
+        map.setOnInfoWindowClickListener(this);
 
 
     }
-
 
 
     private void showMyLocationMarker(LatLng curPoint) {
