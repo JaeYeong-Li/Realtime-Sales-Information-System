@@ -167,7 +167,7 @@ public class Search_Result extends AppCompatActivity {
         double rslt = ret / 1000;
         // km로 변환 및 반올림
 
-        android.util.Log.i("거리", rslt + "km");
+        Log.i("거리", rslt + "km");
         if (rslt <= 1.0) {
             return true;
         } else
@@ -203,9 +203,9 @@ public class Search_Result extends AppCompatActivity {
             int idx1 = ot.indexOf(";");
             if (idx1 == -1)
                 break;
-            String ot_temp = ot.substring(idx1);
+            String ot_temp = ot.substring(idx1+1);
             ot = ot.substring(0, 3);
-            Log.i("openTime요일:", ot);
+            Log.i("openTime요일", ot);
 
             if (ot.equals(sd_day)) {
                 while(true) {

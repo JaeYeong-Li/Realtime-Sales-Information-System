@@ -21,15 +21,15 @@ public class SearchResultViewAdapter extends RecyclerView.Adapter<SearchResultVi
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
         protected TextView storename;
-        protected TextView address;
-        protected TextView opentime;
+       // protected TextView address;
+        //protected TextView opentime;
 
 
         public CustomViewHolder(View view) {
             super(view);
             this.storename = (TextView) view.findViewById(R.id.sritem_storename);
-            this.address = (TextView) view.findViewById(R.id.sritem_address);
-            this.opentime = (TextView) view.findViewById(R.id.sritem_opentime);
+            //this.address = (TextView) view.findViewById(R.id.sritem_address);
+            //this.opentime = (TextView) view.findViewById(R.id.sritem_opentime);
         }
     }
 
@@ -45,8 +45,8 @@ public class SearchResultViewAdapter extends RecyclerView.Adapter<SearchResultVi
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, int position) {
 
         viewholder.storename.setText(mList.get(position).getStoreName());
-        viewholder.address.setText(mList.get(position).getAddress());
-        viewholder.opentime.setText(mList.get(position).getOpenTime());
+        //viewholder.address.setText(mList.get(position).getAddress());
+        //viewholder.opentime.setText(mList.get(position).getOpenTime());
     }
 
     @Override
