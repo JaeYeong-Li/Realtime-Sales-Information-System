@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.android.material.navigation.NavigationView;
 
 //for toolbar
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.core.view.GravityCompat;
@@ -25,6 +26,9 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.FragmentManager;
 import android.app.ProgressDialog;
@@ -43,7 +47,9 @@ public class Search_Result extends AppCompatActivity {
     private SearchResultViewAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
-    public FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
+    private Fragment searchResultMapFragment;
+    private FragmentTransaction fragmentTransaction;
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
@@ -58,6 +64,14 @@ public class Search_Result extends AppCompatActivity {
     protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
+
+        //fragment
+        searchResultMapFragment = new SearchResultMapFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
+
+
 
         Intent intent = getIntent();
         selDate = intent.getStringExtra("selDate");
@@ -353,7 +367,8 @@ public class Search_Result extends AppCompatActivity {
                 //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
                 if (isitClose(storeLocation, myLocation) == true && isitOpen(openDate, openTime, selDate)==true) {
 
-                    String storeId = item.getString(TAG_STORENAME);
+
+                    String storeId = item.getString(TAG_STOREID);
                     String storeName = item.getString(TAG_STORENAME);
                     String category = item.getString(TAG_CATEGORY);
                     String address = item.getString(TAG_ADDRESS);
@@ -366,6 +381,21 @@ public class Search_Result extends AppCompatActivity {
                 }
             }
             Log.d(TAG, "finish arrange result");
+
+            Bundle bundle = new Bundle(mArrayList.size()+1);
+
+            //미리 갯수 알려주긔
+            int arrLen = mArrayList.size();
+            System.out.println("size"+ String.valueOf(arrLen));
+            bundle.putInt("mArrayListSize",arrLen);
+
+            //검색 결과를 프래그먼트로 전달 -> 각 record마다 storeId를 SearchResultMapFragment로 전달
+            for (int r = 0;r<mArrayList.size();r++)
+            {
+               bundle.putString("storeId"+ Integer.valueOf(r),mArrayList.get(r).getStoreId());
+            }
+
+            searchResultMapFragment.setArguments(bundle);
 
         } catch (org.json.JSONException e) {
 

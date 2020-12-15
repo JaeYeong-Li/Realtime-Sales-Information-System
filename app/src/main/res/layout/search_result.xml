@@ -63,7 +63,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:paddingLeft="100dp"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:id="@+id/searchresult_recyclerview" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
