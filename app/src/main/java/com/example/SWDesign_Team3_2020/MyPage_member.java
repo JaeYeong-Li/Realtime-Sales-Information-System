@@ -78,9 +78,9 @@ public class MyPage_member extends AppCompatActivity {
     public void clickHandler(android.view.View view) {
         switch (view.getId())
         {
-            case R.id.mytoedit:
+            case R.id.mybutton1:
                 android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
-                Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo.class);
+                Intent intent = new android.content.Intent(getApplicationContext(), ShowMyStoreInfo.class);
                 startActivity(intent);
                 break;
         }
