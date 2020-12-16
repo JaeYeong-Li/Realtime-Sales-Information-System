@@ -87,7 +87,7 @@ public class LogInActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.logout) {
-                    android.widget.Toast.makeText(context, title + "로그인안했음", android.widget.Toast.LENGTH_SHORT).show();
+                    android.widget.Toast.makeText(context, title + "로그인한 유저가 아닙니다.", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

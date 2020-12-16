@@ -3,26 +3,22 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mypage_toolbar"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/ic_baseline_account_circle_24"
             android:title="마이페이지"
             />
         <item
             android:id="@+id/curLocationSearch"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/ic_baseline_location_on_24"
             android:title="현위치로 검색"
             />
         <item
             android:id="@+id/inputSearch"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/ic_baseline_calendar_today_24"
             android:title="위치/날짜정보로 검색"
             />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/ic_baseline_login_24"
             android:title="로그아웃"
             />
     </group>
