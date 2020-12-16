@@ -2,6 +2,8 @@ package com.example.SWDesign_Team3_2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
+
+import com.example.SWDesign_Team3_2020.R.id;
 import com.google.android.material.navigation.NavigationView;
 
 //for toolbar
@@ -382,24 +384,30 @@ public class Search_Result extends AppCompatActivity {
             }
             Log.d(TAG, "finish arrange result");
 
-            Bundle bundle = new Bundle(mArrayList.size()+1);
 
+
+            Bundle bundle = new Bundle();
             //미리 갯수 알려주긔
             int arrLen = mArrayList.size();
             System.out.println("size"+ String.valueOf(arrLen));
             bundle.putInt("mArrayListSize",arrLen);
 
             //검색 결과를 프래그먼트로 전달 -> 각 record마다 storeId를 SearchResultMapFragment로 전달
-            for (int r = 0;r<mArrayList.size();r++)
+            for (int r = 0;r<arrLen;r++)
             {
-               bundle.putString("storeId"+ Integer.valueOf(r),mArrayList.get(r).getStoreId());
+                System.out.println("번들 싸는 중");
+                String tag = String.valueOf(r);
+                String found = mArrayList.get(r).getStoreId();
+               bundle.putString(tag,found);
             }
-
+            bundle.putString("test","test");
             searchResultMapFragment.setArguments(bundle);
+            final int commit = getSupportFragmentManager().beginTransaction().replace(com.example.SWDesign_Team3_2020.R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
+
 
         } catch (org.json.JSONException e) {
 
-            Log.d(TAG, "showResult : ", e);
+         //   Log.d(TAG, "showResult : ", e);
         }
     }
 

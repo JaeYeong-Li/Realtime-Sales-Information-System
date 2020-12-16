@@ -56,6 +56,8 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     String mJsonString;
     private LatLng curPoint;
 
+    String id;
+
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
     private SearchResultViewAdapter mAdapter;
 
@@ -75,12 +77,33 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     };
 
+    @Override
+
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+
+            String test1 = getArguments().getString("test");
+
+            Log.e("테스트", test1);
+
+
+        } else {
+
+            Log.e("없덩", "null");
+        }
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+
         return inflater.inflate(R.layout.fragment_search_result_map, container, false);
     }
 
@@ -92,20 +115,23 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
-/*
+
         ////bundle로 받은 거...... for 문 돌려서 하나하나 실행하긔
-        Bundle bundle = getArguments();
+
 
         //리스크 사이즈
-        int mArrayListSize = bundle.getInt("mArrayListSize");
+        //     int mArrayListSize = getArguments().getInt("mArrayListSize");
         String storeId_;
+        storeId_ = "5";
+//        Toast.makeText(getContext(),getArguments().getString("test"), android.widget.Toast.LENGTH_LONG).show();
+        for (int j = 8; j < 13; j++) {
+//            storeId_ = getArguments().getString(String.valueOf(j));
+            storeId_ = String.valueOf(j);
 
-        for (int j = 0; j < mArrayListSize; j++) {
-            storeId_ = bundle.getString("storeId" + Integer.valueOf(j));
             GetData task = new GetData();
-            task.execute("http://" + IP_ADDRESS + "/checkstore.php", storeId_);
+            task.execute("http://" + IP_ADDRESS + "/checkstore2.php", storeId_);
 
-        }*/
+        }
     }
 
 
@@ -221,7 +247,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     }
 
     private void arrangeResult() {
-        Toast.makeText(getContext(), "arrangeREut", android.widget.Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), mJsonString, android.widget.Toast.LENGTH_LONG).show();
 
         String TAG_STOREID = "storeId";
 
@@ -231,26 +257,29 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
         try {
             int idx = mJsonString.indexOf("[");
-            mJsonString = mJsonString.substring(idx);
-            mJsonString.trim();
+            if (idx > 0) {
+                mJsonString = mJsonString.substring(idx);
+                mJsonString.trim();
 
-            Log.d("MyApp", mJsonString);
-            org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
+                Log.d("MyApp", mJsonString);
+                org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                Log.d(TAG, "start arrange result");
-                org.json.JSONObject item = jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Log.d(TAG, "start arrange result");
+                    org.json.JSONObject item = jsonArray.getJSONObject(i);
 
-                String lat = item.getString(TAG_LAT);
-                String lang = item.getString(TAG_LANG);
+                    String lat = item.getString(TAG_LAT);
+                    String lang = item.getString(TAG_LANG);
+                    String id = item.getString(TAG_STOREID);
 
-                LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
+                    LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
 
-                ////////////마커로 표시////////////////////
-                showStoreLocationMarker(storeLocation, Integer.parseInt(item.getString(TAG_STOREID)));
+                    ////////////마커로 표시////////////////////
+                    showStoreLocationMarker(storeLocation, Integer.parseInt(id));
+                }
+            } else
+                Toast.makeText(getContext(), "가게 없음", android.widget.Toast.LENGTH_LONG).show();
 
-
-            }
 
         } catch (org.json.JSONException e) {
 
