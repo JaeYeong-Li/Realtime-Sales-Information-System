@@ -394,7 +394,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
     }
 
     private void arrangeResult() {
-        Toast.makeText(getContext(), "arrangeREut", android.widget.Toast.LENGTH_LONG).show();
+    //    Toast.makeText(getContext(), "arrangeREut", android.widget.Toast.LENGTH_LONG).show();
 
         String TAG_STOREID = "storeId";
         String TAG_STORENAME = "storeName";
@@ -448,7 +448,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                     //    mAdapter.notifyDataSetChanged();
                 } else {
 
-                    Toast.makeText(getContext(), "멂어어어어어", android.widget.Toast.LENGTH_LONG).show();
+               //     Toast.makeText(getContext(), "멂어어어어어", android.widget.Toast.LENGTH_LONG).show();
                 }
             }
             Log.d(TAG, "finish arrange result");
