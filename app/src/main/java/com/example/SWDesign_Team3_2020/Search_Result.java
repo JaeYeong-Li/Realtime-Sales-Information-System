@@ -74,6 +74,7 @@ public class Search_Result extends AppCompatActivity {
         fragmentTransaction.replace(R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
 
 
+         Bundle bundle2 = new Bundle();
 
         Intent intent = getIntent();
         selDate = intent.getStringExtra("selDate");
@@ -81,6 +82,9 @@ public class Search_Result extends AppCompatActivity {
         sellon = intent.getStringExtra("lon");
         myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
 
+        bundle2.putString("latitude",sellat);
+        bundle2.putString("longitude",sellon);
+        searchResultMapFragment.setArguments(bundle2);
 
 
         //globalVal

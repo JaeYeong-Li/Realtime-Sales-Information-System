@@ -159,7 +159,7 @@ public class CafeOpenFragment extends Fragment  {
     private void showCurrentLocation(double latitude, double longitude) {
         LatLng curPoint = new LatLng(latitude, longitude);
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 14));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
         showMyLocationMarker(curPoint);
 
         //DB에서 가게 정보 확인

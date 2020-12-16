@@ -209,7 +209,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     private void showCurrentLocation(double latitude, double longitude) {
         curPoint = new com.google.android.gms.maps.model.LatLng(latitude, longitude);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 14));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
 
         //내 위치 보여주기 (해쉬맵에 추가)
         showMyLocationMarker(curPoint);

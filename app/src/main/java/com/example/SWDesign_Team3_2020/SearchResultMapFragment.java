@@ -44,6 +44,10 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     private static String IP_ADDRESS = "27.113.19.27";
     private static String TAG = "phpexample";
 
+    private LatLng selected;
+    private Double selectedLat;
+    private Double selectedLoc;
+
     LocationManager manager;
     GoogleMap map;
 
@@ -56,6 +60,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     String mJsonString;
     private LatLng curPoint;
 
+    int flag = 0;
     String id;
 
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
@@ -75,8 +80,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         }
 
 
-
-
     };
 
     @Override
@@ -89,7 +92,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
             String test1 = getArguments().getString("test");
 
-            Log.e("테스트", test1);
+//            Log.e("테스트", test1);
 
 
         } else {
@@ -118,7 +121,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
             mapFragment.getMapAsync(callback);
         }
 
-        ////bundle로 받은 거...... for 문 돌려서 하나하나 실행하긔
 
 
         //리스크 사이즈
@@ -131,6 +133,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
             GetData task = new GetData();
             task.execute("http://" + IP_ADDRESS + "/checkstore2.php", storeId_);
+
 
         }
     }
@@ -303,10 +306,14 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
 
-  //      Toast.makeText(getContext(),"마커 입략 증", android.widget.Toast.LENGTH_LONG).show();
+        //      Toast.makeText(getContext(),"마커 입략 증", android.widget.Toast.LENGTH_LONG).show();
 
         markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
-
+        if (flag == 0)
+        {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(storeLatLng,17));
+            flag = 1;
+        }
         //마커 클릭 이벤트
         map.setOnMarkerClickListener(this);
         //툴팁 클릭 이벤트
