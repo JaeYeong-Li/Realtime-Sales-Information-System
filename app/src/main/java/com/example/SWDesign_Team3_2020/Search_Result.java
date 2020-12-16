@@ -81,6 +81,8 @@ public class Search_Result extends AppCompatActivity {
         sellon = intent.getStringExtra("lon");
         myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
 
+
+
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
         if(m_gvar.isIDnull() == true) {
@@ -365,6 +367,8 @@ public class Search_Result extends AppCompatActivity {
 
                 String openDate = item.getString(TAG_OPENDATE);
                 String openTime = item.getString(TAG_OPENTIME);
+                if(item.getString(TAG_STOREID).equals("1")==true)
+                 Log.i("storeID****","기존방식 트루");
 
                 //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
                 if (isitClose(storeLocation, myLocation) == true && isitOpen(openDate, openTime, selDate)==true) {
@@ -386,7 +390,7 @@ public class Search_Result extends AppCompatActivity {
 
 
 
-            Bundle bundle = new Bundle();
+           Bundle bundle = new Bundle();
             //미리 갯수 알려주긔
             int arrLen = mArrayList.size();
             System.out.println("size"+ String.valueOf(arrLen));

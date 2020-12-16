@@ -75,6 +75,8 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         }
 
 
+
+
     };
 
     @Override
@@ -122,11 +124,10 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         //리스크 사이즈
         //     int mArrayListSize = getArguments().getInt("mArrayListSize");
         String storeId_;
-        storeId_ = "5";
 //        Toast.makeText(getContext(),getArguments().getString("test"), android.widget.Toast.LENGTH_LONG).show();
-        for (int j = 8; j < 13; j++) {
+        for (int j = 0; j < 13; j++) {
 //            storeId_ = getArguments().getString(String.valueOf(j));
-            storeId_ = String.valueOf(j);
+            storeId_ = Integer.toString(j);
 
             GetData task = new GetData();
             task.execute("http://" + IP_ADDRESS + "/checkstore2.php", storeId_);
@@ -192,7 +193,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         protected String doInBackground(String... params) {
 
             String serverURL = params[0];
-            String postParameters = "country=" + params[1];
+            String postParameters = "storeId=" + params[1];
 
             try {
 
@@ -301,6 +302,8 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     }
 
     private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
+
+  //      Toast.makeText(getContext(),"마커 입략 증", android.widget.Toast.LENGTH_LONG).show();
 
         markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
 
