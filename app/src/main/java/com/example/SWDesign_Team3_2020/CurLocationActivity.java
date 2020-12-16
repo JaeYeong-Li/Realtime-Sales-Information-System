@@ -108,8 +108,8 @@ public class CurLocationActivity extends AppCompatActivity {
         findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
 
         //Sliding pannel
-        ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,new String[] {"Copy","Paste","Cut","Delete"}));
+  //      ListView listView = findViewById(R.id.listView);
+  //      listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,new String[] {"Copy","Paste","Cut","Delete"}));
 
     }
 

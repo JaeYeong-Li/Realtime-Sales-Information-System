@@ -50,7 +50,8 @@ public class SpecificInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_info);
-
+        Intent intent_name = getIntent();
+        String StoreName = intent_name.getStringExtra("storeName");
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
         if(m_gvar.isIDnull() == true) {
@@ -70,7 +71,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
         ImageView_Heart = findViewById(R.id.ImageView_Heart);
 
         TextView_StoreName = findViewById(R.id.TextView_Storename);
-        TextView_StoreName.setText("아에이오우");
+        TextView_StoreName.setText(StoreName);
 
         //set on click listener for linear layout button
         //버튼 클릭 이벤트(리니어 레이아웃 - 선호 버튼)

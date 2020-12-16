@@ -62,13 +62,15 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     int flag = 0;
     String id;
-
+    String StoreName;
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
     private SearchResultViewAdapter mAdapter;
 
     //목표: searchResultMapFragment에서 받은 id를 마커에 띄우기.
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
+    HashMap<Integer,String> markerHashMap2 = new java.util.HashMap<Integer, String>();
+
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
@@ -144,9 +146,10 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         String msg;
 
         storeId = markerHashMap.get(marker);
-
+        StoreName = markerHashMap2.get(storeId);
         Intent i = new Intent(this.getContext(), SpecificInfoActivity.class);
-        i.putExtra("storeId", storeId);
+        i.putExtra("storeName", StoreName);
+     //   Toast.makeText(getContext(),StoreName+"전달", android.widget.Toast.LENGTH_SHORT).show();
         startActivity(i);
 
 
@@ -186,7 +189,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                 Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
             } else {
                 mJsonString = result;
-                Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
+      //          Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
                 arrangeResult();
             }
         }
@@ -257,7 +260,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
         String TAG_LAT = "lat";
         String TAG_LANG = "lang";
-
+        String TAG_STORENAME = "storeName";
 
         try {
             int idx = mJsonString.indexOf("[");
@@ -275,14 +278,14 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                     String lat = item.getString(TAG_LAT);
                     String lang = item.getString(TAG_LANG);
                     String id = item.getString(TAG_STOREID);
+                    String name = item.getString(TAG_STORENAME);
 
                     LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
 
                     ////////////마커로 표시////////////////////
-                    showStoreLocationMarker(storeLocation, Integer.parseInt(id));
+                    showStoreLocationMarker(storeLocation, Integer.parseInt(id),name);
                 }
-            } else
-                Toast.makeText(getContext(), "가게 없음", android.widget.Toast.LENGTH_LONG).show();
+            }
 
 
         } catch (org.json.JSONException e) {
@@ -304,11 +307,12 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     }
 
-    private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
+    private void showStoreLocationMarker(LatLng storeLatLng, int storeId,String storeName) {
 
         //      Toast.makeText(getContext(),"마커 입략 증", android.widget.Toast.LENGTH_LONG).show();
 
         markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
+        markerHashMap2.put(storeId,storeName);
         if (flag == 0)
         {
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(storeLatLng,17));

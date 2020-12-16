@@ -59,9 +59,10 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
     private SearchResultViewAdapter mAdapter;
-
+    private String StoreName;
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
+    HashMap<Integer,String> markerHashMap2 = new java.util.HashMap<Integer, String>();
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
@@ -156,10 +157,11 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         String msg;
 
         storeId = markerHashMap.get(marker);
+        StoreName = markerHashMap2.get(storeId);
 
         if (storeId != -1) { // 내 위치가 아니라면 가게 id 보내기
             Intent i = new Intent(this.getContext(), SpecificInfoActivity.class);
-            i.putExtra("storeId", storeId);
+            i.putExtra("storeName", StoreName);
             startActivity(i);
         }
 
@@ -423,6 +425,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                 String openTime = item.getString(TAG_OPENTIME);
                 String category = item.getString(TAG_CATEGORY);
                 String storeId = item.getString(TAG_STOREID);
+                String storename = item.getString(TAG_STORENAME);
 
                 Date today = new Date();
 
@@ -438,7 +441,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                     //              Toast.makeText(getContext(), "문제야문제", android.widget.Toast.LENGTH_LONG).show();
 
                     ////////////마커로 표시////////////////////
-                    showStoreLocationMarker(storeLatlng, parseInt(storeId));
+                    showStoreLocationMarker(storeLatlng, parseInt(storeId),storename);
 
                     mArrayList.add(storeData);
                     //        Log.i("어레이 들어감??", mArrayList.get(0).getStoreName());
@@ -504,7 +507,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 
     }
 
-    private void showStoreLocationMarker(LatLng storeLatLng, int storeId) {
+    private void showStoreLocationMarker(LatLng storeLatLng, int storeId ,String storeName) {
 /*
         Toast.makeText(getContext(),"///////////////storeLocation marker//////////////", android.widget.Toast.LENGTH_LONG).show();
 
@@ -522,7 +525,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
 //        Marker newMarker = map.addMarker(storeLocationMarker);
         ////////////////////
         markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
-
+        markerHashMap2.put(storeId,storeName);
         //마커 클릭 이벤트
         map.setOnMarkerClickListener(this);
         //툴팁 클릭 이벤트

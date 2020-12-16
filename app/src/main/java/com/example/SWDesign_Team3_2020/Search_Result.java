@@ -274,11 +274,10 @@ public class Search_Result extends AppCompatActivity {
             Log.d(TAG, "response - " + result);
 
             if (result == null){
-                Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
             }
             else {
                 mJsonString = result;
-                Toast.makeText(context, "start arrangeResult", Toast.LENGTH_SHORT).show();
                 arrangeResult();
             }
         }

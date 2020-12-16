@@ -7,14 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        app:umanoDragView="@id/Linear_Slidingview"
-        app:umanoScrollableView="@id/listView"
-        android:gravity = "bottom"
-        >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,27 +62,7 @@
             android:id="@+id/FrameLayout_Map"
             ></FrameLayout>
     </LinearLayout>
-    <LinearLayout
-        android:background="@color/white"
-        android:layout_gravity = "start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/Linear_Slidingview"
-        android:clickable="true"
-        android:focusable="false"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="현 위치 근처 (1km) 영업 중인 가게"
-            android:paddingLeft="16sp"/>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/listView"/>
-    </LinearLayout>
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
