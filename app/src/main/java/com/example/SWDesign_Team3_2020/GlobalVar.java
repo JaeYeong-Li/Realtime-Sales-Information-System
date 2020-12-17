@@ -5,6 +5,7 @@ public class GlobalVar extends Application{
     private static String userID;
     private static String userPW;
     private static String userNAME;
+    public static int searchMode=1;
 
     @Override
     public void onCreate() {
@@ -38,4 +39,6 @@ public class GlobalVar extends Application{
     public void setUserNAME(String name){
         userNAME = name;
     }
+    public void setSearchMode(int mode) {searchMode = mode;}
+    public int getSearchMode() { return searchMode;}
 }

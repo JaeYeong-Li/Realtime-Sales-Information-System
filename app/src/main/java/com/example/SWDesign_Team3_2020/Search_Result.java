@@ -7,8 +7,11 @@ import com.example.SWDesign_Team3_2020.R.id;
 import com.google.android.material.navigation.NavigationView;
 
 //for toolbar
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -50,9 +53,15 @@ public class Search_Result extends AppCompatActivity {
     public static RecyclerView mRecyclerView;
 
     private FragmentManager fragmentManager;
+    private Fragment searchResultMapFragment1;
+    private Fragment searchResultMapFragment2;
+    private Fragment searchResultMapFragment3;
+    private FragmentTransaction fragmentTransaction;
+    private FragmentTransaction fragmentTransaction_category;
+/*
     private Fragment searchResultMapFragment;
     private FragmentTransaction fragmentTransaction;
-
+  */
     private DrawerLayout mDrawerLayout;
     private Context context = this;
     private GlobalVar m_gvar = null;
@@ -61,11 +70,19 @@ public class Search_Result extends AppCompatActivity {
     String mJsonString;
     LatLng myLocation;
 
+    Button Button_Restaurant;
+    Button Button_Cafe;
+    Button Button_Entertain;
 
     @Override
     protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
+
+        //버튼
+        Button_Restaurant = findViewById(id.Button_Restaurant);
+        Button_Cafe = findViewById(id.Button_Cafe);
+        Button_Entertain = findViewById(id.Button_Entertain);
 
         Intent intent = getIntent();
         selDate = intent.getStringExtra("selDate");
@@ -367,6 +384,7 @@ public class Search_Result extends AppCompatActivity {
         String TAG_ADDRESS = "address";
         String TAG_OPENDATE = "openDate";
         String TAG_OPENTIME = "openTime";
+        mArrayList.clear();
 
         try {
             int idx = mJsonString.indexOf("[");
@@ -386,32 +404,34 @@ public class Search_Result extends AppCompatActivity {
 
                 String openDate = item.getString(TAG_OPENDATE);
                 String openTime = item.getString(TAG_OPENTIME);
-                if(item.getString(TAG_STOREID).equals("1")==true)
-                 Log.i("storeID****","기존방식 트루");
+                String category = item.getString(TAG_CATEGORY);
 
                 //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
-                if (isitClose(storeLocation, myLocation) == true && isitOpen(openDate, openTime, selDate)==true) {
-
-
+                if (isitClose(storeLocation, myLocation) == true && isitOpen(openDate, openTime, selDate)==true
+                        && (category.equals(Integer.toString(m_gvar.getSearchMode())))) {
                     String storeId = item.getString(TAG_STOREID);
                     String storeName = item.getString(TAG_STORENAME);
-                    String category = item.getString(TAG_CATEGORY);
                     String address = item.getString(TAG_ADDRESS);
 
                     SearchResultViewItem storeData = new SearchResultViewItem(storeId, storeName, category, lat, lang, address, openDate, openTime);
 
                     mArrayList.add(storeData);
                     Log.d("어레이 들어감??",mArrayList.get(0).getStoreName());
-                    mAdapter.notifyDataSetChanged();
                 }
+                mAdapter.notifyDataSetChanged();
             }
             Log.d(TAG, "finish arrange result");
 
 
             //fragment
-            searchResultMapFragment = new SearchResultMapFragment();
+            searchResultMapFragment1 = new SearchResultMapFragment();
+            searchResultMapFragment2 = new SearchResultMapFragment2();
+            searchResultMapFragment3 = new SearchResultMapFragment3();
+
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
+
+
 
             //bundle
             Bundle bundle2 = new Bundle();
@@ -430,10 +450,20 @@ public class Search_Result extends AppCompatActivity {
                 bundle2.putString(String.valueOf(i)+"Id",mArrayList.get(i).getStoreId());
             }
 
+            if(m_gvar.getSearchMode()==1)
+                searchResultMapFragment1.setArguments(bundle2);
+            else if(m_gvar.getSearchMode()==2)
+                searchResultMapFragment2.setArguments(bundle2);
+            else if(m_gvar.getSearchMode()==3)
+                searchResultMapFragment3.setArguments(bundle2);
 
-            searchResultMapFragment.setArguments(bundle2);
 
-            fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment).commit();
+            if(m_gvar.getSearchMode()==1)
+                fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment1).commit();
+            else if(m_gvar.getSearchMode()==2)
+                fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment2).commit();
+            else if(m_gvar.getSearchMode()==3)
+                fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment3).commit();
 
 
         } catch (org.json.JSONException e) {
@@ -442,6 +472,40 @@ public class Search_Result extends AppCompatActivity {
         }
 
         return mArrayList;
+    }
+
+    public void clickHandler(View view) {
+        fragmentTransaction_category = fragmentManager.beginTransaction();
+
+        switch (view.getId())
+        {
+            case R.id.Button_Cafe:
+                m_gvar.setSearchMode(2);
+                arrangeResult();
+                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment2).commit();
+                findViewById(R.id.Button_Cafe).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+
+            case R.id.Button_Entertain:
+                m_gvar.setSearchMode(3);
+                arrangeResult();
+                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment3).commit();
+                findViewById(R.id.Button_Entertain).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+
+            case R.id.Button_Restaurant:
+                m_gvar.setSearchMode(1);
+                arrangeResult();
+                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment1).commit();
+                findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
+                findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
+                findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+        }
     }
 
 }

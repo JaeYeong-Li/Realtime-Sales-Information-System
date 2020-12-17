@@ -56,7 +56,7 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="400dp"
+            android:layout_height="450dp"
             android:id="@+id/FrameLayout_SearchResult"
             ></FrameLayout>
 
