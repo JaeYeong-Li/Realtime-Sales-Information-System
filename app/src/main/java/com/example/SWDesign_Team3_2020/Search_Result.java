@@ -420,6 +420,16 @@ public class Search_Result extends AppCompatActivity {
             bundle2.putString("longitude", sellon);
             bundle2.putInt("arrlen",mArrayList.size());
 
+            //mArrayList 전달하기
+            for (int i=0;i<mArrayList.size();i++)
+            {
+                //위경도에 따른 위도, 경도, 이름, ID 전달 전달
+                bundle2.putString(String.valueOf(i)+"Lat",mArrayList.get(i).getLat());
+                bundle2.putString(String.valueOf(i)+"Long",mArrayList.get(i).getLang());
+                bundle2.putString(String.valueOf(i)+"Name",mArrayList.get(i).getStoreName());
+                bundle2.putString(String.valueOf(i)+"Id",mArrayList.get(i).getStoreId());
+            }
+
 
             searchResultMapFragment.setArguments(bundle2);
 
