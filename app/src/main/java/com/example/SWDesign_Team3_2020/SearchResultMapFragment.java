@@ -50,7 +50,10 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     //  MarkerOptions storeLocationMarker;
     MarkerOptions myLocationMarker;
+    MarkerOptions storeLocationMarker;
+
     Marker myMarker;
+    java.util.ArrayList<com.google.android.gms.maps.model.Marker> storeMarker;
 
     int storeId;
     int markerIndex = 1;
@@ -63,6 +66,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     private java.util.ArrayList<SearchResultViewItem> mArrayList;
     private SearchResultViewAdapter mAdapter;
     private String StoreName;
+    private java.util.ArrayList<SearchResultViewItem> receivedList;
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
     HashMap<Integer, String> markerHashMap2 = new java.util.HashMap<Integer, String>();
@@ -168,15 +172,24 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         String myValue_name;
         String myValue_id;
 
+        receivedList = new java.util.ArrayList<>();
+        storeMarker = new java.util.ArrayList<>();
         //검색 결과 받아오기
         for(int i = 0;i<arrlen;i++)
         {
+            SearchResultViewItem receivedItem = new com.example.SWDesign_Team3_2020.SearchResultViewItem();
             myValue_lat = this.getArguments().getString(String.valueOf(i)+"Lat");
             myValue_lon = this.getArguments().getString(String.valueOf(i)+"Long");
             myValue_name = this.getArguments().getString(String.valueOf(i)+"Name");
             myValue_id = this.getArguments().getString(String.valueOf(i)+"Id");
 
-            Toast.makeText(getContext(),"검색리스트"+myValue_name, android.widget.Toast.LENGTH_LONG).show();
+            receivedItem.setLat(myValue_lat);
+            receivedItem.setLang(myValue_lon);
+            receivedItem.setStoreName(myValue_name);
+            receivedItem.setStoreId(myValue_id);
+
+            receivedList.add(receivedItem);
+            Toast.makeText(getContext(),"검색리스트"+receivedItem.getStoreName(), android.widget.Toast.LENGTH_LONG).show();
         }
         // map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 17));
 
@@ -259,6 +272,9 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         map.setOnMarkerClickListener(this);
         //툴팁 클릭 이벤트
         map.setOnInfoWindowClickListener(this);
+
+
+
 
     }
 
@@ -477,7 +493,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                     //              Toast.makeText(getContext(), "문제야문제", android.widget.Toast.LENGTH_LONG).show();
 
                     ////////////마커로 표시////////////////////
-                    showStoreLocationMarker(storeLatlng, parseInt(storeId), storename);
 
                     mArrayList.add(storeData);
                     //        Log.i("어레이 들어감??", mArrayList.get(0).getStoreName());
@@ -523,52 +538,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         return false;
     }
 
-    private Marker addMarkerforStore(LatLng storeLatLng, int storeId) {
-        Log.i("storeLca", String.valueOf(storeId));
-
-/*
-        MarkerOptions storeLocationMarker= new MarkerOptions();
-        storeLocationMarker.position(storeLatLng);
-        storeLocationMarker.title("Store Position \n");
-        storeLocationMarker.snippet("Click here to see.");
-        storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(180));
-
- */
-        return map.addMarker(new MarkerOptions()
-                .position(storeLatLng)
-                .title("Store Position")
-                .snippet("Click here to see.")
-                .icon(BitmapDescriptorFactory.defaultMarker(180)));
-
-
-    }
-
-    private void showStoreLocationMarker(LatLng storeLatLng, int storeId, String storeName) {
-/*
-        Toast.makeText(getContext(),"///////////////storeLocation marker//////////////", android.widget.Toast.LENGTH_LONG).show();
-
-
-        Toast.makeText(getContext(),storeLatLng.toString(), android.widget.Toast.LENGTH_LONG).show();
-
-         storeLocationMarker = new MarkerOptions();
-        storeLocationMarker.position(storeLatLng);
-        storeLocationMarker.title("Store Position \n");
-        storeLocationMarker.snippet("Click here to see.");
-        storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(150));
-
-
-*/
-//        Marker newMarker = map.addMarker(storeLocationMarker);
-        ////////////////////
-        markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
-        markerHashMap2.put(storeId, storeName);
-        //마커 클릭 이벤트
-        map.setOnMarkerClickListener(this);
-        //툴팁 클릭 이벤트
-        map.setOnInfoWindowClickListener(this);
-
-
-    }
 
 
     private void showMyLocationMarker(LatLng curPoint) {
@@ -576,7 +545,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         myLocationMarker = new MarkerOptions(); // 마커 객체 생성
         myLocationMarker.position(curPoint);
         myLocationMarker.title("Selected Place \n");
-        myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(299));
+        myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(120));
 
         myMarker = map.addMarker(myLocationMarker);
 
@@ -584,5 +553,24 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         markerHashMap.put(myMarker, -1);
         //해쉬맵에 현위치 추가
 
+
+        Toast.makeText(getContext(),"@@@@@@@@@@@@@@@@@"+String.valueOf(receivedList.size()), android.widget.Toast.LENGTH_LONG).show();
+        //가게 위치 추가
+        for(int i = 0;i<receivedList.size();i++)
+        {
+            storeLocationMarker = new MarkerOptions();
+            LatLng receivedPosition = new LatLng(Double.parseDouble(receivedList.get(i).getLat()),Double.parseDouble(receivedList.get(i).getLang()));
+
+            storeLocationMarker.position(receivedPosition);
+            storeLocationMarker.title(receivedList.get(i).getStoreName());
+            storeLocationMarker.snippet("Click here to see");
+            storeLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(300));
+
+            storeMarker.add( map.addMarker(storeLocationMarker));
+
+            markerHashMap.put(storeMarker.get(i),Integer.parseInt(receivedList.get(i).getStoreId()));
+            markerHashMap2.put(Integer.parseInt(receivedList.get(i).getStoreId()),receivedList.get(i).getStoreName());
+
+        }
     }
 }
