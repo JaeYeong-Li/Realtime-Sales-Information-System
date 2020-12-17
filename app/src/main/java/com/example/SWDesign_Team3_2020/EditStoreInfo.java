@@ -101,7 +101,7 @@ public class EditStoreInfo extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.logout) {
-                    android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
+            //        android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -311,7 +311,7 @@ public class EditStoreInfo extends AppCompatActivity {
     public void clickHandler(View view) {
         int clickid = view.getId();
         if (clickid ==R.id.editSI_addressButton) {
-            android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+     //       android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
             Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo_SearchLocation.class);
             startActivityForResult(intent,PICK_FROM_MAP);
         }else if(clickid == R.id.monto|| clickid == R.id.monto|| clickid == R.id.monfrom|| clickid == R.id.tueto|| clickid ==R.id.tuefrom
@@ -467,7 +467,7 @@ public class EditStoreInfo extends AppCompatActivity {
             Log.d(TAG, "response - " + result);
 
             if (result == null){
-                android.widget.Toast.makeText(context, errorString, android.widget.Toast.LENGTH_SHORT).show();
+     //           android.widget.Toast.makeText(context, errorString, android.widget.Toast.LENGTH_SHORT).show();
             }
             else {
                 mJsonString = result;

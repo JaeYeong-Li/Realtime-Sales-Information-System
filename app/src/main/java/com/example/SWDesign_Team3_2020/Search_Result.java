@@ -120,7 +120,7 @@ public class Search_Result extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.logout) {
-                    Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
+    //                Toast.makeText(context, title + ": 로그아웃 시도중", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

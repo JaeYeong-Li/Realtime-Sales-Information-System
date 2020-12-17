@@ -129,7 +129,7 @@ public class Search_Location extends FragmentActivity implements OnMapReadyCallb
     public void clickHandler(View view) {
         switch (view.getId()) {
             case R.id.searchStep2:
-                Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this.getApplicationContext(), ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Search_Result.class);
                 intent.putExtra("selDate", selDate);
                 intent.putExtra("lat", latitude.toString());

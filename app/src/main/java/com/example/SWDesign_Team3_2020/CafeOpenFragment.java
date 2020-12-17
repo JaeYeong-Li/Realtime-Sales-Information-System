@@ -329,7 +329,7 @@ public class CafeOpenFragment extends Fragment implements GoogleMap.OnInfoWindow
             Log.d(TAG, "response - " + result);
 
             if (result == null) {
-                Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
             } else {
                 mJsonString = result;
                 //     Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();

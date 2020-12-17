@@ -39,13 +39,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d(TAG, stringBuffer.toString());
         db.execSQL(stringBuffer.toString());
 
-        Toast.makeText(context, "선호가게 테이블 생성완료", Toast.LENGTH_SHORT).show();
+   //     Toast.makeText(context, "선호가게 테이블 생성완료", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         try {
-            Toast.makeText(context, "onUpgrade", Toast.LENGTH_SHORT).show();
+    //        Toast.makeText(context, "onUpgrade", Toast.LENGTH_SHORT).show();
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,10 +92,10 @@ public class DBHelper extends SQLiteOpenHelper {
         FavoriteInfoActivity.mArrayList.clear();
         Cursor cursor = getAllData();
         if(cursor.getCount() == 0) {
-            Toast.makeText(context, "데이터없음", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "데이터없음", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()){
-                Log.i("데이터있음", cursor.getString(cursor.getColumnIndex("storeName")));
+          //      Log.i("데이터있음", cursor.getString(cursor.getColumnIndex("storeName")));
                 String _id = cursor.getString(cursor.getColumnIndex("storeId"));
                 String _name = cursor.getString(cursor.getColumnIndex("storeName"));
 

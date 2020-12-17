@@ -52,14 +52,14 @@
                 android:textSize="17dp"
                 android:backgroundTint="@color/blue"
                 android:onClick="clickHandler"/>
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height=""
-                android:id="@+id/FrameLayout_SearchResult"
-                ></FrameLayout>
-
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:id="@+id/FrameLayout_SearchResult"
+            ></FrameLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

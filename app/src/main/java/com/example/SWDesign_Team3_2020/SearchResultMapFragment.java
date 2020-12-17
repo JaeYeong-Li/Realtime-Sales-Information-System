@@ -163,11 +163,11 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         selectedLon = Double.parseDouble(myValue_lon);
         selectedPoint = new com.google.android.gms.maps.model.LatLng(selectedLat, selectedLon);
 
-        Toast.makeText(getContext(), "선택값!!!!!!!!!!!!!!" + String.valueOf(selectedPoint.latitude) + " " + String.valueOf(selectedPoint.longitude), android.widget.Toast.LENGTH_LONG).show();
+   //     Toast.makeText(getContext(), "선택값!!!!!!!!!!!!!!" + String.valueOf(selectedPoint.latitude) + " " + String.valueOf(selectedPoint.longitude), android.widget.Toast.LENGTH_LONG).show();
 
         //검색 결과 받아오기
         int arrlen = this.getArguments().getInt("arrlen");
-        Toast.makeText(getContext(),"검색결과"+String.valueOf(arrlen), android.widget.Toast.LENGTH_LONG).show();
+   //     Toast.makeText(getContext(),"검색결과"+String.valueOf(arrlen), android.widget.Toast.LENGTH_LONG).show();
 
         String myValue_name;
         String myValue_id;
@@ -189,7 +189,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
             receivedItem.setStoreId(myValue_id);
 
             receivedList.add(receivedItem);
-            Toast.makeText(getContext(),"검색리스트"+receivedItem.getStoreName(), android.widget.Toast.LENGTH_LONG).show();
+    //        Toast.makeText(getContext(),"검색리스트"+receivedItem.getStoreName(), android.widget.Toast.LENGTH_LONG).show();
         }
         // map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 17));
 
@@ -554,7 +554,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         //해쉬맵에 현위치 추가
 
 
-        Toast.makeText(getContext(),"@@@@@@@@@@@@@@@@@"+String.valueOf(receivedList.size()), android.widget.Toast.LENGTH_LONG).show();
+    //    Toast.makeText(getContext(),"@@@@@@@@@@@@@@@@@"+String.valueOf(receivedList.size()), android.widget.Toast.LENGTH_LONG).show();
         //가게 위치 추가
         for(int i = 0;i<receivedList.size();i++)
         {

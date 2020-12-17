@@ -73,17 +73,17 @@ public class MyPage_nonmember extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.mytosignin:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+      //          android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.mytologin:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+        //        android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(intent);
                 break;
             case R.id.mybutton2:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+     //           android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), FavoriteInfoActivity.class);
                 startActivity(intent);
                 break;

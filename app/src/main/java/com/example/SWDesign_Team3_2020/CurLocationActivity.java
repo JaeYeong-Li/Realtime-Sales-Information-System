@@ -91,7 +91,7 @@ public class CurLocationActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (id == R.id.logout) {
-                android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
+    //            android.widget.Toast.makeText(context, title + ": 로그아웃 시도중", android.widget.Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

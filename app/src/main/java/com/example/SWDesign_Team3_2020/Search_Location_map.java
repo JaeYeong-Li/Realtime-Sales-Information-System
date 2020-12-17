@@ -98,8 +98,8 @@ public class Search_Location_map extends Fragment implements onMapReadyCallback{
         editText = (EditText) view.findViewById(com.example.SWDesign_Team3_2020.R.id.search_editText);
         button=(Button)view.findViewById(com.example.SWDesign_Team3_2020.R.id.searchStep1_5);
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+       // Toast toast = Toast.makeText(context, text, duration);
+      //  toast.show();
     }
 
     public void onMapReady(final GoogleMap googleMap) {

@@ -250,7 +250,7 @@ public class ShowMyStoreInfo extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.mytoedit:
-                android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
+        //        android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 Intent intent = new android.content.Intent(getApplicationContext(), EditStoreInfo.class);
                 startActivity(intent);
                 finish();

@@ -329,7 +329,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
             Log.d(TAG, "response - " + result);
 
             if (result == null) {
-                Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
             } else {
                 mJsonString = result;
            //     Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
