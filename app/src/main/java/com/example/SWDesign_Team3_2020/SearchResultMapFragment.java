@@ -65,7 +65,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     private String StoreName;
 
     HashMap<Marker, Integer> markerHashMap = new HashMap<Marker, Integer>();
-    HashMap<Integer,String> markerHashMap2 = new java.util.HashMap<Integer, String>();
+    HashMap<Integer, String> markerHashMap2 = new java.util.HashMap<Integer, String>();
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
@@ -99,7 +99,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                     if (location != null) {
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                    }else{
+                    } else {
                         latitude = 35.8154885;
                         longitude = 128.5144324;
                     }
@@ -151,17 +151,19 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
         }
 
 
-       //선택위치 받아오기
+        //선택위치 받아오기
         String myValue_lat = this.getArguments().getString("latitude");
         String myValue_lon = this.getArguments().getString("longitude");
 
         selectedLat = Double.parseDouble(myValue_lat);
         selectedLon = Double.parseDouble(myValue_lon);
-        selectedPoint = new com.google.android.gms.maps.model.LatLng(selectedLat,selectedLon);
+        selectedPoint = new com.google.android.gms.maps.model.LatLng(selectedLat, selectedLon);
 
-        Toast.makeText(getContext(),"선택값!!!!!!!!!!!!!!"+String.valueOf(selectedPoint.latitude)+" "+String.valueOf(selectedPoint.longitude), android.widget.Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "선택값!!!!!!!!!!!!!!" + String.valueOf(selectedPoint.latitude) + " " + String.valueOf(selectedPoint.longitude), android.widget.Toast.LENGTH_LONG).show();
 
-        //showcurr
+        //
+       // map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 17));
+
 
         Date selDate = new java.util.Date();
         String Keyword = selDate.toString();
@@ -182,7 +184,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
             i.putExtra("storeName", StoreName);
             startActivity(i);
         }
-
 
 
     }
@@ -229,11 +230,11 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     private void showCurrentLocation(double latitude, double longitude) {
         curPoint = new com.google.android.gms.maps.model.LatLng(latitude, longitude);
-        
- //       map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
+
+              map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 15));
 
         //내 위치 보여주기 (해쉬맵에 추가)
-       showMyLocationMarker(curPoint);
+        showMyLocationMarker(curPoint);
 
         //가게 위치 보여주기 -> DB에서 끌어올 것
 
@@ -460,7 +461,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                     //              Toast.makeText(getContext(), "문제야문제", android.widget.Toast.LENGTH_LONG).show();
 
                     ////////////마커로 표시////////////////////
-                    showStoreLocationMarker(storeLatlng, parseInt(storeId),storename);
+                    showStoreLocationMarker(storeLatlng, parseInt(storeId), storename);
 
                     mArrayList.add(storeData);
                     //        Log.i("어레이 들어감??", mArrayList.get(0).getStoreName());
@@ -526,7 +527,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     }
 
-    private void showStoreLocationMarker(LatLng storeLatLng, int storeId ,String storeName) {
+    private void showStoreLocationMarker(LatLng storeLatLng, int storeId, String storeName) {
 /*
         Toast.makeText(getContext(),"///////////////storeLocation marker//////////////", android.widget.Toast.LENGTH_LONG).show();
 
@@ -544,7 +545,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 //        Marker newMarker = map.addMarker(storeLocationMarker);
         ////////////////////
         markerHashMap.put(addMarkerforStore(storeLatLng, storeId), storeId);
-        markerHashMap2.put(storeId,storeName);
+        markerHashMap2.put(storeId, storeName);
         //마커 클릭 이벤트
         map.setOnMarkerClickListener(this);
         //툴팁 클릭 이벤트
@@ -556,15 +557,13 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     private void showMyLocationMarker(LatLng curPoint) {
 
-            myLocationMarker = new MarkerOptions(); // 마커 객체 생성
-            myLocationMarker.position(curPoint);
-            myLocationMarker.title("Current Position \n");
-            myLocationMarker.snippet("You are here.");
-            myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(299));
+        myLocationMarker = new MarkerOptions(); // 마커 객체 생성
+        myLocationMarker.position(curPoint);
+        myLocationMarker.title("Current Position \n");
+        myLocationMarker.snippet("You are here.");
+        myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(299));
 
-            myMarker = map.addMarker(myLocationMarker);
-
-
+        myMarker = map.addMarker(myLocationMarker);
 
 
         markerHashMap.put(myMarker, -1);
