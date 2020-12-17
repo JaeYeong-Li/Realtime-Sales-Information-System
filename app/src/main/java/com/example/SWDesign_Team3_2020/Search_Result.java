@@ -69,10 +69,10 @@ public class Search_Result extends AppCompatActivity {
 
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
-        if(m_gvar.isIDnull() == true) {
+        if (m_gvar.isIDnull() == true) {
             isLogin = false;
-        }else{
-            isLogin=true;
+        } else {
+            isLogin = true;
         }
 
         //use toolbar
@@ -106,9 +106,9 @@ public class Search_Result extends AppCompatActivity {
                     finish();
                 } else if (id == R.id.mypage_toolbar) {
                     Intent intent;
-                    if(isLogin == true){
+                    if (isLogin == true) {
                         intent = new Intent(getApplicationContext(), MyPage_member.class);
-                    }else {
+                    } else {
                         intent = new Intent(getApplicationContext(), MyPage_nonmember.class);
                     }
                     startActivity(intent);
@@ -119,6 +119,8 @@ public class Search_Result extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
         //리사이클러뷰 정리
         mRecyclerView = (RecyclerView) findViewById(R.id.searchresult_recyclerview);
@@ -133,15 +135,16 @@ public class Search_Result extends AppCompatActivity {
         String Keyword = selDate;
 
         GetData task = new GetData();
-        task.execute( "http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
+        task.execute("http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
+
+
 
         //fragment
         searchResultMapFragment = new SearchResultMapFragment();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
 
-
+        //bundle
         Bundle bundle2 = new Bundle();
 
         Intent intent = getIntent();
@@ -150,16 +153,22 @@ public class Search_Result extends AppCompatActivity {
         sellon = intent.getStringExtra("lon");
         myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
 
-        bundle2.putString("latitude",sellat);
-        bundle2.putString("longitude",sellon);
+        bundle2.putString("latitude", sellat);
+        bundle2.putString("longitude", sellon);
+
+
+
         searchResultMapFragment.setArguments(bundle2);
+
+        fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment).commit();
+
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+        switch (item.getItemId()) {
+            case android.R.id.home: { // 왼쪽 상단 버튼 눌렀을 때
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
@@ -193,12 +202,16 @@ public class Search_Result extends AppCompatActivity {
             return false;
     }
 
-    private boolean isitOpen(String openDate, String openTime, String selectedDate){
+    public static java.util.ArrayList<SearchResultViewItem> getmArrayListfromSearchResult() {
+        return mArrayList;
+    }
+
+    private boolean isitOpen(String openDate, String openTime, String selectedDate) {
         Date sd;
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             sd = sdf.parse(selectedDate);
-        }catch (Exception e) {
+        } catch (Exception e) {
             sd = new Date();
         }
         Calendar cal = java.util.Calendar.getInstance();
@@ -206,50 +219,69 @@ public class Search_Result extends AppCompatActivity {
 
         int sd_nday = cal.get(Calendar.DAY_OF_WEEK);
         String sd_day = "";
-        switch(sd_nday) {
-            case 1: sd_day="sun"; break;
-            case 2: sd_day="mon"; break;
-            case 3: sd_day="tue"; break;
-            case 4: sd_day="wed"; break;
-            case 5: sd_day="thu"; break;
-            case 6: sd_day="fri"; break;
-            case 7: sd_day="sat"; break;
+        switch (sd_nday) {
+            case 1:
+                sd_day = "sun";
+                break;
+            case 2:
+                sd_day = "mon";
+                break;
+            case 3:
+                sd_day = "tue";
+                break;
+            case 4:
+                sd_day = "wed";
+                break;
+            case 5:
+                sd_day = "thu";
+                break;
+            case 6:
+                sd_day = "fri";
+                break;
+            case 7:
+                sd_day = "sat";
+                break;
         }
 
         String ot = openTime;
         String od = openDate;
-        do{
+        do {
             int idx1 = ot.indexOf(";");
             if (idx1 == -1)
                 break;
-            String ot_temp = ot.substring(idx1+1);
+            String ot_temp = ot.substring(idx1 + 1);
             ot = ot.substring(0, 3);
             Log.i("openTime요일", ot);
 
             if (ot.equals(sd_day)) {
-                while(true) {
+                while (true) {
                     int idx2 = od.indexOf(";");
                     if (idx2 != -1) {
                         //"123;"일때idx는3,length는4
-                        String od_temp="";
-                        if(idx2-1!=od.length())
-                            od_temp = od.substring(idx2+1);
+                        String od_temp = "";
+                        if (idx2 - 1 != od.length())
+                            od_temp = od.substring(idx2 + 1);
                         od = od.substring(0, idx2);
                         Log.i("od_temp:", od_temp);
-                        if(od.equals(selectedDate))
+                        if (od.equals(selectedDate))
                             return false;
-                        if(od_temp=="") { break; }
-                        else { od = od_temp; }
-                    }else { break; }
+                        if (od_temp == "") {
+                            break;
+                        } else {
+                            od = od_temp;
+                        }
+                    } else {
+                        break;
+                    }
                 }
                 return true;
             }
             ot = ot_temp;
-        }while(true);
+        } while (true);
         return false;
     }
 
-    private class GetData extends AsyncTask<String, Void, String>{
+    private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
         String errorString = null;
@@ -270,12 +302,12 @@ public class Search_Result extends AppCompatActivity {
             progressDialog.dismiss();
             Log.d(TAG, "response - " + result);
 
-            if (result == null){
+            if (result == null) {
                 //Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 mJsonString = result;
                 arrangeResult();
+
             }
         }
 
@@ -306,10 +338,9 @@ public class Search_Result extends AppCompatActivity {
                 Log.d(TAG, "response code - " + responseStatusCode);
 
                 InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                }
-                else{
+                } else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -319,7 +350,7 @@ public class Search_Result extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
@@ -339,7 +370,13 @@ public class Search_Result extends AppCompatActivity {
         }
     }
 
-    private void arrangeResult() {
+//
+//    public ArrayList<SearchResultViewItem> getData(ArrayList m)
+//    {
+//        return m;
+//    }
+
+    public ArrayList<SearchResultViewItem> arrangeResult() {
         String TAG_STOREID = "storeId";
         String TAG_STORENAME = "storeName";
         String TAG_CATEGORY = "category";
@@ -413,6 +450,8 @@ public class Search_Result extends AppCompatActivity {
 
          //   Log.d(TAG, "showResult : ", e);
         }
+
+        return mArrayList;
     }
 
 }

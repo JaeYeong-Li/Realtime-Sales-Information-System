@@ -57,8 +57,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_specific_info);
         Intent intent_name = getIntent();
 
-        //StoreName = intent_name.getStringExtra("storeName");
-        StoreName = "임시";
+        StoreName = intent_name.getStringExtra("storeName");
         StoreId = "sdfg";
         myfavorite = CurLocationActivity.mydb1;
 

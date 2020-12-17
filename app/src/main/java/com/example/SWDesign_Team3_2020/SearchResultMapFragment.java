@@ -65,6 +65,11 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     String StoreName;
     public static java.util.ArrayList<SearchResultViewItem> mArrayList;
     public static SearchResultViewAdapter mAdapter;
+    java.util.ArrayList<SearchResultViewItem> stores = new java.util.ArrayList<>();
+
+    private java.util.ArrayList<SearchResultViewItem> mMyData;
+
+
 
     //목표: searchResultMapFragment에서 받은 id를 마커에 띄우기.
 
@@ -83,6 +88,10 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
 
     };
+
+
+
+
 
     @Override
 
@@ -104,15 +113,19 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
+        String myValue = this.getArguments().getString("latitude");
+        Toast.makeText(getContext(),"전달값!!!!!!!!!!!!!!"+myValue, android.widget.Toast.LENGTH_LONG).show();
 
         return inflater.inflate(R.layout.fragment_search_result_map, container, false);
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -123,20 +136,18 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
             mapFragment.getMapAsync(callback);
         }
 
+        //맵에 마커 찍기
+/*
+        Toast.makeText(getContext(),"어레이 리스트 ㅎ사용 가능?", android.widget.Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),valueOf(stores.size())+"개 원소 있음", android.widget.Toast.LENGTH_LONG).show();
+*/
+        for(int i=0; i< stores.size(); i++){
+            Toast.makeText(getContext(),"ㅇㅇ가능", android.widget.Toast.LENGTH_LONG).show();
 
+            LatLng storeLocation = new LatLng(Double.parseDouble(Search_Result.mArrayList.get(i).getLat()), Double.parseDouble(Search_Result.mArrayList.get(i).getLang()));
 
-        //리스크 사이즈
-        //     int mArrayListSize = getArguments().getInt("mArrayListSize");
-        String storeId_;
-//        Toast.makeText(getContext(),getArguments().getString("test"), android.widget.Toast.LENGTH_LONG).show();
-        for (int j = 0; j < 13; j++) {
-//            storeId_ = getArguments().getString(String.valueOf(j));
-            storeId_ = Integer.toString(j);
-
-            GetData task = new GetData();
-            task.execute("http://" + IP_ADDRESS + "/checkstore2.php", storeId_);
-
-
+Toast.makeText(getContext(),valueOf(storeLocation.latitude), android.widget.Toast.LENGTH_SHORT).show();
+            showStoreLocationMarker(storeLocation, Integer.parseInt(Search_Result.mArrayList.get(i).getStoreId()),Search_Result.mArrayList.get(i).getStoreName());
         }
     }
 
@@ -163,142 +174,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
     }
 
-
-    private class GetData extends android.os.AsyncTask<String, Void, String> {
-
-        android.app.ProgressDialog progressDialog;
-        String errorString = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = android.app.ProgressDialog.show(getContext(),
-                    "Please Wait", null, true, true);
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            progressDialog.dismiss();
-            Log.d(TAG, "response - " + result);
-
-            if (result == null) {
-                Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
-            } else {
-                mJsonString = result;
-      //          Toast.makeText(getContext(), "start arrangeResult", Toast.LENGTH_SHORT).show();
-                arrangeResult();
-            }
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String serverURL = params[0];
-            String postParameters = "storeId=" + params[1];
-
-            try {
-
-                java.net.URL url = new java.net.URL(serverURL);
-                java.net.HttpURLConnection httpURLConnection = (java.net.HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.connect();
-
-                java.io.OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "response code - " + responseStatusCode);
-
-                java.io.InputStream inputStream;
-                if (responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                } else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-                java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(inputStream, "UTF-8");
-                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-
-                return sb.toString().trim();
-
-
-            } catch (Exception e) {
-
-                Log.d(TAG, "InsertData: Error ", e);
-                errorString = e.toString();
-
-                return null;
-            }
-
-        }
-    }
-
-    private void arrangeResult() {
-
-        String TAG_STOREID = "storeId";
-
-        String TAG_LAT = "lat";
-        String TAG_LANG = "lang";
-        String TAG_STORENAME = "storeName";
-
-        try {
-            int idx = mJsonString.indexOf("[");
-            if (idx > 0) {
-                mJsonString = mJsonString.substring(idx);
-                mJsonString.trim();
-
-                Log.d("MyApp", mJsonString);
-                org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    Log.d(TAG, "start arrange result");
-                    org.json.JSONObject item = jsonArray.getJSONObject(i);
-
-                    String lat = item.getString(TAG_LAT);
-                    String lang = item.getString(TAG_LANG);
-                    String id = item.getString(TAG_STOREID);
-                    String name = item.getString(TAG_STORENAME);
-
-                    LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
-
-                    ////////////마커로 표시////////////////////
-                    //showStoreLocationMarker(storeLocation, Integer.parseInt(id),name);
-
-                }
-            }
-
-            for(int i=0; i< Search_Result.mArrayList.size(); i++){
-                LatLng storeLocation = new LatLng(Double.parseDouble(Search_Result.mArrayList.get(i).getLat()), Double.parseDouble(Search_Result.mArrayList.get(i).getLang()));
-                //Toast.makeText(getContext(),Search_Result.mArrayList.get(i).getLat()+";"+Search_Result.mArrayList.get(i).getLang(), android.widget.Toast.LENGTH_LONG).show();
-                showStoreLocationMarker(storeLocation, Integer.parseInt(Search_Result.mArrayList.get(i).getStoreId()),Search_Result.mArrayList.get(i).getStoreName());
-            }
-
-
-        } catch (org.json.JSONException e) {
-
-            Log.d(TAG, "showResult : ", e);
-        }
-    }
 
 
     private Marker addMarkerforStore(LatLng storeLatLng, int storeId) {
