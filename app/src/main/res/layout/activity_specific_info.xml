@@ -37,6 +37,7 @@
                 android:layout_gravity="center_vertical"
                 />
             <TextView
+                android:id="@+id/addFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bookmark this store"
@@ -47,6 +48,7 @@
                 android:paddingRight="30px"
                 android:paddingVertical="20px"
                 android:padding="20px"
+                android:onClick="clickHandler"
                 />
         </LinearLayout>
         <TextView

@@ -24,6 +24,11 @@ public class SearchResultViewItem {
         this.openDate = openDate;
     }
 
+    public SearchResultViewItem(String storeId, String storeName){
+        this.storeId = storeId;
+        this.storeName = storeName;
+    }
+
     public String getStoreId() { return storeId; }
 
     public void setStoreId(String storeId) {

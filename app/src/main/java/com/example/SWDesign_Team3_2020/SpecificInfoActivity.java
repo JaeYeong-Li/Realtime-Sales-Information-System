@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -39,9 +40,13 @@ public class SpecificInfoActivity extends AppCompatActivity {
     private boolean preferedStore = false;
 
     private ImageView ImageView_Heart;
+    private TextView addFvorite;
 
     private GlobalVar m_gvar = null;
     Boolean isLogin = false;
+
+    DBHelper myfavorite;
+    String StoreName,StoreId;
 
 
     private android.widget.TextView TextView_StoreName;
@@ -51,7 +56,12 @@ public class SpecificInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_info);
         Intent intent_name = getIntent();
-        String StoreName = intent_name.getStringExtra("storeName");
+
+        //StoreName = intent_name.getStringExtra("storeName");
+        StoreName = "임시";
+        StoreId = "sdfg";
+        myfavorite = CurLocationActivity.mydb1;
+
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
         if(m_gvar.isIDnull() == true) {
@@ -72,6 +82,7 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
         TextView_StoreName = findViewById(R.id.TextView_Storename);
         TextView_StoreName.setText(StoreName);
+        addFvorite = findViewById(R.id.addFavorite);
 
         //set on click listener for linear layout button
         //버튼 클릭 이벤트(리니어 레이아웃 - 선호 버튼)
@@ -90,8 +101,6 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
 
         }
-
-
 
 
 
@@ -199,6 +208,17 @@ public class SpecificInfoActivity extends AppCompatActivity {
                 findViewById(R.id.Button_Menu).setBackgroundColor(getResources().getColor(R.color.blue));
                 findViewById(R.id.Button_OpenTime).setBackgroundColor(getResources().getColor(R.color.blue));
                 break;
+            case R.id.addFavorite:
+                boolean isInserted = myfavorite.insertData(StoreId,StoreName);
+                if (isInserted == true) {
+                    //myfavorite.updateItems();
+                    //FavoriteInfoActivity.mAdapter.notifyDataSetChanged();
+                    Toast.makeText(this, "등록성공",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "등록실패",
+                            Toast.LENGTH_LONG).show();
+                }
         }
 
     }

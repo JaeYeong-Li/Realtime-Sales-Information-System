@@ -1,109 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FavoriteInfoActivity"
-  >
-    <include
-        layout="@layout/toolbar"
-        android:id="@+id/toolbar" />
-
-    <TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="favourite store"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="1.Chicken King"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:background="@drawable/fillet2"
-            android:gravity="center"
-            android:text="delete"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/fillet"
-            android:gravity="center"
-            android:text="go"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <TextView
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="2.MR.BBQ"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".LogInActivity">
 
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:background="@drawable/fillet2"
-            android:gravity="center"
-            android:text="delete"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar" />
 
-        <TextView
-            android:layout_width="120dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:paddingLeft="100dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/myfavorite_recyclerview" />
+
+        <Button
+            android:id="@+id/myfavorite_delete"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
             android:background="@drawable/fillet"
             android:gravity="center"
-            android:text="go"
+            android:text="초기화"
             android:textColor="#ffffff"
-            android:textSize="18sp" />
+            android:onClick="clickHandler"
+            android:textSize="15sp" />
+
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/fillet"
-        android:gravity="center"
-        android:text="manage"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
-
-</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

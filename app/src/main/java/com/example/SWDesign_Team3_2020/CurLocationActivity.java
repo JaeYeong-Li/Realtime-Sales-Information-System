@@ -37,11 +37,14 @@ public class CurLocationActivity extends AppCompatActivity {
 
     private GlobalVar m_gvar = null;
     Boolean isLogin = false;
+    public static DBHelper mydb1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cur_location);
+
+        mydb1 = new DBHelper(this);
 
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();

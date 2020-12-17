@@ -63,8 +63,8 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     int flag = 0;
     String id;
     String StoreName;
-    private java.util.ArrayList<SearchResultViewItem> mArrayList;
-    private SearchResultViewAdapter mAdapter;
+    public static java.util.ArrayList<SearchResultViewItem> mArrayList;
+    public static SearchResultViewAdapter mAdapter;
 
     //목표: searchResultMapFragment에서 받은 id를 마커에 띄우기.
 
@@ -254,7 +254,6 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
     }
 
     private void arrangeResult() {
-        Toast.makeText(getContext(), mJsonString, android.widget.Toast.LENGTH_LONG).show();
 
         String TAG_STOREID = "storeId";
 
@@ -283,8 +282,15 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
                     LatLng storeLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lang));
 
                     ////////////마커로 표시////////////////////
-                    showStoreLocationMarker(storeLocation, Integer.parseInt(id),name);
+                    //showStoreLocationMarker(storeLocation, Integer.parseInt(id),name);
+
                 }
+            }
+
+            for(int i=0; i< Search_Result.mArrayList.size(); i++){
+                LatLng storeLocation = new LatLng(Double.parseDouble(Search_Result.mArrayList.get(i).getLat()), Double.parseDouble(Search_Result.mArrayList.get(i).getLang()));
+                //Toast.makeText(getContext(),Search_Result.mArrayList.get(i).getLat()+";"+Search_Result.mArrayList.get(i).getLang(), android.widget.Toast.LENGTH_LONG).show();
+                showStoreLocationMarker(storeLocation, Integer.parseInt(Search_Result.mArrayList.get(i).getStoreId()),Search_Result.mArrayList.get(i).getStoreName());
             }
 
 

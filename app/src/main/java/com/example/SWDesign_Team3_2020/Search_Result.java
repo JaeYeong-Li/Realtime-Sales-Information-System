@@ -45,9 +45,9 @@ public class Search_Result extends AppCompatActivity {
     private static String IP_ADDRESS = "27.113.19.27";
     private static String TAG = "phpexample";
 
-    private ArrayList<SearchResultViewItem> mArrayList;
-    private SearchResultViewAdapter mAdapter;
-    private RecyclerView mRecyclerView;
+    public static ArrayList<SearchResultViewItem> mArrayList;
+    public static SearchResultViewAdapter mAdapter;
+    public static RecyclerView mRecyclerView;
 
     private FragmentManager fragmentManager;
     private Fragment searchResultMapFragment;
@@ -66,26 +66,6 @@ public class Search_Result extends AppCompatActivity {
     protected void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
-
-        //fragment
-        searchResultMapFragment = new SearchResultMapFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
-
-
-         Bundle bundle2 = new Bundle();
-
-        Intent intent = getIntent();
-        selDate = intent.getStringExtra("selDate");
-        sellat = intent.getStringExtra("lat");
-        sellon = intent.getStringExtra("lon");
-        myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
-
-        bundle2.putString("latitude",sellat);
-        bundle2.putString("longitude",sellon);
-        searchResultMapFragment.setArguments(bundle2);
-
 
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
@@ -148,13 +128,31 @@ public class Search_Result extends AppCompatActivity {
         mAdapter = new SearchResultViewAdapter(this, mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
-        mArrayList.clear();
         mAdapter.notifyDataSetChanged();
 
         String Keyword = selDate;
 
         GetData task = new GetData();
         task.execute( "http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
+
+        //fragment
+        searchResultMapFragment = new SearchResultMapFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
+
+
+        Bundle bundle2 = new Bundle();
+
+        Intent intent = getIntent();
+        selDate = intent.getStringExtra("selDate");
+        sellat = intent.getStringExtra("lat");
+        sellon = intent.getStringExtra("lon");
+        myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
+
+        bundle2.putString("latitude",sellat);
+        bundle2.putString("longitude",sellon);
+        searchResultMapFragment.setArguments(bundle2);
 
     }
 
@@ -189,7 +187,6 @@ public class Search_Result extends AppCompatActivity {
         double rslt = ret / 1000;
         // km로 변환 및 반올림
 
-        Log.i("거리", rslt + "km");
         if (rslt <= 1.0) {
             return true;
         } else

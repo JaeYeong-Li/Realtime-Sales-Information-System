@@ -90,17 +90,20 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
                 return;
             } else {
                 if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
+                    double latitude, longitude;
                     location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                     if (location != null) {
-                        double latitude = location.getLatitude();
-                        double longitude = location.getLongitude();
-                        String message = "최근 위치1 -> Latitude : " + latitude + "\n Longitude : " + longitude;
-
-                        showCurrentLocation(latitude, longitude);
-                        Log.i("MyLocTest", "최근 위치1 호출");
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }else{
+                        latitude = 35.8154885;
+                        longitude = 128.5144324;
                     }
+                    String message = "최근 위치1 -> Latitude : " + latitude + "\n Longitude : " + longitude;
+
+                    showCurrentLocation(latitude, longitude);
+                    Log.i("MyLocTest", "최근 위치1 호출");
                     //        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,gpsListener);
                 } else if (manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                     location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
