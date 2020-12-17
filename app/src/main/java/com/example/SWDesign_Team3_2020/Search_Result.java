@@ -67,6 +67,12 @@ public class Search_Result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
 
+        Intent intent = getIntent();
+        selDate = intent.getStringExtra("selDate");
+        sellat = intent.getStringExtra("lat");
+        sellon = intent.getStringExtra("lon");
+        myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
+
         //globalVal
         m_gvar = (GlobalVar) getApplicationContext();
         if (m_gvar.isIDnull() == true) {
@@ -137,30 +143,6 @@ public class Search_Result extends AppCompatActivity {
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
 
-
-
-        //fragment
-        searchResultMapFragment = new SearchResultMapFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-
-        //bundle
-        Bundle bundle2 = new Bundle();
-
-        Intent intent = getIntent();
-        selDate = intent.getStringExtra("selDate");
-        sellat = intent.getStringExtra("lat");
-        sellon = intent.getStringExtra("lon");
-        myLocation = new LatLng(Double.parseDouble(sellat), Double.parseDouble(sellon));
-
-        bundle2.putString("latitude", sellat);
-        bundle2.putString("longitude", sellon);
-
-
-
-        searchResultMapFragment.setArguments(bundle2);
-
-        fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment).commit();
 
 
     }
@@ -426,24 +408,22 @@ public class Search_Result extends AppCompatActivity {
             Log.d(TAG, "finish arrange result");
 
 
+            //fragment
+            searchResultMapFragment = new SearchResultMapFragment();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
 
-           Bundle bundle = new Bundle();
-            //미리 갯수 알려주긔
-            int arrLen = mArrayList.size();
-            System.out.println("size"+ String.valueOf(arrLen));
-            bundle.putInt("mArrayListSize",arrLen);
+            //bundle
+            Bundle bundle2 = new Bundle();
 
-            //검색 결과를 프래그먼트로 전달 -> 각 record마다 storeId를 SearchResultMapFragment로 전달
-            for (int r = 0;r<arrLen;r++)
-            {
-                System.out.println("번들 싸는 중");
-                String tag = String.valueOf(r);
-                String found = mArrayList.get(r).getStoreId();
-               bundle.putString(tag,found);
-            }
-            bundle.putString("test","test");
-            searchResultMapFragment.setArguments(bundle);
-            final int commit = getSupportFragmentManager().beginTransaction().replace(com.example.SWDesign_Team3_2020.R.id.FrameLayout_SearchResult,searchResultMapFragment).commit();
+            bundle2.putString("latitude", sellat);
+            bundle2.putString("longitude", sellon);
+            bundle2.putInt("arrlen",mArrayList.size());
+
+
+            searchResultMapFragment.setArguments(bundle2);
+
+            fragmentTransaction.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment).commit();
 
 
         } catch (org.json.JSONException e) {

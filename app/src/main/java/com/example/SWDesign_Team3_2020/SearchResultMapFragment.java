@@ -161,8 +161,11 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
         Toast.makeText(getContext(), "선택값!!!!!!!!!!!!!!" + String.valueOf(selectedPoint.latitude) + " " + String.valueOf(selectedPoint.longitude), android.widget.Toast.LENGTH_LONG).show();
 
-        //
-       // map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 17));
+        //검색 결과 받아오기
+        int arrlen = this.getArguments().getInt("arrlen");
+        Toast.makeText(getContext(),"검색결과"+String.valueOf(arrlen), android.widget.Toast.LENGTH_LONG).show();
+
+        // map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 17));
 
 
         Date selDate = new java.util.Date();
