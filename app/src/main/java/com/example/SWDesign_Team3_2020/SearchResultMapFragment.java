@@ -234,7 +234,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
               map.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPoint, 15));
 
         //내 위치 보여주기 (해쉬맵에 추가)
-        showMyLocationMarker(curPoint);
+        showMyLocationMarker(selectedPoint);
 
         //가게 위치 보여주기 -> DB에서 끌어올 것
 
@@ -559,8 +559,7 @@ public class SearchResultMapFragment extends Fragment implements GoogleMap.OnInf
 
         myLocationMarker = new MarkerOptions(); // 마커 객체 생성
         myLocationMarker.position(curPoint);
-        myLocationMarker.title("Current Position \n");
-        myLocationMarker.snippet("You are here.");
+        myLocationMarker.title("Selected Place \n");
         myLocationMarker.icon(BitmapDescriptorFactory.defaultMarker(299));
 
         myMarker = map.addMarker(myLocationMarker);
