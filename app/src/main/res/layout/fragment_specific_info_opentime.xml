@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!--시작 시간-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,13 +47,13 @@
                     android:text="  Mon  :  "
                     android:textSize="19dp"
                     android:textStyle="bold" />
-                <!--시작 시간-->
+
                 <TextView
                     android:id="@+id/TextView_Mon_StartHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -68,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -83,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -99,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 
@@ -124,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -140,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -155,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -171,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 
@@ -196,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -212,7 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -227,7 +228,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -243,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 
@@ -268,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -284,7 +285,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -299,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -315,7 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
             <!--금요일-->
@@ -340,7 +341,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -356,7 +357,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -371,7 +372,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -387,7 +388,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 
@@ -412,7 +413,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -428,7 +429,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -443,7 +444,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -459,7 +460,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 
@@ -485,7 +486,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -501,7 +502,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -516,7 +517,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
 
                 <TextView
@@ -533,7 +534,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12px"
                     android:layout_marginBottom="12px"
-                    android:text="09"
+                    android:text="-"
                     android:textSize="19dp" />
             </LinearLayout>
 

@@ -6,6 +6,8 @@ public class GlobalVar extends Application{
     private static String userPW;
     private static String userNAME;
     public static int searchMode=1;
+    public static String selectedMenu;
+    public static String selectedOpenTime;
 
     @Override
     public void onCreate() {
@@ -41,4 +43,16 @@ public class GlobalVar extends Application{
     }
     public void setSearchMode(int mode) {searchMode = mode;}
     public int getSearchMode() { return searchMode;}
+    public String getselectedMenu() {
+        return selectedMenu;
+    }
+    public void setselectedMenu(String menu){
+        selectedMenu = menu;
+    }
+    public String getselectedOpenTime() {
+        return selectedOpenTime;
+    }
+    public void setselectedOpenTime(String ot){
+        selectedOpenTime = ot;
+    }
 }

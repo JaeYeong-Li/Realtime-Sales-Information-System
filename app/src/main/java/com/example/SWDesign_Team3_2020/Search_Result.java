@@ -57,11 +57,7 @@ public class Search_Result extends AppCompatActivity {
     private Fragment searchResultMapFragment2;
     private Fragment searchResultMapFragment3;
     private FragmentTransaction fragmentTransaction;
-    private FragmentTransaction fragmentTransaction_category;
-/*
-    private Fragment searchResultMapFragment;
-    private FragmentTransaction fragmentTransaction;
-  */
+
     private DrawerLayout mDrawerLayout;
     private Context context = this;
     private GlobalVar m_gvar = null;
@@ -384,6 +380,7 @@ public class Search_Result extends AppCompatActivity {
         String TAG_ADDRESS = "address";
         String TAG_OPENDATE = "openDate";
         String TAG_OPENTIME = "openTime";
+        String TAG_MENU = "menu";
         mArrayList.clear();
 
         try {
@@ -412,8 +409,9 @@ public class Search_Result extends AppCompatActivity {
                     String storeId = item.getString(TAG_STOREID);
                     String storeName = item.getString(TAG_STORENAME);
                     String address = item.getString(TAG_ADDRESS);
+                    String menu = item.getString(TAG_MENU);
 
-                    SearchResultViewItem storeData = new SearchResultViewItem(storeId, storeName, category, lat, lang, address, openDate, openTime);
+                    SearchResultViewItem storeData = new SearchResultViewItem(storeId, storeName, category, lat, lang, address, openDate, openTime, menu);
 
                     mArrayList.add(storeData);
                     Log.d("어레이 들어감??",mArrayList.get(0).getStoreName());
@@ -475,14 +473,12 @@ public class Search_Result extends AppCompatActivity {
     }
 
     public void clickHandler(View view) {
-        fragmentTransaction_category = fragmentManager.beginTransaction();
 
         switch (view.getId())
         {
             case R.id.Button_Cafe:
                 m_gvar.setSearchMode(2);
                 arrangeResult();
-                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment2).commit();
                 findViewById(R.id.Button_Cafe).setBackgroundColor(Color.GRAY);
                 findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));
                 findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
@@ -491,7 +487,6 @@ public class Search_Result extends AppCompatActivity {
             case R.id.Button_Entertain:
                 m_gvar.setSearchMode(3);
                 arrangeResult();
-                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment3).commit();
                 findViewById(R.id.Button_Entertain).setBackgroundColor(Color.GRAY);
                 findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
                 findViewById(R.id.Button_Restaurant).setBackgroundColor(getResources().getColor(R.color.blue));
@@ -500,7 +495,6 @@ public class Search_Result extends AppCompatActivity {
             case R.id.Button_Restaurant:
                 m_gvar.setSearchMode(1);
                 arrangeResult();
-                fragmentTransaction_category.replace(R.id.FrameLayout_SearchResult, searchResultMapFragment1).commit();
                 findViewById(R.id.Button_Restaurant).setBackgroundColor(Color.GRAY);
                 findViewById(R.id.Button_Cafe).setBackgroundColor(getResources().getColor(R.color.blue));
                 findViewById(R.id.Button_Entertain).setBackgroundColor(getResources().getColor(R.color.blue));

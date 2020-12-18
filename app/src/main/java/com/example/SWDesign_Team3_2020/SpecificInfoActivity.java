@@ -18,10 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class SpecificInfoActivity extends AppCompatActivity {
+    //private static String IP_ADDRESS = "10.0.2.2";
+    private static String IP_ADDRESS = "27.113.19.27";
+
     private DrawerLayout mDrawerLayout;
     private Context context = this;
 
@@ -46,10 +50,12 @@ public class SpecificInfoActivity extends AppCompatActivity {
     Boolean isLogin = false;
 
     DBHelper myfavorite;
-    String StoreName,StoreId;
+    String StoreName,StoreId,StoreAddress;
+    String mJsonString;
 
 
-    private android.widget.TextView TextView_StoreName;
+    TextView TextView_StoreName,TextView_Address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,6 @@ public class SpecificInfoActivity extends AppCompatActivity {
         Intent intent_name = getIntent();
 
         StoreName = intent_name.getStringExtra("storeName");
-        StoreId = "sdfg";
         myfavorite = CurLocationActivity.mydb1;
 
         //globalVal
@@ -81,7 +86,11 @@ public class SpecificInfoActivity extends AppCompatActivity {
 
         TextView_StoreName = findViewById(R.id.TextView_Storename);
         TextView_StoreName.setText(StoreName);
+        TextView_Address = findViewById(R.id.TextView_Address);
+
         addFvorite = findViewById(R.id.addFavorite);
+
+
 
         //set on click listener for linear layout button
         //버튼 클릭 이벤트(리니어 레이아웃 - 선호 버튼)
@@ -175,7 +184,10 @@ public class SpecificInfoActivity extends AppCompatActivity {
         fragmentOpenschedule = new SpecificInfoFragment_OpenSchedule();
 
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.FrameLayout_SpecificInfo, fragmentOpentime).commitAllowingStateLoss();
+
+        GetData task = new GetData();
+        Log.i("storeName",StoreName);
+        task.execute( "http://" + IP_ADDRESS + "/checkstore2.php", StoreName);
 
 
     }
@@ -220,5 +232,127 @@ public class SpecificInfoActivity extends AppCompatActivity {
                 }
         }
 
+    }
+
+
+    private class GetData extends android.os.AsyncTask<String, Void, String> {
+
+        android.app.ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = android.app.ProgressDialog.show(SpecificInfoActivity.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            Log.d("si:getData", "response - " + result);
+
+            if (result == null) {
+                //Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
+            } else {
+                mJsonString = result;
+                arrangeResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = "storeName=" + params[1];
+
+            try {
+
+                java.net.URL url = new java.net.URL(serverURL);
+                java.net.HttpURLConnection httpURLConnection = (java.net.HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                java.io.OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("si:getData", "response code - " + responseStatusCode);
+
+                java.io.InputStream inputStream;
+                if (responseStatusCode == java.net.HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader(inputStream, "UTF-8");
+                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d("si:getData", "InsertData: Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void arrangeResult() {
+        String TAG_STOREID = "storeId";
+        String TAG_ADDRESS = "address";
+        String TAG_MENU = "menu";
+        String TAG_OPENTIME = "openTime";
+
+
+        try {
+            int idx = mJsonString.indexOf("[");
+            mJsonString = mJsonString.substring(idx);
+            mJsonString.trim();
+
+            Log.d("MyApp", mJsonString);
+            org.json.JSONArray jsonArray = new org.json.JSONArray(mJsonString);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                org.json.JSONObject item = jsonArray.getJSONObject(i);
+                StoreId = item.getString(TAG_STOREID);
+                StoreAddress = item.getString(TAG_ADDRESS);
+                TextView_Address.setText(StoreAddress);
+                m_gvar.setselectedMenu(item.getString(TAG_MENU));
+                m_gvar.setselectedOpenTime(item.getString(TAG_OPENTIME));
+            }
+            Log.d("si:getData", "finish arrange result");
+
+        } catch (org.json.JSONException e) {
+
+            Log.d("si:getData", "showResult : ", e);
+        }
+
+        transaction.replace(R.id.FrameLayout_SpecificInfo, fragmentOpentime).commitAllowingStateLoss();
     }
 }

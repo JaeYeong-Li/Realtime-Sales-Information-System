@@ -9,8 +9,26 @@ public class SearchResultViewItem {
     private String address;
     private String openTime;
     private String openDate;
+    private String menu;
 
     public SearchResultViewItem(){
+    }
+
+    public SearchResultViewItem(String storeId, String storeName, String category, String lat, String lang, String address, String openTime, String openDate, String menu){
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.category = category;
+        this.lat = lat;
+        this.lang = lang;
+        this.address = address;
+        this.openTime = openTime;
+        this.openDate = openDate;
+        this.menu = menu;
+    }
+
+    public SearchResultViewItem(String storeId, String storeName){
+        this.storeId = storeId;
+        this.storeName = storeName;
     }
 
     public SearchResultViewItem(String storeId, String storeName, String category, String lat, String lang, String address, String openTime, String openDate){
@@ -22,11 +40,6 @@ public class SearchResultViewItem {
         this.address = address;
         this.openTime = openTime;
         this.openDate = openDate;
-    }
-
-    public SearchResultViewItem(String storeId, String storeName){
-        this.storeId = storeId;
-        this.storeName = storeName;
     }
 
     public String getStoreId() { return storeId; }
@@ -76,6 +89,12 @@ public class SearchResultViewItem {
     }
 
     public String getOpenDate() { return openDate; }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public String getMenu() { return menu; }
 
 
 }

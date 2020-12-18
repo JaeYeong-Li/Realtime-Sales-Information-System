@@ -34,7 +34,7 @@
                 android:paddingLeft="19dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Macaron, eggtart"
+                android:text="양념 닭강정, 간장 닭강정"
                 android:textSize="21dp"
                 android:layout_marginBottom="30dp">
             </TextView>
