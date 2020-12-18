@@ -84,7 +84,7 @@ public class MyPage_member extends AppCompatActivity {
                 intent = new android.content.Intent(getApplicationContext(), ShowMyStoreInfo.class);
                 startActivity(intent);
                 break;
-            case R.id.mybutton2:
+            case R.id.mybutton2_member:
            //     android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), FavoriteInfoActivity.class);
                 startActivity(intent);

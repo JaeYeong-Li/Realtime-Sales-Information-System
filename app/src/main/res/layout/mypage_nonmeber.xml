@@ -64,7 +64,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/mybutton2"
+            android:id="@+id/mybutton2_nonmember"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"

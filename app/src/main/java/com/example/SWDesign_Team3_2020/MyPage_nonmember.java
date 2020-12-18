@@ -82,7 +82,7 @@ public class MyPage_nonmember extends AppCompatActivity {
                 intent = new android.content.Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.mybutton2:
+            case R.id.mybutton2_nonmember:
      //           android.widget.Toast.makeText(context, ": 클릭", android.widget.Toast.LENGTH_SHORT).show();
                 intent = new android.content.Intent(getApplicationContext(), FavoriteInfoActivity.class);
                 startActivity(intent);
