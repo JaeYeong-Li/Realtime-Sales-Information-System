@@ -434,7 +434,7 @@ public class CafeOpenFragment extends Fragment implements GoogleMap.OnInfoWindow
 
                 //boolean isitClose(LatLng storeLocation, LatLng MyLocation)
 
-                if (isitClose(storeLocation, curPoint) == true && isitOpen(openDate, openTime, today) == true && (category.equals("3"))) {
+                if (isitClose(storeLocation, curPoint) == true && isitOpen(openDate, openTime, today) == true && (category.equals("2"))) {
 
                     String storeName = item.getString(TAG_STORENAME);
                     String address = item.getString(TAG_ADDRESS);
