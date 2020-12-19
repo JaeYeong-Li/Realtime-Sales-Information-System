@@ -151,7 +151,7 @@ public class CafeOpenFragment extends Fragment implements GoogleMap.OnInfoWindow
         Date selDate = new java.util.Date();
         String Keyword = selDate.toString();
         GetData task = new GetData();
-        task.execute("http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
+        task.execute("http://" + IP_ADDRESS + "/showSearchResult2.php", "2");
     }
 
 
@@ -342,7 +342,7 @@ public class CafeOpenFragment extends Fragment implements GoogleMap.OnInfoWindow
         protected String doInBackground(String... params) {
 
             String serverURL = params[0];
-            String postParameters = "country=" + params[1];
+            String postParameters = "category=" + params[1];
 
             try {
 

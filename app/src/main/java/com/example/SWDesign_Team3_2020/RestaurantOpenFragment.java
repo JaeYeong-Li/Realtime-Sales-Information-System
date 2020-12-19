@@ -151,7 +151,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         Date selDate = new java.util.Date();
         String Keyword = selDate.toString();
         GetData task = new GetData();
-        task.execute("http://" + IP_ADDRESS + "/showSearchResult.php", Keyword);
+        task.execute("http://" + IP_ADDRESS + "/showSearchResult2.php", "1");
     }
 
 
@@ -342,7 +342,7 @@ public class RestaurantOpenFragment extends Fragment implements GoogleMap.OnInfo
         protected String doInBackground(String... params) {
 
             String serverURL = params[0];
-            String postParameters = "country=" + params[1];
+            String postParameters = "category=" + params[1];
 
             try {
 

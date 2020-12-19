@@ -215,28 +215,46 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
+                mDrawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void showResult(){
         try {
             int idx = mJsonString.indexOf("[");
-            mJsonString = mJsonString.substring(idx);
-            mJsonString.trim();
+            if(idx==-1){
+                android.widget.Toast.makeText(context, "존재하지 않은 회원이나 잘못된 id, pw 입력하셨습니다", android.widget.Toast.LENGTH_SHORT).show();
+                finish();
+                android.content.Intent intent = new android.content.Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(intent);
+            }else {
+                mJsonString = mJsonString.substring(idx);
+                mJsonString.trim();
 
-            Log.d("MyApp",mJsonString);
-            JSONArray jsonArray = new JSONArray(mJsonString);
+                Log.d("MyApp", mJsonString);
+                JSONArray jsonArray = new JSONArray(mJsonString);
 
-            JSONObject item = jsonArray.getJSONObject(0);
-            String id = item.getString(TAG_ID);
-            String pw = item.getString(TAG_PW);
-            String name = item.getString(TAG_NAME);
+                JSONObject item = jsonArray.getJSONObject(0);
+                String id = item.getString(TAG_ID);
+                String pw = item.getString(TAG_PW);
+                String name = item.getString(TAG_NAME);
 
-            m_gvar.setUserID(id);
-            m_gvar.setUserPW(pw);
-            m_gvar.setUserNAME(name);
+                m_gvar.setUserID(id);
+                m_gvar.setUserPW(pw);
+                m_gvar.setUserNAME(name);
 
-            android.widget.Toast.makeText(context, "환영합니다"+name+"님", android.widget.Toast.LENGTH_SHORT).show();
+                android.widget.Toast.makeText(context, "환영합니다" + name + "님", android.widget.Toast.LENGTH_SHORT).show();
 
-            android.content.Intent intent = new android.content.Intent(getApplicationContext(), MyPage_member.class);
-            startActivity(intent);
+                android.content.Intent intent = new android.content.Intent(getApplicationContext(), MyPage_member.class);
+                startActivity(intent);
+            }
 
         } catch (JSONException e) {
 
