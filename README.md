@@ -16,4 +16,9 @@
 ![시스템 아키텍처](https://user-images.githubusercontent.com/42104898/103199711-bfcae300-492e-11eb-9f80-af827d383ee3.png)
 
 ## Results
-(사진첨부하기)
+#### 가게정보 등록, 수정
+<img src="https://user-images.githubusercontent.com/42104898/103201502-61ecca00-4933-11eb-8a39-58a3f4802e44.PNG"  width="700" height="300">
+#### 현위치 기준 검색
+<img src="https://user-images.githubusercontent.com/42104898/103201506-644f2400-4933-11eb-970c-92995d7ce802.PNG"  width="700" height="300">
+#### 날짜, 위치 기반 검색
+<img src="https://user-images.githubusercontent.com/42104898/103201509-66b17e00-4933-11eb-9184-feb77e9ddee3.PNG"  width="700" height="300">
