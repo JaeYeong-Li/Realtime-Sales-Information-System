@@ -15,6 +15,9 @@
 ## System Architecture
 ![시스템 아키텍처](https://user-images.githubusercontent.com/42104898/103199711-bfcae300-492e-11eb-9f80-af827d383ee3.png)
 
+## usecase
+![usecase](https://user-images.githubusercontent.com/42104898/103204812-7fbe2d00-493b-11eb-96a7-4fbbd8c6b67e.jpg)
+
 ## Results
 <h4>가게정보 등록, 수정<br>
 <img src="https://user-images.githubusercontent.com/42104898/103201502-61ecca00-4933-11eb-8a39-58a3f4802e44.PNG"  width="700" height="300">
