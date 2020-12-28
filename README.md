@@ -12,5 +12,8 @@
 * php
 * Android Studio
 
+## System Architecture
+![시스템 아키텍처](https://user-images.githubusercontent.com/42104898/103199711-bfcae300-492e-11eb-9f80-af827d383ee3.png)
+
 ## Results
 (사진첨부하기)
